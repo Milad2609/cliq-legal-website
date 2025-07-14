@@ -112,10 +112,10 @@
         }
 
         .subline {
-            	font-size: 22px;
-    		font-weight: 600;
-    		line-height: 1.3;
-    		color: #ffffff;
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: #ffffff;
         }
 
         /* CTA Button */
@@ -202,6 +202,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            height: 100%;
         }
 
         /* Headings inside cards get fixed min height for alignment */
@@ -235,6 +236,24 @@
 
         .pain-points li {
             margin-bottom: 0.3rem;
+        }
+
+        /* Package cards with aligned buttons */
+        .package-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .package-card .content-pad {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-card .btn {
+            margin-top: auto;
+            align-self: flex-start;
         }
 
         /* ===============  FOOTER  =============== */
@@ -365,7 +384,7 @@
                 </div>
             </div>
 
-            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;">
+            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
                 Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke - binnen Tagen.
             </p>
         </div>
@@ -379,38 +398,43 @@
 
             <div class="grid-3">
                 <!-- Paket 1 -->
-                <div class="content-pad">
-                    <h3 class="cliq-heading">Data & AI Compliance Sprint</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (14 Tage):</strong></p>
-                    <p class="cliq-body">Gap‑Report + roadmap‑ready Maßnahmenliste · Checkliste für Auditoren · Priorisierte Quick‑Wins</p>
+                <div class="package-card">
+                    <div class="content-pad">
+                        <h3 class="cliq-heading">Data & AI Compliance Sprint</h3>
+                        <p class="cliq-body"><strong>Dein Plus danach (14 Tage):</strong></p>
+                        <p class="cliq-body">Gap‑Report + roadmap‑ready Maßnahmenliste · Checkliste für Auditoren · Priorisierte Quick‑Wins</p>
 
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
-                    <a href="https://calendly.com/DEIN-LINK" class="btn">Book Pilot</a>
+                        <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
+                        <a href="https://calendly.com/DEIN-LINK" class="btn">Book Pilot</a>
+                    </div>
                 </div>
 
                 <!-- Paket 2 -->
-                <div class="content-pad">
-                    <h3 class="cliq-heading">Quick‑Hire HR Legal</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (7 Tage):</strong></p>
-                    <p class="cliq-body">Wasserdichte Arbeits‑ & Freelancer‑Verträge · Remote‑/Whistleblower‑Policy in Produktion · Slack‑FAQ für HR</p>
+                <div class="package-card">
+                    <div class="content-pad">
+                        <h3 class="cliq-heading">Quick‑Hire HR Legal</h3>
+                        <p class="cliq-body"><strong>Dein Plus danach (7 Tage):</strong></p>
+                        <p class="cliq-body">Wasserdichte Arbeits‑ & Freelancer‑Verträge · Remote‑/Whistleblower‑Policy in Produktion · Slack‑FAQ für HR</p>
 
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
-                    <a href="https://calendly.com/DEIN-LINK" class="btn">Book Pilot</a>
+                        <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
+                        <a href="https://calendly.com/DEIN-LINK" class="btn">Book Pilot</a>
+                    </div>
                 </div>
 
                 <!-- Paket 3 -->
-                <div class="content-pad">
-                    <h3 class="cliq-heading">Commercial / Agency Deal‑Desk</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (laufend):</strong></p>
-                    <p class="cliq-body">Max. 5 Vertrags‑Redlines < 24h/Monat · AGB‑ & IP‑Review · Style‑Guide für Klauseln · Quartalsreport</p>
+                <div class="package-card">
+                    <div class="content-pad">
+                        <h3 class="cliq-heading">Commercial / Agency Deal‑Desk</h3>
+                        <p class="cliq-body"><strong>Dein Plus danach (laufend):</strong></p>
+                        <p class="cliq-body">Max. 5 Vertrags‑Redlines < 24h/Monat · AGB‑ & IP‑Review · Style‑Guide für Klauseln · Quartalsreport</p>
 
-
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €/Monat</strong></p>
-                    <a href="https://calendly.com/DEIN-LINK" class="btn">Book Pilot</a>
+                        <p class="cliq-body"><strong>Festpreis: 3.000 €/Monat</strong></p>
+                        <a href="https://calendly.com/DEIN-LINK" class="btn">Book Pilot</a>
+                    </div>
                 </div>
             </div>
 
-            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;">
+            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
                 Keine Stundenzettel. Kein Onboarding. 100 % Festpreis. Erst der Pilot, dann – wenn gewünscht – der monatliche Retainer.
             </p>
         </div>
@@ -470,7 +494,7 @@
                 </div>
             </div>
 
-            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;">
+            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
                 Gemeinsam liefern wir Großkanzlei‑Präzision – in Scale‑up‑Geschwindigkeit.
             </p>
         </div>
