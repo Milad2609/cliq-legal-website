@@ -136,6 +136,7 @@
                 white-space: normal; /* Allow text to wrap on mobile */
                 flex-direction: column;
                 gap: 0.5rem;
+                min-height: 3rem; /* Fixed height to prevent jumping */
             }
             
             .usp-line .static {
@@ -145,6 +146,10 @@
             .typewriter {
                 min-width: auto;
                 border-right: none; /* Remove cursor on mobile for cleaner look */
+                min-height: 1.5rem; /* Fixed height for typewriter area */
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             /* Section adjustments for mobile */
