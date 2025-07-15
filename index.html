@@ -325,23 +325,19 @@
 document.addEventListener("DOMContentLoaded", () => {
     const words = [
         "Compliance.",
-        "Datenschutz.",
-        "KI.",
-        "IP & ESG.",
-        "Business Law.",
-        "Verträge.",
-        "Arbeitsrecht.",
-        "Freelancer & HR.",
-        "Festpreise & Abo-Modelle.",
-        "Kanzleiqualität, Startup-Tempo."
+        "Datenschutz / KI / IP.",
+        "Business Law / ESG.",
+        "Freelancer / People.",
+        "Festpreise / Abo-Modelle.",
+        "Kanzleiqualität / Startup-Tempo."
     ];
     
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    const typeSpeed = 80; // Schneller
-    const deleteSpeed = 40; // Noch schneller
-    const pauseTime = 800; // Kürzere Pause
+    const typeSpeed = 80;
+    const deleteSpeed = 40;
+    const pauseTime = 800;
     
     const typewriterElement = document.getElementById("typewriter");
     
@@ -368,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Word is deleted, move to next word
             isDeleting = false;
             wordIndex = (wordIndex + 1) % words.length;
-            speed = 200; // Kürzere Pause zwischen Wörtern
+            speed = 200;
         }
         
         setTimeout(type, speed);
