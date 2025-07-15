@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -325,35 +324,60 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const words = [
-        "Compliance",
-        "Datenschutz",
-        "KI",
-        "IP & ESG",
-        "Business Law",
-        "Verträge",
-        "Arbeitsrecht",
-        "Freelancer & HR",
-        "Festpreise & Abo-Modelle",
-        "Kanzleiqualität, Startup-Tempo"
+        "Compliance.",
+        "Datenschutz.",
+        "KI.",
+        "IP & ESG.",
+        "Business Law.",
+        "Verträge.",
+        "Arbeitsrecht.",
+        "Freelancer & HR.",
+        "Festpreise & Abo-Modelle.",
+        "Kanzleiqualität, Startup-Tempo."
     ];
-    let i = 0, j = 0, del = false;
-    const speed = 120, pause = 1200;
-    const el = document.getElementById("typewriter");
-
-    const type = () => {
-        if (!del) {
-            el.textContent = words[i].slice(0, j++);
-            if (j > words[i].length) { del = true; setTimeout(type, pause); return; }
+    
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeSpeed = 120;
+    const deleteSpeed = 60;
+    const pauseTime = 1500;
+    
+    const typewriterElement = document.getElementById("typewriter");
+    
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            // Deleting characters
+            typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
         } else {
-            el.textContent = words[i].slice(0, j--);
-            if (j < 0) { del = false; i = (i + 1) % words.length; }
+            // Typing characters
+            typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
         }
-        setTimeout(type, del ? speed / 2 : speed);
-    };
+        
+        let speed = isDeleting ? deleteSpeed : typeSpeed;
+        
+        if (!isDeleting && charIndex === currentWord.length) {
+            // Word is complete, pause before deleting
+            speed = pauseTime;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            // Word is deleted, move to next word
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            speed = 500; // Pause before starting next word
+        }
+        
+        setTimeout(type, speed);
+    }
+    
+    // Start the typewriter effect
     type();
 });
 </script>
 
 </body>
 </html>
-```
