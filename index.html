@@ -63,9 +63,9 @@
 
         /* ===============  USP SECTION  (Typewriter) =============== */
         .usps       {background:#f7fafc;padding:1.5rem 0;}
-        .usp-line   {font-size:22px;font-weight:600;text-align:center;white-space:nowrap;}
+        .usp-line   {font-size:22px;font-weight:600;text-align:center;white-space:nowrap;display:flex;justify-content:center;align-items:center;}
         .usp-line .static {color:#002a4a;}
-        .typewriter {color:#00eadb;border-right:2px solid #00eadb;overflow:hidden;}
+        .typewriter {color:#00eadb;border-right:2px solid #00eadb;overflow:hidden;min-width:1px;}
 
         @media (prefers-reduced-motion:reduce){.typewriter{border-right:none;}}
 
@@ -339,9 +339,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    const typeSpeed = 120;
-    const deleteSpeed = 60;
-    const pauseTime = 1500;
+    const typeSpeed = 80; // Schneller
+    const deleteSpeed = 40; // Noch schneller
+    const pauseTime = 800; // Kürzere Pause
     
     const typewriterElement = document.getElementById("typewriter");
     
@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Word is deleted, move to next word
             isDeleting = false;
             wordIndex = (wordIndex + 1) % words.length;
-            speed = 500; // Pause before starting next word
+            speed = 200; // Kürzere Pause zwischen Wörtern
         }
         
         setTimeout(type, speed);
