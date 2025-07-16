@@ -70,6 +70,26 @@
 
         @media (prefers-reduced-motion:reduce){.typewriter{border-right:none;}}
 
+        /* ===============  SOFTCOLORFADE INTEGRATION  =============== */
+        /* Main content wrapper with background fade */
+        main#bg-timeline {
+            background-color: #002a4a; /* Start with navy */
+            animation: bg-fade 1 linear both;
+            animation-timeline: scroll(root block);
+        }
+        
+        @keyframes bg-fade {
+            from { background-color: #002a4a; }
+            to { background-color: #f7fafc; }
+        }
+        
+        /* Fallback for browsers without scroll timeline support */
+        @supports not (animation-timeline: scroll()) {
+            main#bg-timeline {
+                background-color: #f7fafc;
+            }
+        }
+
         /* ===============  SECTION BASE  =============== */
         .section{padding:4rem 0;}
         .section-title{font-size:42px;margin-bottom:1rem;text-align:center;}
@@ -202,6 +222,14 @@
                 font-size: 16px;
             }
         }
+
+        /* ===============  ACCESSIBILITY  =============== */
+        @media (prefers-reduced-motion: reduce) {
+            main#bg-timeline {
+                animation: none;
+                background-color: #f7fafc;
+            }
+        }
     </style>
 </head>
 
@@ -240,174 +268,177 @@
     </div>
 </section>
 
-<!-- =========  WHO WE HELP  ========= -->
-<section class="section">
-    <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>Who we help<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Rechtliche Lücken bremsen dein Wachstum?</p>
-        <div class="grid-3">
-            <!-- Nora -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Nora – COO, SaaS-Scale-up (70 MA)</h3>
-                <img src="./Nora-Laura.png" alt="Portrait von Nora" class="persona-img">
-                <p class="cliq-body"><strong>Situation:</strong></p>
-                <p class="cliq-body">KI-Features stehen vorm Launch, Investor Due-Diligence tickt, Slack-Kanäle quellen über</p>
-                <div class="pain-points">
-                    <h4>Pain Points</h4>
-                    <ul class="cliq-body">
-                        <li>AI-Act-Risiko 2026</li>
-                        <li>DSGVO-Auskunft fehlt</li>
-                        <li>Vertragsstau</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Markus -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Markus – CFO, Mittelstandsunternehmen (150 MA)</h3>
-                <img src="./Markus.png" alt="Portrait von Markus" class="persona-img">
-                <p class="cliq-body"><strong>Situation:</strong></p>
-                <p class="cliq-body">Audit-Termin rückt näher, "Legal Counsel"-Stelle seit 3 Monaten unbesetzt</p>
-                <div class="pain-points">
-                    <h4>Pain Points</h4>
-                    <ul class="cliq-body">
-                        <li>20 Lieferverträge offen</li>
-                        <li>Remote-Policy unscharf</li>
-                        <li>Hiring-Gap kostet Zeit & Geld</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Laura -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Laura – Agentur-CEO (40 MA)</h3>
-                <img src="./Nora-Laura.png" alt="Portrait von Laura" class="persona-img">
-                <p class="cliq-body"><strong>Situation:</strong></p>
-                <p class="cliq-body">Pitch-Deadline in 72h, Kunde fordert wasserdichte AVV + IP-Klauseln</p>
-                <div class="pain-points">
-                    <h4>Pain Points</h4>
-                    <ul class="cliq-body">
-                        <li>Scheinselbstständigkeit im Freelancer-Pool</li>
-                        <li>Kreativ-Assets ohne Rechtekette</li>
-                        <li>AVV-Deadlines</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
-            Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.
-        </p>
-    </div>
-</section>
-
-<!-- =========  HOW WE FIX IT  ========= -->
-<section class="section" style="background:#f7fafc;">
-    <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>How we fix it<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Drei punktgenaue Pilotpakete:</p>
-        <div class="grid-3">
-            <!-- Paket 1 -->
-            <div class="package-card">
+<!-- =========  MAIN CONTENT WITH SOFTCOLORFADE  ========= -->
+<main id="bg-timeline">
+    <!-- =========  WHO WE HELP  ========= -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="brackets">[</span>Who we help<span class="brackets">]</span></h2>
+            <p class="section-subtitle">Rechtliche Lücken bremsen dein Wachstum?</p>
+            <div class="grid-3">
+                <!-- Nora -->
                 <div class="content-pad">
-                    <h3 class="cliq-heading">Data &amp; AI Compliance Sprint</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (14 Tage):</strong></p>
-                    <p class="cliq-body">Gap-Report + roadmap-ready Maßnahmenliste · Checkliste für Auditoren · Priorisierte Quick-Wins</p>
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
-                    <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+                    <h3 class="cliq-heading">Nora – COO, SaaS-Scale-up (70 MA)</h3>
+                    <img src="./Nora-Laura.png" alt="Portrait von Nora" class="persona-img">
+                    <p class="cliq-body"><strong>Situation:</strong></p>
+                    <p class="cliq-body">KI-Features stehen vorm Launch, Investor Due-Diligence tickt, Slack-Kanäle quellen über</p>
+                    <div class="pain-points">
+                        <h4>Pain Points</h4>
+                        <ul class="cliq-body">
+                            <li>AI-Act-Risiko 2026</li>
+                            <li>DSGVO-Auskunft fehlt</li>
+                            <li>Vertragsstau</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <!-- Paket 2 -->
-            <div class="package-card">
+                <!-- Markus -->
                 <div class="content-pad">
-                    <h3 class="cliq-heading">Quick-Hire HR Legal</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (7 Tage):</strong></p>
-                    <p class="cliq-body">Wasserdichte Arbeits- &amp; Freelancer-Verträge · Remote-/Whistleblower-Policy in Produktion · Slack-FAQ für HR</p>
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
-                    <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+                    <h3 class="cliq-heading">Markus – CFO, Mittelstandsunternehmen (150 MA)</h3>
+                    <img src="./Markus.png" alt="Portrait von Markus" class="persona-img">
+                    <p class="cliq-body"><strong>Situation:</strong></p>
+                    <p class="cliq-body">Audit-Termin rückt näher, "Legal Counsel"-Stelle seit 3 Monaten unbesetzt</p>
+                    <div class="pain-points">
+                        <h4>Pain Points</h4>
+                        <ul class="cliq-body">
+                            <li>20 Lieferverträge offen</li>
+                            <li>Remote-Policy unscharf</li>
+                            <li>Hiring-Gap kostet Zeit & Geld</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <!-- Paket 3 -->
-            <div class="package-card">
+                <!-- Laura -->
                 <div class="content-pad">
-                    <h3 class="cliq-heading">Commercial / Agency Deal-Desk</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (laufend):</strong></p>
-                    <p class="cliq-body">Max. 5 Vertrags-Redlines &lt; 24h/Monat · AGB- &amp; IP-Review · Style-Guide für Klauseln · Quartalsreport</p>
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €/Monat</strong></p>
-                    <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+                    <h3 class="cliq-heading">Laura – Agentur-CEO (40 MA)</h3>
+                    <img src="./Nora-Laura.png" alt="Portrait von Laura" class="persona-img">
+                    <p class="cliq-body"><strong>Situation:</strong></p>
+                    <p class="cliq-body">Pitch-Deadline in 72h, Kunde fordert wasserdichte AVV + IP-Klauseln</p>
+                    <div class="pain-points">
+                        <h4>Pain Points</h4>
+                        <ul class="cliq-body">
+                            <li>Scheinselbstständigkeit im Freelancer-Pool</li>
+                            <li>Kreativ-Assets ohne Rechtekette</li>
+                            <li>AVV-Deadlines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
+                Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.
+            </p>
+        </div>
+    </section>
+
+    <!-- =========  HOW WE FIX IT  ========= -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="brackets">[</span>How we fix it<span class="brackets">]</span></h2>
+            <p class="section-subtitle">Drei punktgenaue Pilotpakete:</p>
+            <div class="grid-3">
+                <!-- Paket 1 -->
+                <div class="package-card">
+                    <div class="content-pad">
+                        <h3 class="cliq-heading">Data &amp; AI Compliance Sprint</h3>
+                        <p class="cliq-body"><strong>Dein Plus danach (14 Tage):</strong></p>
+                        <p class="cliq-body">Gap-Report + roadmap-ready Maßnahmenliste · Checkliste für Auditoren · Priorisierte Quick-Wins</p>
+                        <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
+                        <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+                    </div>
+                </div>
+                <!-- Paket 2 -->
+                <div class="package-card">
+                    <div class="content-pad">
+                        <h3 class="cliq-heading">Quick-Hire HR Legal</h3>
+                        <p class="cliq-body"><strong>Dein Plus danach (7 Tage):</strong></p>
+                        <p class="cliq-body">Wasserdichte Arbeits- &amp; Freelancer-Verträge · Remote-/Whistleblower-Policy in Produktion · Slack-FAQ für HR</p>
+                        <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
+                        <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+                    </div>
+                </div>
+                <!-- Paket 3 -->
+                <div class="package-card">
+                    <div class="content-pad">
+                        <h3 class="cliq-heading">Commercial / Agency Deal-Desk</h3>
+                        <p class="cliq-body"><strong>Dein Plus danach (laufend):</strong></p>
+                        <p class="cliq-body">Max. 5 Vertrags-Redlines &lt; 24h/Monat · AGB- &amp; IP-Review · Style-Guide für Klauseln · Quartalsreport</p>
+                        <p class="cliq-body"><strong>Festpreis: 3.000 €/Monat</strong></p>
+                        <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+                    </div>
+                </div>
+            </div>
+            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
+                Keine Stundenzettel. Kein Onboarding. 100 % Festpreis. Erst der Pilot, dann – wenn gewünscht – der monatliche Retainer.
+            </p>
+        </div>
+    </section>
+
+    <!-- =========  HOW IT WORKS  ========= -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="brackets">[</span>How it works<span class="brackets">]</span></h2>
+            <p class="section-subtitle">Ein CLIQ: Aus Mail-Chaos wird Rechtstransparenz.</p>
+            <div class="grid-4">
+                <div class="content-pad">
+                    <h3 class="cliq-heading" style="font-size:22px">15-min Discovery Call</h3>
+                    <p class="cliq-body">Wir hören zu, sortieren den größten Pain und empfehlen das passende Paket.</p>
+                </div>
+                <div class="content-pad">
+                    <h3 class="cliq-heading" style="font-size:22px">2-Page Pilot-Vertrag</h3>
+                    <p class="cliq-body">E-Signatur, Start spätestens 48h später.</p>
+                </div>
+                <div class="content-pad">
+                    <h3 class="cliq-heading" style="font-size:22px">Deep-Dive &amp; Fix</h3>
+                    <p class="cliq-body">Wir arbeiten selbstständig, halten dich up-to-date, liefern Roadmap + Dokumentation.</p>
+                </div>
+                <div class="content-pad">
+                    <h3 class="cliq-heading" style="font-size:22px">Legal Counsel as a Service</h3>
+                    <p class="cliq-body">Auf Wunsch bleiben wir als Legal Counsel auf Abruf – planbar zum Festpreis.</p>
                 </div>
             </div>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
-            Keine Stundenzettel. Kein Onboarding. 100 % Festpreis. Erst der Pilot, dann – wenn gewünscht – der monatliche Retainer.
-        </p>
-    </div>
-</section>
+    </section>
 
-<!-- =========  HOW IT WORKS  ========= -->
-<section class="section">
-    <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>How it works<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Ein CLIQ: Aus Mail-Chaos wird Rechtstransparenz.</p>
-        <div class="grid-4">
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">15-min Discovery Call</h3>
-                <p class="cliq-body">Wir hören zu, sortieren den größten Pain und empfehlen das passende Paket.</p>
+    <!-- =========  WHO WE ARE  ========= -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="brackets">[</span>Who we are<span class="brackets">]</span></h2>
+            <p class="section-subtitle">Deine Legal Counsel auf Abruf</p>
+            <div class="grid-2">
+                <!-- Milad -->
+                <div class="content-pad">
+                    <h3 class="cliq-heading">Milad Ghafarian – Principal Lawyer</h3>
+                    <img src="./Milad.png" alt="Portrait von Milad Ghafarian" class="team-img">
+                    <p class="cliq-body">
+                        Rechtsanwalt mit 8+ Jahren in Tech-, Corporate- und Commercial-Verträgen
+                        (SaaS, Cloud, Software-Dev) bei sDAX-Konzern und spezialisierten Boutiquen.
+                        Verhandelt zweisprachig (DE/EN) auf C-Level – und liefert Verträge, die Entwickler verstehen.
+                    </p>
+                </div>
+                <!-- Burak -->
+                <div class="content-pad">
+                    <h3 class="cliq-heading">Burak Korkmaz – Of Counsel</h3>
+                    <img src="./Burak.png" alt="Portrait von Burak Korkmaz" class="team-img">
+                    <p class="cliq-body">
+                        Rechtsanwalt mit Fokus auf Commercial, IP/IT und Employment-Support für digitale Geschäftsmodelle;
+                        Erfahrung aus Münchner Boutique-Teams. Arbeitet auf Deutsch und Englisch,
+                        denkt pragmatisch &amp; umsetzungsorientiert.
+                    </p>
+                </div>
             </div>
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">2-Page Pilot-Vertrag</h3>
-                <p class="cliq-body">E-Signatur, Start spätestens 48h später.</p>
-            </div>
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">Deep-Dive &amp; Fix</h3>
-                <p class="cliq-body">Wir arbeiten selbstständig, halten dich up-to-date, liefern Roadmap + Dokumentation.</p>
-            </div>
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">Legal Counsel as a Service</h3>
-                <p class="cliq-body">Auf Wunsch bleiben wir als Legal Counsel auf Abruf – planbar zum Festpreis.</p>
-            </div>
+            <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
+                Gemeinsam liefern wir Großkanzlei-Präzision – in Scale-up-Geschwindigkeit.
+            </p>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- =========  WHO WE ARE  ========= -->
-<section class="section" style="background:#f7fafc;">
-    <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>Who we are<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Deine Legal Counsel auf Abruf</p>
-        <div class="grid-2">
-            <!-- Milad -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Milad Ghafarian – Principal Lawyer</h3>
-                <img src="./Milad.png" alt="Portrait von Milad Ghafarian" class="team-img">
-                <p class="cliq-body">
-                    Rechtsanwalt mit 8+ Jahren in Tech-, Corporate- und Commercial-Verträgen
-                    (SaaS, Cloud, Software-Dev) bei sDAX-Konzern und spezialisierten Boutiquen.
-                    Verhandelt zweisprachig (DE/EN) auf C-Level – und liefert Verträge, die Entwickler verstehen.
-                </p>
-            </div>
-            <!-- Burak -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Burak Korkmaz – Of Counsel</h3>
-                <img src="./Burak.png" alt="Portrait von Burak Korkmaz" class="team-img">
-                <p class="cliq-body">
-                    Rechtsanwalt mit Fokus auf Commercial, IP/IT und Employment-Support für digitale Geschäftsmodelle;
-                    Erfahrung aus Münchner Boutique-Teams. Arbeitet auf Deutsch und Englisch,
-                    denkt pragmatisch &amp; umsetzungsorientiert.
-                </p>
-            </div>
+    <!-- =========  FINAL CTA  ========= -->
+    <section class="section">
+        <div class="container" style="text-align:center;">
+            <h2 class="section-title"><span class="brackets">[</span>Let's bring legal clarity to your company.<span class="brackets">]</span></h2>
+            <p class="section-subtitle">Buche jetzt deinen 15-min Schnell-Check – wir melden uns garantiert innerhalb von 24h.</p>
+            <a href="https://calendly.com/mg-cliq/15min" class="btn btn-large">Book free Call</a>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
-            Gemeinsam liefern wir Großkanzlei-Präzision – in Scale-up-Geschwindigkeit.
-        </p>
-    </div>
-</section>
-
-<!-- =========  FINAL CTA  ========= -->
-<section class="section">
-    <div class="container" style="text-align:center;">
-        <h2 class="section-title"><span class="brackets">[</span>Let's bring legal clarity to your company.<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Buche jetzt deinen 15-min Schnell-Check – wir melden uns garantiert innerhalb von 24h.</p>
-        <a href="https://calendly.com/mg-cliq/15min" class="btn btn-large">Book free Call</a>
-    </div>
-</section>
+    </section>
+</main>
 
 <!-- =========  FOOTER  ========= -->
 <footer class="footer">
