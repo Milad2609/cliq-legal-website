@@ -1,811 +1,356 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLIQ Legal – Legal Counsel as a Service</title>
-
-    <!-- Variable Font -->
-    <link rel="preload" href="https://rsms.me/inter/inter.var.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
-    <style>
-        /* ===============  DESIGN TOKENS  ================= */
-        :root {
-            /* Colors */
-            --color-primary: #00eadb;
-            --color-primary-hover: #00b8a9;
-            --color-text: #4a5568;
-            --color-heading: #002a4a;
-            --color-background: #ffffff;
-            --color-surface: #f7fafc;
-            --color-surface-alt: #f8fafc;
-            --color-hero-start: #002a4a;
-            --color-hero-end: #f7fafc;
-            
-            /* Typography */
-            --font-family: 'Inter var', 'Inter', Arial, sans-serif;
-            --font-weight-normal: 400;
-            --font-weight-semibold: 600;
-            --font-weight-bold: 700;
-            
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            --space-2xl: 4rem;
-            
-            /* Transitions */
-            --transition-fast: 0.2s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
-        }
-
-        /* Dark theme */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --color-text: #e2e8f0;
-                --color-heading: #f1f5f9;
-                --color-background: #0f172a;
-                --color-surface: #1e293b;
-                --color-surface-alt: #334155;
-            }
-        }
-
-        /* ===============  RESET & BASE  ================= */
-        *, *::before, *::after { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-
-        body {
-            font-family: var(--font-family);
-            line-height: 1.6;
-            color: var(--color-text);
-            background: var(--color-background);
-            overflow-x: hidden;
-        }
-
-        .container { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 0 var(--space-lg);
-            container-type: inline-size;
-        }
-
-        /* ===============  TYPOGRAPHY & COLOR  =============== */
-        .cliq-heading { 
-            font-weight: var(--font-weight-semibold); 
-            color: var(--color-heading); 
-        }
-        .cliq-body { 
-            font-weight: var(--font-weight-normal); 
-            color: var(--color-text); 
-        }
-
-        a { 
-            color: var(--color-primary); 
-            text-decoration: none; 
-            transition: color var(--transition-normal); 
-        }
-        a:hover { 
-            color: var(--color-primary-hover); 
-        }
-
-        .brackets { 
-            color: var(--color-primary); 
-        }
-
-        /* ===============  HERO SECTION  =============== */
-        .cliq-hero {
-            background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
-            position: relative;
-            padding: var(--space-lg) 0 var(--space-2xl);
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            perspective: 1000px;
-        }
-
-        .cliq-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0"/></filter></defs><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"/></svg>');
-            opacity: 0.1;
-            z-index: 1;
-            transform: translateZ(-80px) scale(1.1);
-            will-change: transform;
-        }
-
-        .cliq-hero .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: var(--space-lg);
-            width: 100%;
-        }
-
-        .hero-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-md);
-            max-width: 600px;
-        }
-
-        .logo {
-            font-size: 36px;
-            font-weight: var(--font-weight-semibold);
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            position: absolute;
-            top: var(--space-lg);
-            left: var(--space-lg);
-            transition: font-weight var(--transition-normal);
-        }
-
-        .logo:hover {
-            font-weight: var(--font-weight-bold);
-        }
-
-        .logo .text {
-            color: #ffffff;
-        }
-
-        .slogan {
-            font-size: 32px;
-            line-height: 1.2;
-            color: #ffffff;
-        }
-
-        .slogan .highlight {
-            color: var(--color-primary);
-        }
-
-        .subline {
-            font-size: 22px;
-            font-weight: var(--font-weight-semibold);
-            line-height: 1.3;
-            color: #ffffff;
-        }
-
-        .btn {
-            background: var(--color-primary);
-            color: var(--color-heading);
-            padding: 16px 32px;
-            border-radius: 8px;
-            font-weight: var(--font-weight-semibold);
-            display: inline-block;
-            transition: all var(--transition-normal);
-            border: none;
-            cursor: pointer;
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 234, 219, 0.2);
-            will-change: transform, box-shadow;
-        }
-
-        .btn:hover {
-            background: var(--color-primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 234, 219, 0.4);
-        }
-
-        .btn:active {
-            transform: scale(0.97);
-        }
-
-        .btn-large {
-            padding: 20px 40px;
-            font-size: 18px;
-        }
-
-        /* ===============  USP SECTION  =============== */
-        .usps {
-            background: var(--color-surface);
-            padding: var(--space-md) 0;
-        }
-
-        .usp-line {
-            font-size: 22px;
-            font-weight: var(--font-weight-semibold);
-            text-align: center;
-            white-space: nowrap;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .usp-line .static {
-            color: var(--color-heading);
-        }
-
-        .typewriter {
-            color: var(--color-primary);
-            border-right: 2px solid var(--color-primary);
-            overflow: hidden;
-            min-width: 1px;
-            animation: blink 1s infinite, typewriter 12s steps(60) infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-color: var(--color-primary); }
-            51%, 100% { border-color: transparent; }
-        }
-
-        @keyframes typewriter {
-            0%, 16.66% { width: 0; }
-            8.33%, 25% { width: 100%; }
-            33.33%, 50% { width: 0; }
-            41.66%, 58.33% { width: 100%; }
-            66.66%, 83.33% { width: 0; }
-            75%, 91.66% { width: 100%; }
-            100% { width: 0; }
-        }
-
-        /* ===============  SECTION BASE  =============== */
-        .section {
-            padding: var(--space-2xl) 0;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp linear;
-            animation-timeline: view();
-            animation-range: entry 25% cover 30%;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-title {
-            font-size: 42px;
-            margin-bottom: var(--space-sm);
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 22px;
-            font-weight: var(--font-weight-semibold);
-            line-height: 1.3;
-            margin-bottom: var(--space-xl);
-            text-align: center;
-        }
-
-        /* ===============  GRID LAYOUTS  =============== */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: var(--space-lg);
-            align-items: start;
-        }
-
-        /* ===============  CARDS  =============== */
-        .content-pad {
-            background: var(--color-background);
-            padding: var(--space-md);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            height: 100%;
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-            will-change: transform, box-shadow;
-        }
-
-        .content-pad:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .content-pad .cliq-heading {
-            min-height: 56px;
-        }
-
-        .content-pad .cliq-body strong {
-            display: block;
-            margin-bottom: 0.35rem;
-        }
-
-        /* Portraits */
-        .persona-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto var(--space-sm);
-            background: var(--color-surface);
-        }
-
-        .team-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0.75rem auto 1.25rem;
-            display: block;
-            background: var(--color-surface);
-        }
-
-        /* Package card button alignment */
-        .package-card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .package-card .content-pad {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .package-card .btn {
-            margin-top: auto;
-            align-self: flex-start;
-        }
-
-        /* FOOTER */
-        .footer {
-            padding: var(--space-lg) 0;
-            text-align: center;
-            background: var(--color-surface-alt);
-        }
-
-        /* ===============  ACCESSIBILITY  =============== */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            .typewriter {
-                border-right: none;
-                animation: none;
-            }
-
-            .section {
-                opacity: 1;
-                transform: none;
-                animation: none;
-            }
-
-            .cliq-hero::before {
-                transform: none;
-            }
-        }
-
-        /* ===============  RESPONSIVE  =============== */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 var(--space-sm);
-            }
-
-            .cliq-hero {
-                padding: var(--space-sm) 0 var(--space-lg);
-                min-height: 60vh;
-            }
-
-            .hero-content {
-                flex-direction: column;
-                gap: var(--space-md);
-            }
-
-            .hero-text {
-                text-align: center;
-                align-items: center;
-                gap: var(--space-sm);
-            }
-
-            .slogan {
-                font-size: 24px;
-            }
-
-            .logo {
-                font-size: 28px;
-                position: relative;
-                top: auto;
-                left: auto;
-                justify-content: center;
-                margin-bottom: var(--space-md);
-            }
-
-            .team-img {
-                width: 120px;
-                height: 120px;
-            }
-
-            .usps {
-                padding: var(--space-sm) 0;
-            }
-
-            .usp-line {
-                font-size: 18px;
-                white-space: normal;
-                flex-direction: column;
-                gap: var(--space-xs);
-                height: 4rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .usp-line .static {
-                margin-bottom: 0.25rem;
-            }
-
-            .typewriter {
-                min-width: auto;
-                border-right: none;
-                height: 2rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .section {
-                padding: var(--space-lg) 0;
-            }
-
-            .section-title {
-                font-size: 32px;
-                margin-bottom: 0.5rem;
-            }
-
-            .section-subtitle {
-                font-size: 18px;
-                margin-bottom: var(--space-lg);
-            }
-
-            .grid-3,
-            .grid-4,
-            .grid-2 {
-                grid-template-columns: 1fr;
-                gap: var(--space-md);
-            }
-
-            .content-pad {
-                padding: 1.25rem;
-            }
-
-            .content-pad .cliq-heading {
-                min-height: auto;
-                font-size: 18px;
-            }
-
-            .persona-img {
-                width: 100px;
-                height: 100px;
-            }
-
-            .btn {
-                padding: 14px 28px;
-                font-size: 16px;
-            }
-
-            .btn-large {
-                padding: 16px 32px;
-                font-size: 16px;
-            }
-        }
-
-        /* ===============  CONTAINER QUERIES  =============== */
-        @container (max-width: 600px) {
-            .grid-3,
-            .grid-4,
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ===============  SCROLL TIMELINE SUPPORT  =============== */
-        @supports (animation-timeline: scroll()) {
-            .cliq-hero {
-                animation: bgFade linear;
-                animation-timeline: scroll();
-            }
-
-            .cliq-hero::before {
-                animation: parallax linear;
-                animation-timeline: scroll();
-            }
-
-            @keyframes bgFade {
-                from {
-                    background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
-                }
-                to {
-                    background: linear-gradient(135deg, var(--color-hero-end) 0%, var(--color-hero-end) 50%, var(--color-hero-end) 100%);
-                }
-            }
-
-            @keyframes parallax {
-                to {
-                    transform: translateZ(-80px) scale(1.1) translateY(calc(var(--scroll) * 0.5px));
-                }
-            }
-        }
-
-        @supports not (animation-timeline: scroll()) {
-            .cliq-hero {
-                background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
-            }
-
-            .cliq-hero::before {
-                transform: translateZ(-80px) scale(1.1);
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLIQ Legal – Legal Counsel as a Service</title>
+
+  <!-- Inter Variable Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================  DESIGN TOKENS  ===================== */
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-alt: #f7fafc;
+      --color-primary: #00eadb;
+      --color-primary-dark: #00b8a9;
+      --color-text: #4a5568;
+      --color-heading: #002a4a;
+      --space-xl: 4rem;
+      --space-lg: 3rem;
+      --space-md: 2rem;
+      --space-sm: 1rem;
+      --radius: 8px;
+      --shadow-btn: 0 4px 12px rgba(0, 234, 219, 0.3);
+      --ease: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0d1117;
+        --color-bg-alt: #1a1f27;
+        --color-text: #c9d1d9;
+        --color-heading: #daf2ff;
+      }
+    }
+
+    /* =====================  BASE RESET  ===================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.6;
+      background: var(--color-bg);
+      color: var(--color-text);
+      overflow-x: hidden;
+    }
+
+    a { color: var(--color-primary); text-decoration: none; transition: color .3s var(--ease); }
+    a:hover { color: var(--color-primary-dark); }
+
+    .container { max-width: 1400px; margin: 0 auto; padding-inline: var(--space-md); }
+
+    .cliq-heading { font-weight: 600; color: var(--color-heading); }
+    .cliq-body     { font-weight: 400; }
+
+    .brackets { color: var(--color-primary); }
+
+    /* =====================  HERO ===================== */
+    .cliq-hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      padding-block: var(--space-md) var(--space-xl);
+      background: linear-gradient(120deg, var(--color-heading) 0%, #04365d 100%);
+      overflow: hidden;
+    }
+
+    /* Parallax layer */
+    .cliq-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("./hero-bg-dark.webp") center/cover no-repeat;
+      transform: translateZ(-80px) scale(1.1);
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .hero-content { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--space-md); text-align: center; position: relative; }
+    .hero-text    { max-width: 600px; display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .logo {
+      position: absolute; top: var(--space-md); left: var(--space-md);
+      display: flex; align-items: center; gap: .25rem; font-size: 36px; font-weight: 600; white-space: nowrap;
+    }
+    .logo .text { color: #ffffff; font-variation-settings: "wght" 600; transition: font-variation-settings .3s var(--ease); }
+    .logo:hover .text { font-variation-settings: "wght" 700; }
+
+    .slogan { font-size: 32px; line-height: 1.2; color: #ffffff; }
+    .slogan .highlight { color: var(--color-primary); }
+    .subline { font-size: 22px; font-weight: 600; line-height: 1.3; color: #ffffff; }
+
+    .btn {
+      display: inline-block;
+      background: var(--color-primary);
+      color: var(--color-heading);
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-btn); background: var(--color-primary-dark); }
+    .btn:active { transform: scale(.97); }
+
+    /* =====================  USP TYPEWRITER ===================== */
+    .usps { background: var(--color-bg-alt); padding-block: var(--space-sm); text-align: center; }
+    .usp-line { font-size: 22px; font-weight: 600; display: inline-flex; gap: .5rem; white-space: nowrap; }
+
+    /* Pure CSS typewriter effect */
+    .typewriter {
+      --caret: var(--color-primary);
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      animation: typing 9s steps(40) infinite, blink .75s step-end infinite;
+    }
+    .typewriter::after {
+      content: ""; position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: var(--caret); }
+    @keyframes typing {
+      0%   { max-width: 0; }
+      20%  { max-width: 100%; }
+      40%  { max-width: 100%; }
+      60%  { max-width: 0; }
+      100% { max-width: 0; }
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* =====================  SECTION BASE ===================== */
+    .section { padding-block: var(--space-xl); background: var(--color-bg); }
+    .section-title { font-size: 42px; margin-bottom: var(--space-sm); text-align: center; }
+    .section-subtitle { font-size: 22px; font-weight: 600; margin-bottom: var(--space-lg); text-align: center; }
+
+    /* Scroll‑linked Fade‑in */
+    .section {
+      opacity: 0; transform: translateY(30px);
+      animation: rise .6s var(--ease) both;
+      animation-timeline: view();
+      animation-range: entry 25% cover 30%;
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* =====================  GRID LAYOUTS ===================== */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-md); }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-md); }
+
+    /* =====================  CARDS ===================== */
+    .content-pad {
+      background: var(--color-bg);
+      padding: var(--space-md);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+      display: flex; flex-direction: column; gap: 1rem; height: 100%;
+    }
+
+    /* =====================  IMAGES ===================== */
+    img { width: 100%; height: auto; border-radius: 50%; object-fit: cover; display: block; }
+    .persona-img { width: 120px; height: 120px; margin: 0 auto 1rem; }
+    .team-img   { width: 160px; height: 160px; margin: .75rem auto 1.25rem; }
+
+    /* =====================  FOOTER ===================== */
+    .footer { text-align: center; background: var(--color-bg-alt); padding-block: var(--space-md); }
+
+    /* =====================  RESPONSIVE (CONTAINER QUERIES) ===================== */
+    @container style(max-width: 768px) {
+      .slogan { font-size: 24px; }
+      .logo { font-size: 28px; position: static; margin-bottom: var(--space-sm); justify-content: center; }
+      .cliq-hero { min-height: 60vh; padding-block: var(--space-sm) var(--space-lg); }
+      .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* =====================  SCROLL‑LINKED BACKGROUND FADE ===================== */
+    @scroll-timeline bg-tl { source: auto; time-range: 1; }
+    .cliq-hero { animation: bgShift 1 linear both bg-tl; }
+    @keyframes bgShift {
+      from { background: linear-gradient(120deg, var(--color-heading) 0%, #04365d 100%); }
+      to   { background: var(--color-bg-alt); }
+    }
+
+    /* =====================  ACCESSIBILITY ===================== */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+      .cliq-hero::before { transform: none !important; }
+    }
+  </style>
 </head>
 
 <body>
-
-<!-- =========  HERO  ========= -->
-<section class="cliq-hero">
+  <!-- =========  HERO ========= -->
+  <section class="cliq-hero">
     <div class="container">
-        <div class="logo">
-            <span class="brackets">[</span>
-            <span class="text">CLIQ LEGAL</span>
-            <span class="brackets">]</span>
-        </div>
+      <div class="logo">
+        <span class="brackets">[</span>
+        <span class="text">CLIQ LEGAL</span>
+        <span class="brackets">]</span>
+      </div>
 
-        <div class="hero-content">
-            <div class="hero-text">
-                <h2 class="slogan">
-                    Don't guess<span class="highlight">.</span> Let's CLIQ<span class="highlight">.</span>
-                </h2>
-                <p class="subline">Legal Counsel as a Service. Anwaltskanzlei zum Festpreis.</p>
-                <div class="hero-btn">
-                    <a href="https://calendly.com/mg-cliq/15min" class="btn">Book free Call</a>
-                </div>
-            </div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h2 class="slogan">Don't guess<span class="highlight">.</span> Let's CLIQ<span class="highlight">.</span></h2>
+          <p class="subline">Legal Counsel as a Service. Anwaltskanzlei zum Festpreis.</p>
+          <a href="https://calendly.com/mg-cliq/15min" class="btn">Book free Call</a>
         </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- =========  USP SECTION  ========= -->
-<section class="usps">
+  <!-- =========  USP SECTION ========= -->
+  <section class="usps">
     <div class="container">
-        <p class="usp-line">
-            <span class="static">Wir können&nbsp;</span>
-            <span class="typewriter" aria-label="Compliance"></span>
-        </p>
+      <p class="usp-line">
+        <span class="static">Wir können&nbsp;</span>
+        <span class="typewriter" aria-label="Compliance">Compliance · Datenschutz / KI / IP · Business Law / ESG · Freelancer / People · Festpreise / Abo-Modelle · Kanzleiqualität / Startup-Tempo.</span>
+      </p>
     </div>
-</section>
+  </section>
 
-<!-- =========  WHO WE HELP  ========= -->
-<section class="section">
+  <!-- =========  WHO WE HELP ========= -->
+  <section class="section">
     <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>Who we help<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Rechtliche Lücken bremsen dein Wachstum?</p>
-        <div class="grid-3">
-            <!-- Nora -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Nora – COO, SaaS-Scale-up (70 MA)</h3>
-                <img src="./Nora-Laura.webp" alt="Portrait von Nora" class="persona-img" loading="lazy">
-                <p class="cliq-body"><strong>Situation:</strong></p>
-                <p class="cliq-body">KI-Features stehen vorm Launch, Investor Due-Diligence tickt, Slack-Kanäle quellen über</p>
-                <div class="pain-points">
-                    <h4>Pain Points</h4>
-                    <ul class="cliq-body">
-                        <li>AI-Act-Risiko 2026</li>
-                        <li>DSGVO-Auskunft fehlt</li>
-                        <li>Vertragsstau</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Markus -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Markus – CFO, Mittelstandsunternehmen (150 MA)</h3>
-                <img src="./Markus.webp" alt="Portrait von Markus" class="persona-img" loading="lazy">
-                <p class="cliq-body"><strong>Situation:</strong></p>
-                <p class="cliq-body">Audit-Termin rückt näher, "Legal Counsel"-Stelle seit 3 Monaten unbesetzt</p>
-                <div class="pain-points">
-                    <h4>Pain Points</h4>
-                    <ul class="cliq-body">
-                        <li>20 Lieferverträge offen</li>
-                        <li>Remote-Policy unscharf</li>
-                        <li>Hiring-Gap kostet Zeit & Geld</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Laura -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Laura – Agentur-CEO (40 MA)</h3>
-                <img src="./Nora-Laura.webp" alt="Portrait von Laura" class="persona-img" loading="lazy">
-                <p class="cliq-body"><strong>Situation:</strong></p>
-                <p class="cliq-body">Pitch-Deadline in 72h, Kunde fordert wasserdichte AVV + IP-Klauseln</p>
-                <div class="pain-points">
-                    <h4>Pain Points</h4>
-                    <ul class="cliq-body">
-                        <li>Scheinselbstständigkeit im Freelancer-Pool</li>
-                        <li>Kreativ-Assets ohne Rechtekette</li>
-                        <li>AVV-Deadlines</li>
-                    </ul>
-                </div>
-            </div>
+      <h2 class="section-title"><span class="brackets">[</span>Who we help<span class="brackets">]</span></h2>
+      <p class="section-subtitle">Rechtliche Lücken bremsen dein Wachstum?</p>
+      <div class="grid-3">
+        <div class="content-pad">
+          <h3 class="cliq-heading">Nora – COO, SaaS-Scale-up (70 MA)</h3>
+          <img src="./Nora-Laura.webp" alt="Portrait von Nora" class="persona-img" loading="lazy" />
+          <p class="cliq-body"><strong>Situation:</strong> KI-Features stehen vorm Launch, Investor Due-Diligence tickt, Slack-Kanäle quellen über</p>
+          <h4>Pain Points</h4>
+          <ul class="cliq-body"><li>AI-Act-Risiko 2026</li><li>DSGVO-Auskunft fehlt</li><li>Vertragsstau</li></ul>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:var(--space-lg);font-weight:var(--font-weight-semibold);font-size:22px;line-height:1.3;">
-            Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.
-        </p>
+        <div class="content-pad">
+          <h3 class="cliq-heading">Markus – CFO, Mittelstandsunternehmen (150 MA)</h3>
+          <img src="./Markus.webp" alt="Portrait von Markus" class="persona-img" loading="lazy" />
+          <p class="cliq-body"><strong>Situation:</strong> Audit-Termin rückt näher, "Legal Counsel"-Stelle seit 3 Monaten unbesetzt</p>
+          <h4>Pain Points</h4>
+          <ul class="cliq-body"><li>20 Lieferverträge offen</li><li>Remote-Policy unscharf</li><li>Hiring-Gap kostet Zeit & Geld</li></ul>
+        </div>
+        <div class="content-pad">
+          <h3 class="cliq-heading">Laura – Agentur-CEO (40 MA)</h3>
+          <img src="./Nora-Laura.webp" alt="Portrait von Laura" class="persona-img" loading="lazy" />
+          <p class="cliq-body"><strong>Situation:</strong> Pitch-Deadline in 72h, Kunde fordert wasserdichte AVV + IP-Klauseln</p>
+          <h4>Pain Points</h4>
+          <ul class="cliq-body"><li>Scheinselbstständigkeit im Freelancer-Pool</li><li>Kreativ-Assets ohne Rechtekette</li><li>AVV-Deadlines</li></ul>
+        </div>
+      </div>
+      <p class="cliq-body" style="text-align:center; margin-top:var(--space-md); font-weight:600; font-size:22px; line-height:1.3;">
+        Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.
+      </p>
     </div>
-</section>
+  </section>
 
-<!-- =========  HOW WE FIX IT  ========= -->
-<section class="section" style="background:var(--color-surface);">
+  <!-- =========  HOW WE FIX IT ========= -->
+  <section class="section" style="background:var(--color-bg-alt);">
     <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>How we fix it<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Drei punktgenaue Pilotpakete:</p>
-        <div class="grid-3">
-            <!-- Paket 1 -->
-            <div class="package-card">
-                <div class="content-pad">
-                    <h3 class="cliq-heading">Data &amp; AI Compliance Sprint</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (14 Tage):</strong></p>
-                    <p class="cliq-body">Gap-Report + roadmap-ready Maßnahmenliste · Checkliste für Auditoren · Priorisierte Quick-Wins</p>
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
-                    <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
-                </div>
-            </div>
-            <!-- Paket 2 -->
-            <div class="package-card">
-                <div class="content-pad">
-                    <h3 class="cliq-heading">Quick-Hire HR Legal</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (7 Tage):</strong></p>
-                    <p class="cliq-body">Wasserdichte Arbeits- &amp; Freelancer-Verträge · Remote-/Whistleblower-Policy in Produktion · Slack-FAQ für HR</p>
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
-                    <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
-                </div>
-            </div>
-            <!-- Paket 3 -->
-            <div class="package-card">
-                <div class="content-pad">
-                    <h3 class="cliq-heading">Commercial / Agency Deal-Desk</h3>
-                    <p class="cliq-body"><strong>Dein Plus danach (laufend):</strong></p>
-                    <p class="cliq-body">Max. 5 Vertrags-Redlines &lt; 24h/Monat · AGB- &amp; IP-Review · Style-Guide für Klauseln · Quartalsreport</p>
-                    <p class="cliq-body"><strong>Festpreis: 3.000 €/Monat</strong></p>
-                    <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
-                </div>
-            </div>
+      <h2 class="section-title"><span class="brackets">[</span>How we fix it<span class="brackets">]</span></h2>
+      <p class="section-subtitle">Drei punktgenaue Pilotpakete:</p>
+      <div class="grid-3">
+        <div class="content-pad">
+          <h3 class="cliq-heading">Data &amp; AI Compliance Sprint</h3>
+          <p class="cliq-body"><strong>Dein Plus danach (14 Tage):</strong> Gap-Report + roadmap‑ready Maßnahmenliste · Checkliste für Auditoren · Priorisierte Quick‑Wins</p>
+          <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
+          <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:var(--space-lg);font-weight:var(--font-weight-semibold);font-size:22px;line-height:1.3;">
-            Keine Stundenzettel. Kein Onboarding. 100 % Festpreis. Erst der Pilot, dann – wenn gewünscht – der monatliche Retainer.
-        </p>
+        <div class="content-pad">
+          <h3 class="cliq-heading">Quick-Hire HR Legal</h3>
+          <p class="cliq-body"><strong>Dein Plus danach (7 Tage):</strong> Wasserdichte Arbeits- &amp; Freelancer-Verträge · Remote-/Whistleblower-Policy in Produktion · Slack-FAQ für HR</p>
+          <p class="cliq-body"><strong>Festpreis: 3.000 €</strong></p>
+          <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+        </div>
+        <div class="content-pad">
+          <h3 class="cliq-heading">Commercial / Agency Deal-Desk</h3>
+          <p class="cliq-body"><strong>Dein Plus danach (laufend):</strong> Max. 5 Vertrags-Redlines &lt; 24h/Monat · AGB- &amp; IP-Review · Style-Guide für Klauseln · Quartalsreport</p>
+          <p class="cliq-body"><strong>Festpreis: 3.000 €/Monat</strong></p>
+          <a href="https://calendly.com/mg-cliq/15min" class="btn">Book Pilot</a>
+        </div>
+      </div>
+      <p class="cliq-body" style="text-align:center; margin-top:var(--space-md); font-weight:600; font-size:22px; line-height:1.3;">
+        Keine Stundenzettel. Kein Onboarding. 100 % Festpreis. Erst der Pilot, dann – wenn gewünscht – der monatliche Retainer.
+      </p>
     </div>
-</section>
+  </section>
 
-<!-- =========  HOW IT WORKS  ========= -->
-<section class="section">
+  <!-- =========  HOW IT WORKS ========= -->
+  <section class="section">
     <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>How it works<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Ein CLIQ: Aus Mail-Chaos wird Rechtstransparenz.</p>
-        <div class="grid-4">
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">15-min Discovery Call</h3>
-                <p class="cliq-body">Wir hören zu, sortieren den größten Pain und empfehlen das passende Paket.</p>
-            </div>
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">2-Page Pilot-Vertrag</h3>
-                <p class="cliq-body">E-Signatur, Start spätestens 48h später.</p>
-            </div>
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">Deep-Dive &amp; Fix</h3>
-                <p class="cliq-body">Wir arbeiten selbstständig, halten dich up-to-date, liefern Roadmap + Dokumentation.</p>
-            </div>
-            <div class="content-pad">
-                <h3 class="cliq-heading" style="font-size:22px">Legal Counsel as a Service</h3>
-                <p class="cliq-body">Auf Wunsch bleiben wir als Legal Counsel auf Abruf – planbar zum Festpreis.</p>
-            </div>
-        </div>
+      <h2 class="section-title"><span class="brackets">[</span>How it works<span class="brackets">]</span></h2>
+      <p class="section-subtitle">Ein CLIQ: Aus Mail-Chaos wird Rechtstransparenz.</p>
+      <div class="grid-4">
+        <div class="content-pad"><h3 class="cliq-heading" style="font-size:22px">15-min Discovery Call</h3><p class="cliq-body">Wir hören zu, sortieren den größten Pain und empfehlen das passende Paket.</p></div>
+        <div class="content-pad"><h3 class="cliq-heading" style="font-size:22px">2-Page Pilot-Vertrag</h3><p class="cliq-body">E-Signatur, Start spätestens 48h später.</p></div>
+        <div class="content-pad"><h3 class="cliq-heading" style="font-size:22px">Deep-Dive &amp; Fix</h3><p class="cliq-body">Wir arbeiten selbstständig, halten dich up-to-date, liefern Roadmap + Dokumentation.</p></div>
+        <div class="content-pad"><h3 class="cliq-heading" style="font-size:22px">Legal Counsel as a Service</h3><p class="cliq-body">Auf Wunsch bleiben wir als Legal Counsel auf Abruf – planbar zum Festpreis.</p></div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- =========  WHO WE ARE  ========= -->
-<section class="section" style="background:var(--color-surface);">
+  <!-- =========  WHO WE ARE ========= -->
+  <section class="section" style="background:var(--color-bg-alt);">
     <div class="container">
-        <h2 class="section-title"><span class="brackets">[</span>Who we are<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Deine Legal Counsel auf Abruf</p>
-        <div class="grid-2">
-            <!-- Milad -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Milad Ghafarian – Principal Lawyer</h3>
-                <img src="./Milad.webp" alt="Portrait von Milad Ghafarian" class="team-img" loading="lazy">
-                <p class="cliq-body">
-                    Rechtsanwalt mit 8+ Jahren in Tech-, Corporate- und Commercial-Verträgen
-                    (SaaS, Cloud, Software-Dev) bei sDAX-Konzern und spezialisierten Boutiquen.
-                    Verhandelt zweisprachig (DE/EN) auf C-Level – und liefert Verträge, die Entwickler verstehen.
-                </p>
-            </div>
-            <!-- Burak -->
-            <div class="content-pad">
-                <h3 class="cliq-heading">Burak Korkmaz – Of Counsel</h3>
-                <img src="./Burak.webp" alt="Portrait von Burak Korkmaz" class="team-img" loading="lazy">
-                <p class="cliq-body">
-                    Rechtsanwalt mit Fokus auf Commercial, IP/IT und Employment-Support für digitale Geschäftsmodelle;
-                    Erfahrung aus Münchner Boutique-Teams. Arbeitet auf Deutsch und Englisch,
-                    denkt pragmatisch &amp; umsetzungsorientiert.
-                </p>
-            </div>
+      <h2 class="section-title"><span class="brackets">[</span>Who we are<span class="brackets">]</span></h2>
+      <p class="section-subtitle">Deine Legal Counsel auf Abruf</p>
+      <div class="grid-2">
+        <div class="content-pad">
+          <h3 class="cliq-heading">Milad Ghafarian – Principal Lawyer</h3>
+          <img src="./Milad.webp" alt="Portrait von Milad Ghafarian" class="team-img" loading="lazy" />
+          <p class="cliq-body">Rechtsanwalt mit 8+ Jahren in Tech-, Corporate- und Commercial-Verträgen (SaaS, Cloud, Software-Dev) bei sDAX-Konzern und spezialisierten Boutiquen. Verhandelt zweisprachig (DE/EN) auf C-Level – und liefert Verträge, die Entwickler verstehen.</p>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:var(--space-lg);font-weight:var(--font-weight-semibold);font-size:22px;line-height:1.3;">
-            Gemeinsam liefern wir Großkanzlei-Präzision – in Scale-up-Geschwindigkeit.
-        </p>
+        <div class="content-pad">
+          <h3 class="cliq-heading">Burak Korkmaz – Of Counsel</h3>
+          <img src="./Burak.webp" alt="Portrait von Burak Korkmaz" class="team-img" loading="lazy" />
+          <p class="cliq-body">Rechtsanwalt mit Fokus auf Commercial, IP/IT und Employment-Support für digitale Geschäftsmodelle; Erfahrung aus Münchner Boutique-Teams. Arbeitet auf Deutsch und Englisch, denkt pragmatisch &amp; umsetzungsorientiert.</p>
+        </div>
+      </div>
+      <p class="cliq-body" style="text-align:center; margin-top:var(--space-md); font-weight:600; font-size:22px; line-height:1.3;">Gemeinsam liefern wir Großkanzlei-Präzision – in Scale-up-Geschwindigkeit.</p>
     </div>
-</section>
+  </section>
 
-<!-- =========  FINAL CTA  ========= -->
-<section class="section">
+  <!-- =========  FINAL CTA ========= -->
+  <section class="section">
     <div class="container" style="text-align:center;">
-        <h2 class="section-title"><span class="brackets">[</span>Let's bring legal clarity to your company.<span class="brackets">]</span></h2>
-        <p class="section-subtitle">Buche jetzt deinen 15-min Schnell-Check – wir melden uns garantiert innerhalb von 24h.</p>
-        <a href="https://calendly.com/mg-cliq/15min" class="btn btn-large">Book free Call</a>
+      <h2 class="section-title"><span class="brackets">[</span>Let's bring legal clarity to your company.<span class="brackets">]</span></h2>
+      <p class="section-subtitle">Buche jetzt deinen 15-min Schnell-Check – wir melden uns garantiert innerhalb von 24h.</p>
+      <a href="https://calendly.com/mg-cliq/15min" class="btn" style="font-size:18px; padding:1.25rem 2.5rem;">Book free Call</a>
     </div>
-</section>
+  </section>
 
-<!-- =========  FOOTER  ========= -->
-<footer class="footer">
+  <!-- =========  FOOTER ========= -->
+  <footer class="footer">
     <div class="container">
-        <p class="cliq-body">© 2025 CLIQ Legal – Rechtsanwalt Milad Ghafarian</p>
-        <p class="cliq-body"><a href="#impressum">Impressum</a> | <a href="#datenschutz">Datenschutz</a> | <a href="https://linkedin.com/company/cliq-legal">LinkedIn</a></p>
+      <p class="cliq-body">© 2025 CLIQ Legal – Rechtsanwalt Milad Ghafarian</p>
+      <p class="cliq-body"><a href="#impressum">Impressum</a> | <a href="#datenschutz">Datenschutz</a> | <a href="https://linkedin.com/company/cliq-legal" target="_blank" rel="noopener">LinkedIn</a></p>
     </div>
-</footer>
+  </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    // Pure CSS typewriter effect is handled by CSS animations
-    // No JavaScript needed for typewriter anymore
-    
-    // Add fallback for browsers that don't support view() timeline
-    if (!CSS.supports('animation-timeline: view()')) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
-    }
-});
-</script>
-
+  <script>
+    /* ---------- View Transition (smooth anchor) ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        if (document.startViewTransition) {
+          document.startViewTransition(() => target.scrollIntoView({ behavior: 'smooth' }));
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
