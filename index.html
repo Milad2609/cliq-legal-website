@@ -20,6 +20,8 @@
             --color-background: #ffffff;
             --color-surface: #f7fafc;
             --color-surface-alt: #f8fafc;
+            --color-hero-start: #002a4a;
+            --color-hero-end: #f7fafc;
             
             /* Typography */
             --font-family: 'Inter var', 'Inter', Arial, sans-serif;
@@ -70,7 +72,8 @@
         .container { 
             max-width: 1400px; 
             margin: 0 auto; 
-            padding: 0 var(--space-lg); 
+            padding: 0 var(--space-lg);
+            container-type: inline-size;
         }
 
         /* ===============  TYPOGRAPHY & COLOR  =============== */
@@ -98,13 +101,14 @@
 
         /* ===============  HERO SECTION  =============== */
         .cliq-hero {
-            background: linear-gradient(135deg, #002a4a 0%, #1a365d 50%, #2d3748 100%);
+            background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
             position: relative;
             padding: var(--space-lg) 0 var(--space-2xl);
             min-height: 80vh;
             display: flex;
             align-items: center;
             overflow: hidden;
+            perspective: 1000px;
         }
 
         .cliq-hero::before {
@@ -117,6 +121,8 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0"/></filter></defs><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"/></svg>');
             opacity: 0.1;
             z-index: 1;
+            transform: translateZ(-80px) scale(1.1);
+            will-change: transform;
         }
 
         .cliq-hero .container {
@@ -143,7 +149,7 @@
 
         .logo {
             font-size: 36px;
-            font-weight: var(--font-weight-bold);
+            font-weight: var(--font-weight-semibold);
             white-space: nowrap;
             display: flex;
             align-items: center;
@@ -155,7 +161,7 @@
         }
 
         .logo:hover {
-            font-weight: 700;
+            font-weight: var(--font-weight-bold);
         }
 
         .logo .text {
@@ -191,6 +197,7 @@
             cursor: pointer;
             transform: translateY(0);
             box-shadow: 0 2px 8px rgba(0, 234, 219, 0.2);
+            will-change: transform, box-shadow;
         }
 
         .btn:hover {
@@ -233,7 +240,7 @@
             border-right: 2px solid var(--color-primary);
             overflow: hidden;
             min-width: 1px;
-            animation: blink 1s infinite;
+            animation: blink 1s infinite, typewriter 12s steps(60) infinite;
         }
 
         @keyframes blink {
@@ -242,8 +249,13 @@
         }
 
         @keyframes typewriter {
-            0% { width: 0; }
-            100% { width: 100%; }
+            0%, 16.66% { width: 0; }
+            8.33%, 25% { width: 100%; }
+            33.33%, 50% { width: 0; }
+            41.66%, 58.33% { width: 100%; }
+            66.66%, 83.33% { width: 0; }
+            75%, 91.66% { width: 100%; }
+            100% { width: 0; }
         }
 
         /* ===============  SECTION BASE  =============== */
@@ -251,7 +263,9 @@
             padding: var(--space-2xl) 0;
             opacity: 0;
             transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp linear;
+            animation-timeline: view();
+            animation-range: entry 25% cover 30%;
         }
 
         @keyframes fadeInUp {
@@ -306,6 +320,7 @@
             gap: var(--space-sm);
             height: 100%;
             transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            will-change: transform, box-shadow;
         }
 
         .content-pad:hover {
@@ -329,6 +344,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto var(--space-sm);
+            background: var(--color-surface);
         }
 
         .team-img {
@@ -338,6 +354,7 @@
             object-fit: cover;
             margin: 0.75rem auto 1.25rem;
             display: block;
+            background: var(--color-surface);
         }
 
         /* Package card button alignment */
@@ -377,12 +394,17 @@
 
             .typewriter {
                 border-right: none;
+                animation: none;
             }
 
             .section {
                 opacity: 1;
                 transform: none;
                 animation: none;
+            }
+
+            .cliq-hero::before {
+                transform: none;
             }
         }
 
@@ -517,19 +539,34 @@
                 animation-timeline: scroll();
             }
 
+            .cliq-hero::before {
+                animation: parallax linear;
+                animation-timeline: scroll();
+            }
+
             @keyframes bgFade {
                 from {
-                    background: linear-gradient(135deg, #002a4a 0%, #1a365d 50%, #2d3748 100%);
+                    background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
                 }
                 to {
-                    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface) 50%, var(--color-surface) 100%);
+                    background: linear-gradient(135deg, var(--color-hero-end) 0%, var(--color-hero-end) 50%, var(--color-hero-end) 100%);
+                }
+            }
+
+            @keyframes parallax {
+                to {
+                    transform: translateZ(-80px) scale(1.1) translateY(calc(var(--scroll) * 0.5px));
                 }
             }
         }
 
         @supports not (animation-timeline: scroll()) {
             .cliq-hero {
-                background: linear-gradient(135deg, #002a4a 0%, #1a365d 50%, #2d3748 100%);
+                background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
+            }
+
+            .cliq-hero::before {
+                transform: translateZ(-80px) scale(1.1);
             }
         }
     </style>
@@ -565,7 +602,7 @@
     <div class="container">
         <p class="usp-line">
             <span class="static">Wir können&nbsp;</span>
-            <span id="typewriter" class="typewriter" aria-label="Compliance"></span>
+            <span class="typewriter" aria-label="Compliance"></span>
         </p>
     </div>
 </section>
@@ -747,57 +784,25 @@
     </div>
 </footer>
 
-<!-- =========  OPTIMIZED TYPEWRITER SCRIPT  ========= -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const words = [
-        "Compliance.",
-        "Datenschutz / KI / IP.",
-        "Business Law / ESG.",
-        "Freelancer / People.",
-        "Festpreise / Abo-Modelle.",
-        "Kanzleiqualität / Startup-Tempo."
-    ];
+    // Pure CSS typewriter effect is handled by CSS animations
+    // No JavaScript needed for typewriter anymore
     
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typeSpeed = 80;
-    const deleteSpeed = 40;
-    const pauseTime = 800;
-    
-    const typewriterElement = document.getElementById("typewriter");
-    
-    function type() {
-        const currentWord = words[wordIndex];
-        
-        if (isDeleting) {
-            typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-        let speed = isDeleting ? deleteSpeed : typeSpeed;
-        
-        if (!isDeleting && charIndex === currentWord.length) {
-            speed = pauseTime;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            speed = 200;
-        }
-        
-        setTimeout(type, speed);
-    }
-    
-    // Check for reduced motion preference
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        type();
-    } else {
-        typewriterElement.textContent = words[0];
+    // Add fallback for browsers that don't support view() timeline
+    if (!CSS.supports('animation-timeline: view()')) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
     }
 });
 </script>
