@@ -33,6 +33,18 @@
 
         .brackets { color:#00eadb; }
 
+        /* ===============  SCROLL PROGRESS INDICATOR  =============== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #00eadb, #00b8a9);
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
         /* ===============  HERO SECTION  =============== */
         .cliq-hero{
             background:url('./hero-bg-dark.png') center/cover no-repeat;
@@ -70,26 +82,6 @@
 
         @media (prefers-reduced-motion:reduce){.typewriter{border-right:none;}}
 
-        /* ===============  SOFTCOLORFADE INTEGRATION  =============== */
-        /* Main content wrapper with background fade */
-        main#bg-timeline {
-            background-color: #002a4a; /* Start with navy */
-            animation: bg-fade 1 linear both;
-            animation-timeline: scroll(root block);
-        }
-        
-        @keyframes bg-fade {
-            from { background-color: #002a4a; }
-            to { background-color: #f7fafc; }
-        }
-        
-        /* Fallback for browsers without scroll timeline support */
-        @supports not (animation-timeline: scroll()) {
-            main#bg-timeline {
-                background-color: #f7fafc;
-            }
-        }
-
         /* ===============  SECTION BASE  =============== */
         .section{padding:4rem 0;}
         .section-title{font-size:42px;margin-bottom:1rem;text-align:center;}
@@ -100,27 +92,104 @@
         .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
         .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2rem;align-items:start;}
 
-        /* ===============  CARDS  =============== */
+        /* ===============  MICRO-INTERACTIONS CARDS  =============== */
         .content-pad{
             background:#ffffff;padding:1.5rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);
             display:flex;flex-direction:column;gap:1rem;height:100%;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Hover-Effekte für Karten */
+        .content-pad:hover {
+            border-color: rgba(0,234,219,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        /* Subtiler Glow-Effekt beim Hover */
+        .content-pad::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,234,219,0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .content-pad:hover::before {
+            left: 100%;
+        }
+
         .content-pad .cliq-heading{min-height:56px;}
         .content-pad .cliq-body strong{display:block;margin-bottom:.35rem;}
 
         /* Portraits */
-        .persona-img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;}
-        .team-img   {width:160px;height:160px;border-radius:50%;object-fit:cover;margin:.75rem auto 1.25rem;display:block;}
+        .persona-img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;transition: transform 0.3s ease;}
+        .persona-img:hover{transform: scale(1.05);}
+        .team-img   {width:160px;height:160px;border-radius:50%;object-fit:cover;margin:.75rem auto 1.25rem;display:block;transition: transform 0.3s ease;}
+        .team-img:hover{transform: scale(1.05);}
 
         /* Package card button alignment */
         .package-card{display:flex;flex-direction:column;height:100%;}
         .package-card .content-pad{flex:1;display:flex;flex-direction:column;}
         .package-card .btn{margin-top:auto;align-self:flex-start;}
 
-        /* FOOTER */
+        /* ===============  SECTION MICRO-INTERACTIONS  =============== */
+        .section {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* Subtiler Border-Effekt für Sektionen */
+        .section::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00eadb, #00b8a9);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .section:hover::before {
+            width: 100px;
+        }
+
+        /* ===============  BUTTON ENHANCEMENTS  =============== */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* ===============  FOOTER  =============== */
         .footer{padding:2rem 0;text-align:center;background:#f8fafc;}
 
-        /* RESPONSIVE */
+        /* ===============  RESPONSIVE  =============== */
         @media (max-width:768px){
             .container {
                 padding: 0 1rem; /* Reduce padding on mobile */
@@ -221,19 +290,40 @@
                 padding: 16px 32px;
                 font-size: 16px;
             }
+
+            /* Disable some micro-interactions on mobile for better performance */
+            .content-pad::before {
+                display: none;
+            }
+            
+            .section::before {
+                display: none;
+            }
         }
 
         /* ===============  ACCESSIBILITY  =============== */
         @media (prefers-reduced-motion: reduce) {
-            main#bg-timeline {
-                animation: none;
-                background-color: #f7fafc;
+            .content-pad,
+            .section,
+            .btn,
+            .persona-img,
+            .team-img {
+                transition: none;
+            }
+            
+            .content-pad::before,
+            .section::before,
+            .btn::before {
+                display: none;
             }
         }
     </style>
 </head>
 
 <body>
+
+<!-- =========  SCROLL PROGRESS INDICATOR  ========= -->
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- =========  HERO  ========= -->
 <section class="cliq-hero">
@@ -268,8 +358,8 @@
     </div>
 </section>
 
-<!-- =========  MAIN CONTENT WITH SOFTCOLORFADE  ========= -->
-<main id="bg-timeline">
+<!-- =========  MAIN CONTENT  ========= -->
+<main>
     <!-- =========  WHO WE HELP  ========= -->
     <section class="section">
         <div class="container">
@@ -448,8 +538,18 @@
     </div>
 </footer>
 
-<!-- =========  TYPEWRITER SCRIPT  ========= -->
+<!-- =========  SCRIPTS  ========= -->
 <script>
+// Scroll Progress Indicator
+window.addEventListener('scroll', () => {
+    const scrollProgress = document.getElementById('scrollProgress');
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.body.offsetHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    scrollProgress.style.width = scrollPercent + '%';
+});
+
+// Typewriter Effect
 document.addEventListener("DOMContentLoaded", () => {
     const words = [
         "Compliance.",
