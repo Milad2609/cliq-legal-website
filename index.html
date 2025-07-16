@@ -20,6 +20,8 @@
             color:#4a5568;
             background:#ffffff;
             overflow-x: hidden; /* Prevent horizontal scroll */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
@@ -70,6 +72,7 @@
         .btn{
             background:#00eadb;color:#002a4a;padding:16px 32px;border-radius:8px;font-weight:600;
             display:inline-block;transition:all .3s ease;border:none;cursor:pointer;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
         }
         .btn:hover{background:#00b8a9;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,234,219,.3);}
         .btn-large{padding:20px 40px;font-size:18px;}
@@ -100,16 +103,23 @@
             border: 1px solid transparent;
             position: relative;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Hover-Effekte für Karten */
+        /* Hover-Effekte für Desktop */
         .content-pad:hover {
             border-color: rgba(0,234,219,0.2);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
-        /* Subtiler Glow-Effekt beim Hover */
+        /* Touch-Effekte für Mobile */
+        .content-pad:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Subtiler Glow-Effekt beim Hover (nur Desktop) */
         .content-pad::before {
             content: '';
             position: absolute;
@@ -145,7 +155,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Subtiler Border-Effekt für Sektionen */
+        /* Subtiler Border-Effekt für Sektionen (nur Desktop) */
         .section::before {
             content: '';
             position: absolute;
@@ -166,6 +176,7 @@
         .btn {
             position: relative;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn::before {
@@ -186,18 +197,24 @@
             height: 300px;
         }
 
+        /* Touch-Feedback für Buttons */
+        .btn:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+
         /* ===============  FOOTER  =============== */
         .footer{padding:2rem 0;text-align:center;background:#f8fafc;}
 
-        /* ===============  RESPONSIVE  =============== */
+        /* ===============  MOBILE OPTIMIZATIONS  =============== */
         @media (max-width:768px){
             .container {
-                padding: 0 1rem; /* Reduce padding on mobile */
+                padding: 0 1rem;
             }
             
             .cliq-hero {
-                padding: 1rem 0 2rem 0; /* Reduce hero padding on mobile */
-                min-height: 60vh; /* Reduce min-height on mobile */
+                padding: 1rem 0 2rem 0;
+                min-height: 60vh;
             }
 
             .hero-content {
@@ -222,10 +239,10 @@
             
             .usp-line {
                 font-size: 18px;
-                white-space: normal; /* Allow text to wrap on mobile */
+                white-space: normal;
                 flex-direction: column;
                 gap: 0.5rem;
-                height: 4rem; /* Fixed height - no min-height */
+                height: 4rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -237,8 +254,8 @@
             
             .typewriter {
                 min-width: auto;
-                border-right: none; /* Remove cursor on mobile for cleaner look */
-                height: 2rem; /* Fixed height - no min-height */
+                border-right: none;
+                height: 2rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -263,7 +280,7 @@
             .grid-3,
             .grid-4,
             .grid-2 {
-                grid-template-columns: 1fr; /* Single column on mobile */
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
             
@@ -291,13 +308,58 @@
                 font-size: 16px;
             }
 
-            /* Disable some micro-interactions on mobile for better performance */
+            /* Mobile-specific micro-interactions */
+            .content-pad {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            
+            .content-pad:active {
+                transform: scale(0.98);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            /* Mobile scroll progress - smaller and less intrusive */
+            .scroll-progress {
+                height: 2px;
+                opacity: 0.8;
+            }
+
+            /* Disable complex animations on mobile for performance */
             .content-pad::before {
                 display: none;
             }
             
             .section::before {
                 display: none;
+            }
+
+            .btn::before {
+                display: none;
+            }
+
+            /* Mobile touch feedback for images */
+            .persona-img:active,
+            .team-img:active {
+                transform: scale(1.02);
+            }
+        }
+
+        /* ===============  TABLET OPTIMIZATIONS  =============== */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .section-subtitle {
+                font-size: 20px;
             }
         }
 
@@ -315,6 +377,26 @@
             .section::before,
             .btn::before {
                 display: none;
+            }
+        }
+
+        /* ===============  PERFORMANCE OPTIMIZATIONS  =============== */
+        /* Hardware acceleration for smooth animations */
+        .content-pad,
+        .btn,
+        .persona-img,
+        .team-img {
+            will-change: transform;
+        }
+
+        /* Optimize for low-end devices */
+        @media (max-width: 480px) {
+            .content-pad {
+                transition: none;
+            }
+            
+            .btn {
+                transition: background-color 0.2s ease;
             }
         }
     </style>
@@ -540,14 +622,43 @@
 
 <!-- =========  SCRIPTS  ========= -->
 <script>
-// Scroll Progress Indicator
-window.addEventListener('scroll', () => {
+// Performance-optimized scroll handler with throttling
+let ticking = false;
+
+function updateScrollProgress() {
     const scrollProgress = document.getElementById('scrollProgress');
     const scrollTop = window.pageYOffset;
     const docHeight = document.body.offsetHeight - window.innerHeight;
     const scrollPercent = (scrollTop / docHeight) * 100;
     scrollProgress.style.width = scrollPercent + '%';
-});
+    ticking = false;
+}
+
+function requestTick() {
+    if (!ticking) {
+        requestAnimationFrame(updateScrollProgress);
+        ticking = true;
+    }
+}
+
+window.addEventListener('scroll', requestTick, { passive: true });
+
+// Touch feedback for mobile
+if ('ontouchstart' in window) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const touchElements = document.querySelectorAll('.content-pad, .btn');
+        
+        touchElements.forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            }, { passive: true });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+            }, { passive: true });
+        });
+    });
+}
 
 // Typewriter Effect
 document.addEventListener("DOMContentLoaded", () => {
@@ -573,11 +684,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentWord = words[wordIndex];
         
         if (isDeleting) {
-            // Deleting characters
             typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
             charIndex--;
         } else {
-            // Typing characters
             typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
             charIndex++;
         }
@@ -585,11 +694,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let speed = isDeleting ? deleteSpeed : typeSpeed;
         
         if (!isDeleting && charIndex === currentWord.length) {
-            // Word is complete, pause before deleting
             speed = pauseTime;
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
-            // Word is deleted, move to next word
             isDeleting = false;
             wordIndex = (wordIndex + 1) % words.length;
             speed = 200;
@@ -598,7 +705,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(type, speed);
     }
     
-    // Start the typewriter effect
     type();
 });
 </script>
