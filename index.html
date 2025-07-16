@@ -155,7 +155,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Subtiler Border-Effekt für Sektionen (nur Desktop) */
+        /* Subtiler Border-Effekt für Sektionen */
         .section::before {
             content: '';
             position: absolute;
@@ -308,6 +308,17 @@
                 font-size: 16px;
             }
 
+            /* Mobile-optimierte Sektion-Linien */
+            .section::before {
+                height: 1px; /* Dünner auf Mobile */
+                width: 60px; /* Kürzer auf Mobile */
+                transition: width 0.2s ease; /* Schneller auf Mobile */
+            }
+
+            .section:hover::before {
+                width: 80px; /* Kürzerer Hover-Effekt auf Mobile */
+            }
+
             /* Mobile-specific micro-interactions */
             .content-pad {
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -326,10 +337,6 @@
 
             /* Disable complex animations on mobile for performance */
             .content-pad::before {
-                display: none;
-            }
-            
-            .section::before {
                 display: none;
             }
 
