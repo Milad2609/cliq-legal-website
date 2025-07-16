@@ -77,12 +77,12 @@
         .btn:hover{background:#00b8a9;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,234,219,.3);}
         .btn-large{padding:20px 40px;font-size:18px;}
 
-        /* ===============  USP SECTION  (Sanfter Fade) =============== */
+        /* ===============  USP SECTION  (Korrigierter Sanfter Fade) =============== */
         .usps {
             background:#f7fafc;
             padding:1.5rem 0;
         }
-        
+
         .usp-line {
             font-size: 22px;
             font-weight: 600;
@@ -91,23 +91,28 @@
             justify-content: center;
             align-items: center;
             gap: 0.5rem;
-            height: 2.5rem;
+            height: 3rem; /* Höher für bessere Sichtbarkeit */
+            position: relative;
         }
-        
+
         .usp-line .static {
             color: #002a4a;
         }
-        
+
         .usp-text {
             color: #00eadb;
             opacity: 0;
-            animation: gentle-fade 6s ease-in-out infinite;
-            animation-delay: calc(var(--index) * 3s);
+            animation: quick-fade 3s ease-in-out infinite;
+            animation-delay: calc(var(--index) * 1.5s);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
-        
-        @keyframes gentle-fade {
+
+        @keyframes quick-fade {
             0%, 100% { opacity: 0; }
-            20%, 80% { opacity: 1; }
+            15%, 85% { opacity: 1; } /* Längere Sichtbarkeit */
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -273,7 +278,7 @@
                 font-size: 18px;
                 flex-direction: column;
                 gap: 0.5rem;
-                height: 4rem;
+                height: 5rem; /* Höher auf Mobile für bessere Lesbarkeit */
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -289,6 +294,10 @@
                 align-items: center;
                 justify-content: center;
                 width: 100%;
+                position: relative; /* Zurück zu relative auf Mobile */
+                left: auto;
+                transform: none;
+                white-space: normal; /* Erlaubt Zeilenumbruch auf Mobile */
             }
             
             /* Section adjustments for mobile */
