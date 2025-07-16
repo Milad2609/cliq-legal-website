@@ -77,13 +77,53 @@
         .btn:hover{background:#00b8a9;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,234,219,.3);}
         .btn-large{padding:20px 40px;font-size:18px;}
 
-        /* ===============  USP SECTION  (Typewriter) =============== */
-        .usps       {background:#f7fafc;padding:1.5rem 0;}
-        .usp-line   {font-size:22px;font-weight:600;text-align:center;white-space:nowrap;display:flex;justify-content:center;align-items:center;}
-        .usp-line .static {color:#002a4a;}
-        .typewriter {color:#00eadb;border-right:2px solid #00eadb;overflow:hidden;min-width:1px;}
+        /* ===============  USP SECTION  (Modern Fade-Rotation) =============== */
+        .usps {
+            background:#f7fafc;
+            padding:1.5rem 0;
+        }
+        
+        .usp-line {
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            height: 2.5rem;
+        }
+        
+        .usp-line .static {
+            color: #002a4a;
+        }
+        
+        .usp-text {
+            color: #00eadb;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-rotate 4s ease-in-out infinite;
+            animation-delay: calc(var(--index) * 2s);
+        }
+        
+        @keyframes fade-rotate {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateY(20px) rotateX(90deg); 
+            }
+            20%, 80% { 
+                opacity: 1; 
+                transform: translateY(0) rotateX(0deg); 
+            }
+        }
 
-        @media (prefers-reduced-motion:reduce){.typewriter{border-right:none;}}
+        @media (prefers-reduced-motion: reduce) {
+            .usp-text {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
 
         /* ===============  SECTION BASE  =============== */
         .section{padding:4rem 0;}
@@ -113,7 +153,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
-        /* Touch-Effekte für Mobile */
+        /* Touch-Effekte für Mobile - nur Scale, kein Border */
         .content-pad:active {
             transform: scale(0.98);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -239,7 +279,6 @@
             
             .usp-line {
                 font-size: 18px;
-                white-space: normal;
                 flex-direction: column;
                 gap: 0.5rem;
                 height: 4rem;
@@ -252,9 +291,7 @@
                 margin-bottom: 0.25rem;
             }
             
-            .typewriter {
-                min-width: auto;
-                border-right: none;
+            .usp-text {
                 height: 2rem;
                 display: flex;
                 align-items: center;
@@ -310,16 +347,16 @@
 
             /* Mobile-optimierte Sektion-Linien */
             .section::before {
-                height: 1px; /* Dünner auf Mobile */
-                width: 60px; /* Kürzer auf Mobile */
-                transition: width 0.2s ease; /* Schneller auf Mobile */
+                height: 1px;
+                width: 60px;
+                transition: width 0.2s ease;
             }
 
             .section:hover::before {
-                width: 80px; /* Kürzerer Hover-Effekt auf Mobile */
+                width: 80px;
             }
 
-            /* Mobile-specific micro-interactions */
+            /* Mobile-specific micro-interactions - nur Scale, kein Border */
             .content-pad {
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
             }
@@ -327,6 +364,7 @@
             .content-pad:active {
                 transform: scale(0.98);
                 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                border-color: transparent; /* Kein türkiser Border auf Mobile */
             }
 
             /* Mobile scroll progress - smaller and less intrusive */
@@ -442,7 +480,12 @@
     <div class="container">
         <p class="usp-line">
             <span class="static">Wir können&nbsp;</span>
-            <span id="typewriter" class="typewriter" aria-label="Compliance"></span>
+            <span class="usp-text" style="--index: 0">Compliance.</span>
+            <span class="usp-text" style="--index: 1">Datenschutz / KI / IP.</span>
+            <span class="usp-text" style="--index: 2">Business Law / ESG.</span>
+            <span class="usp-text" style="--index: 3">Freelancer / People.</span>
+            <span class="usp-text" style="--index: 4">Festpreise / Abo-Modelle.</span>
+            <span class="usp-text" style="--index: 5">Kanzleiqualität / Startup-Tempo.</span>
         </p>
     </div>
 </section>
@@ -650,70 +693,22 @@ function requestTick() {
 
 window.addEventListener('scroll', requestTick, { passive: true });
 
-// Touch feedback for mobile
+// Touch feedback for mobile - nur für Buttons, nicht für Karten
 if ('ontouchstart' in window) {
     document.addEventListener('DOMContentLoaded', () => {
-        const touchElements = document.querySelectorAll('.content-pad, .btn');
+        const touchButtons = document.querySelectorAll('.btn');
         
-        touchElements.forEach(element => {
-            element.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
+        touchButtons.forEach(button => {
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
             }, { passive: true });
             
-            element.addEventListener('touchend', function() {
+            button.addEventListener('touchend', function() {
                 this.style.transform = '';
             }, { passive: true });
         });
     });
 }
-
-// Typewriter Effect
-document.addEventListener("DOMContentLoaded", () => {
-    const words = [
-        "Compliance.",
-        "Datenschutz / KI / IP.",
-        "Business Law / ESG.",
-        "Freelancer / People.",
-        "Festpreise / Abo-Modelle.",
-        "Kanzleiqualität / Startup-Tempo."
-    ];
-    
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typeSpeed = 80;
-    const deleteSpeed = 40;
-    const pauseTime = 800;
-    
-    const typewriterElement = document.getElementById("typewriter");
-    
-    function type() {
-        const currentWord = words[wordIndex];
-        
-        if (isDeleting) {
-            typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-        let speed = isDeleting ? deleteSpeed : typeSpeed;
-        
-        if (!isDeleting && charIndex === currentWord.length) {
-            speed = pauseTime;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            speed = 200;
-        }
-        
-        setTimeout(type, speed);
-    }
-    
-    type();
-});
 </script>
 
 </body>
