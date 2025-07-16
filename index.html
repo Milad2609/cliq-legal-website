@@ -5,568 +5,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLIQ Legal – Legal Counsel as a Service</title>
 
-    <!-- Variable Font -->
-    <link rel="preload" href="https://rsms.me/inter/inter.var.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <!-- Google-Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ===============  DESIGN TOKENS  ================= */
-        :root {
-            /* Colors */
-            --color-primary: #00eadb;
-            --color-primary-hover: #00b8a9;
-            --color-text: #4a5568;
-            --color-heading: #002a4a;
-            --color-background: #ffffff;
-            --color-surface: #f7fafc;
-            --color-surface-alt: #f8fafc;
-            --color-hero-start: #002a4a;
-            --color-hero-end: #f7fafc;
-            
-            /* Typography */
-            --font-family: 'Inter var', 'Inter', Arial, sans-serif;
-            --font-weight-normal: 400;
-            --font-weight-semibold: 600;
-            --font-weight-bold: 700;
-            
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            --space-2xl: 4rem;
-            
-            /* Transitions */
-            --transition-fast: 0.2s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
-        }
-
-        /* Dark theme */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --color-text: #e2e8f0;
-                --color-heading: #f1f5f9;
-                --color-background: #0f172a;
-                --color-surface: #1e293b;
-                --color-surface-alt: #334155;
-            }
-        }
-
         /* ===============  RESET & BASE  ================= */
-        *, *::before, *::after { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
         body {
-            font-family: var(--font-family);
-            line-height: 1.6;
-            color: var(--color-text);
-            background: var(--color-background);
-            overflow-x: hidden;
+            font-family:'Inter',Arial,sans-serif;
+            line-height:1.6;
+            color:#4a5568;
+            background:#ffffff;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        .container { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 0 var(--space-lg);
-            container-type: inline-size;
-        }
+        .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
 
         /* ===============  TYPOGRAPHY & COLOR  =============== */
-        .cliq-heading { 
-            font-weight: var(--font-weight-semibold); 
-            color: var(--color-heading); 
-        }
-        .cliq-body { 
-            font-weight: var(--font-weight-normal); 
-            color: var(--color-text); 
-        }
+        .cliq-heading { font-weight:600; color:#002a4a; }
+        .cliq-body     { font-weight:400; color:#4a5568; }
 
-        a { 
-            color: var(--color-primary); 
-            text-decoration: none; 
-            transition: color var(--transition-normal); 
-        }
-        a:hover { 
-            color: var(--color-primary-hover); 
-        }
+        a { color:#00eadb; text-decoration:none; transition:color .3s ease; }
+        a:hover { color:#00b8a9; }
 
-        .brackets { 
-            color: var(--color-primary); 
-        }
+        .brackets { color:#00eadb; }
 
         /* ===============  HERO SECTION  =============== */
-        .cliq-hero {
-            background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
-            position: relative;
-            padding: var(--space-lg) 0 var(--space-2xl);
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            perspective: 1000px;
+        .cliq-hero{
+            background:url('./hero-bg-dark.png') center/cover no-repeat;
+            padding:2rem 0 4rem;
+            min-height:80vh;
+            display:flex;
+            align-items:center;
+            position:relative;
         }
+        .hero-content{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2rem;width:100%;}
+        .hero-text   {display:flex;flex-direction:column;align-items:center;gap:1.5rem;max-width:600px;}
 
-        .cliq-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0"/></filter></defs><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"/></svg>');
-            opacity: 0.1;
-            z-index: 1;
-            transform: translateZ(-80px) scale(1.1);
-            will-change: transform;
+        .logo{
+            font-size:36px;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:4px;
+            position:absolute;top:2rem;left:2rem;
         }
+        .logo .text{color:#ffffff;}
 
-        .cliq-hero .container {
-            position: relative;
-            z-index: 2;
-        }
+        .slogan{font-size:32px;line-height:1.2;color:#ffffff;}
+        .slogan .highlight{color:#00eadb;}
+        .subline{font-size:22px;font-weight:600;line-height:1.3;color:#ffffff;}
 
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: var(--space-lg);
-            width: 100%;
+        .btn{
+            background:#00eadb;color:#002a4a;padding:16px 32px;border-radius:8px;font-weight:600;
+            display:inline-block;transition:all .3s ease;border:none;cursor:pointer;
         }
+        .btn:hover{background:#00b8a9;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,234,219,.3);}
+        .btn-large{padding:20px 40px;font-size:18px;}
 
-        .hero-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-md);
-            max-width: 600px;
-        }
+        /* ===============  USP SECTION  (Typewriter) =============== */
+        .usps       {background:#f7fafc;padding:1.5rem 0;}
+        .usp-line   {font-size:22px;font-weight:600;text-align:center;white-space:nowrap;display:flex;justify-content:center;align-items:center;}
+        .usp-line .static {color:#002a4a;}
+        .typewriter {color:#00eadb;border-right:2px solid #00eadb;overflow:hidden;min-width:1px;}
 
-        .logo {
-            font-size: 36px;
-            font-weight: var(--font-weight-semibold);
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            position: absolute;
-            top: var(--space-lg);
-            left: var(--space-lg);
-            transition: font-weight var(--transition-normal);
-        }
-
-        .logo:hover {
-            font-weight: var(--font-weight-bold);
-        }
-
-        .logo .text {
-            color: #ffffff;
-        }
-
-        .slogan {
-            font-size: 32px;
-            line-height: 1.2;
-            color: #ffffff;
-        }
-
-        .slogan .highlight {
-            color: var(--color-primary);
-        }
-
-        .subline {
-            font-size: 22px;
-            font-weight: var(--font-weight-semibold);
-            line-height: 1.3;
-            color: #ffffff;
-        }
-
-        .btn {
-            background: var(--color-primary);
-            color: var(--color-heading);
-            padding: 16px 32px;
-            border-radius: 8px;
-            font-weight: var(--font-weight-semibold);
-            display: inline-block;
-            transition: all var(--transition-normal);
-            border: none;
-            cursor: pointer;
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 234, 219, 0.2);
-            will-change: transform, box-shadow;
-        }
-
-        .btn:hover {
-            background: var(--color-primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 234, 219, 0.4);
-        }
-
-        .btn:active {
-            transform: scale(0.97);
-        }
-
-        .btn-large {
-            padding: 20px 40px;
-            font-size: 18px;
-        }
-
-        /* ===============  USP SECTION  =============== */
-        .usps {
-            background: var(--color-surface);
-            padding: var(--space-md) 0;
-        }
-
-        .usp-line {
-            font-size: 22px;
-            font-weight: var(--font-weight-semibold);
-            text-align: center;
-            white-space: nowrap;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .usp-line .static {
-            color: var(--color-heading);
-        }
-
-        .typewriter {
-            color: var(--color-primary);
-            border-right: 2px solid var(--color-primary);
-            overflow: hidden;
-            min-width: 1px;
-            animation: blink 1s infinite, typewriter 12s steps(60) infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-color: var(--color-primary); }
-            51%, 100% { border-color: transparent; }
-        }
-
-        @keyframes typewriter {
-            0%, 16.66% { width: 0; }
-            8.33%, 25% { width: 100%; }
-            33.33%, 50% { width: 0; }
-            41.66%, 58.33% { width: 100%; }
-            66.66%, 83.33% { width: 0; }
-            75%, 91.66% { width: 100%; }
-            100% { width: 0; }
-        }
+        @media (prefers-reduced-motion:reduce){.typewriter{border-right:none;}}
 
         /* ===============  SECTION BASE  =============== */
-        .section {
-            padding: var(--space-2xl) 0;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp linear;
-            animation-timeline: view();
-            animation-range: entry 25% cover 30%;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-title {
-            font-size: 42px;
-            margin-bottom: var(--space-sm);
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 22px;
-            font-weight: var(--font-weight-semibold);
-            line-height: 1.3;
-            margin-bottom: var(--space-xl);
-            text-align: center;
-        }
+        .section{padding:4rem 0;}
+        .section-title{font-size:42px;margin-bottom:1rem;text-align:center;}
+        .section-subtitle{font-size:22px;font-weight:600;line-height:1.3;margin-bottom:3rem;text-align:center;}
 
         /* ===============  GRID LAYOUTS  =============== */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: var(--space-lg);
-            align-items: start;
-        }
+        .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;}
+        .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
+        .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2rem;align-items:start;}
 
         /* ===============  CARDS  =============== */
-        .content-pad {
-            background: var(--color-background);
-            padding: var(--space-md);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            height: 100%;
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-            will-change: transform, box-shadow;
+        .content-pad{
+            background:#ffffff;padding:1.5rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);
+            display:flex;flex-direction:column;gap:1rem;height:100%;
         }
-
-        .content-pad:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .content-pad .cliq-heading {
-            min-height: 56px;
-        }
-
-        .content-pad .cliq-body strong {
-            display: block;
-            margin-bottom: 0.35rem;
-        }
+        .content-pad .cliq-heading{min-height:56px;}
+        .content-pad .cliq-body strong{display:block;margin-bottom:.35rem;}
 
         /* Portraits */
-        .persona-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto var(--space-sm);
-            background: var(--color-surface);
-        }
-
-        .team-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0.75rem auto 1.25rem;
-            display: block;
-            background: var(--color-surface);
-        }
+        .persona-img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;}
+        .team-img   {width:160px;height:160px;border-radius:50%;object-fit:cover;margin:.75rem auto 1.25rem;display:block;}
 
         /* Package card button alignment */
-        .package-card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .package-card .content-pad {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .package-card .btn {
-            margin-top: auto;
-            align-self: flex-start;
-        }
+        .package-card{display:flex;flex-direction:column;height:100%;}
+        .package-card .content-pad{flex:1;display:flex;flex-direction:column;}
+        .package-card .btn{margin-top:auto;align-self:flex-start;}
 
         /* FOOTER */
-        .footer {
-            padding: var(--space-lg) 0;
-            text-align: center;
-            background: var(--color-surface-alt);
-        }
+        .footer{padding:2rem 0;text-align:center;background:#f8fafc;}
 
-        /* ===============  ACCESSIBILITY  =============== */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            .typewriter {
-                border-right: none;
-                animation: none;
-            }
-
-            .section {
-                opacity: 1;
-                transform: none;
-                animation: none;
-            }
-
-            .cliq-hero::before {
-                transform: none;
-            }
-        }
-
-        /* ===============  RESPONSIVE  =============== */
-        @media (max-width: 768px) {
+        /* RESPONSIVE */
+        @media (max-width:768px){
             .container {
-                padding: 0 var(--space-sm);
+                padding: 0 1rem; /* Reduce padding on mobile */
             }
-
+            
             .cliq-hero {
-                padding: var(--space-sm) 0 var(--space-lg);
-                min-height: 60vh;
+                padding: 1rem 0 2rem 0; /* Reduce hero padding on mobile */
+                min-height: 60vh; /* Reduce min-height on mobile */
             }
 
             .hero-content {
                 flex-direction: column;
-                gap: var(--space-md);
+                gap: 1.5rem;
             }
 
             .hero-text {
                 text-align: center;
                 align-items: center;
-                gap: var(--space-sm);
+                gap: 1rem;
             }
 
-            .slogan {
-                font-size: 24px;
-            }
-
-            .logo {
-                font-size: 28px;
-                position: relative;
-                top: auto;
-                left: auto;
-                justify-content: center;
-                margin-bottom: var(--space-md);
-            }
-
-            .team-img {
-                width: 120px;
-                height: 120px;
-            }
-
+            .slogan{font-size:24px;}
+            .logo{font-size:28px;position:relative;top:auto;left:auto;justify-content:center;margin-bottom:1.5rem;}
+            .team-img{width:120px;height:120px;}
+            
+            /* USP Section Mobile Fixes */
             .usps {
-                padding: var(--space-sm) 0;
+                padding: 1rem 0;
             }
-
+            
             .usp-line {
                 font-size: 18px;
-                white-space: normal;
+                white-space: normal; /* Allow text to wrap on mobile */
                 flex-direction: column;
-                gap: var(--space-xs);
-                height: 4rem;
+                gap: 0.5rem;
+                height: 4rem; /* Fixed height - no min-height */
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
-
+            
             .usp-line .static {
                 margin-bottom: 0.25rem;
             }
-
+            
             .typewriter {
                 min-width: auto;
-                border-right: none;
-                height: 2rem;
+                border-right: none; /* Remove cursor on mobile for cleaner look */
+                height: 2rem; /* Fixed height - no min-height */
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
             }
-
+            
+            /* Section adjustments for mobile */
             .section {
-                padding: var(--space-lg) 0;
+                padding: 2rem 0;
             }
-
+            
             .section-title {
                 font-size: 32px;
                 margin-bottom: 0.5rem;
             }
-
+            
             .section-subtitle {
                 font-size: 18px;
-                margin-bottom: var(--space-lg);
+                margin-bottom: 2rem;
             }
-
+            
             .grid-3,
             .grid-4,
             .grid-2 {
-                grid-template-columns: 1fr;
-                gap: var(--space-md);
+                grid-template-columns: 1fr; /* Single column on mobile */
+                gap: 1.5rem;
             }
-
+            
             .content-pad {
                 padding: 1.25rem;
             }
-
+            
             .content-pad .cliq-heading {
                 min-height: auto;
                 font-size: 18px;
             }
-
+            
             .persona-img {
                 width: 100px;
                 height: 100px;
             }
-
+            
             .btn {
                 padding: 14px 28px;
                 font-size: 16px;
             }
-
+            
             .btn-large {
                 padding: 16px 32px;
                 font-size: 16px;
-            }
-        }
-
-        /* ===============  CONTAINER QUERIES  =============== */
-        @container (max-width: 600px) {
-            .grid-3,
-            .grid-4,
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ===============  SCROLL TIMELINE SUPPORT  =============== */
-        @supports (animation-timeline: scroll()) {
-            .cliq-hero {
-                animation: bgFade linear;
-                animation-timeline: scroll();
-            }
-
-            .cliq-hero::before {
-                animation: parallax linear;
-                animation-timeline: scroll();
-            }
-
-            @keyframes bgFade {
-                from {
-                    background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
-                }
-                to {
-                    background: linear-gradient(135deg, var(--color-hero-end) 0%, var(--color-hero-end) 50%, var(--color-hero-end) 100%);
-                }
-            }
-
-            @keyframes parallax {
-                to {
-                    transform: translateZ(-80px) scale(1.1) translateY(calc(var(--scroll) * 0.5px));
-                }
-            }
-        }
-
-        @supports not (animation-timeline: scroll()) {
-            .cliq-hero {
-                background: linear-gradient(135deg, var(--color-hero-start) 0%, #1a365d 50%, #2d3748 100%);
-            }
-
-            .cliq-hero::before {
-                transform: translateZ(-80px) scale(1.1);
             }
         }
     </style>
@@ -602,7 +235,7 @@
     <div class="container">
         <p class="usp-line">
             <span class="static">Wir können&nbsp;</span>
-            <span class="typewriter" aria-label="Compliance"></span>
+            <span id="typewriter" class="typewriter" aria-label="Compliance"></span>
         </p>
     </div>
 </section>
@@ -616,7 +249,7 @@
             <!-- Nora -->
             <div class="content-pad">
                 <h3 class="cliq-heading">Nora – COO, SaaS-Scale-up (70 MA)</h3>
-                <img src="./Nora-Laura.png" alt="Portrait von Nora" class="persona-img" loading="lazy">
+                <img src="./Nora-Laura.png" alt="Portrait von Nora" class="persona-img">
                 <p class="cliq-body"><strong>Situation:</strong></p>
                 <p class="cliq-body">KI-Features stehen vorm Launch, Investor Due-Diligence tickt, Slack-Kanäle quellen über</p>
                 <div class="pain-points">
@@ -631,7 +264,7 @@
             <!-- Markus -->
             <div class="content-pad">
                 <h3 class="cliq-heading">Markus – CFO, Mittelstandsunternehmen (150 MA)</h3>
-                <img src="./Markus.png" alt="Portrait von Markus" class="persona-img" loading="lazy">
+                <img src="./Markus.png" alt="Portrait von Markus" class="persona-img">
                 <p class="cliq-body"><strong>Situation:</strong></p>
                 <p class="cliq-body">Audit-Termin rückt näher, "Legal Counsel"-Stelle seit 3 Monaten unbesetzt</p>
                 <div class="pain-points">
@@ -646,7 +279,7 @@
             <!-- Laura -->
             <div class="content-pad">
                 <h3 class="cliq-heading">Laura – Agentur-CEO (40 MA)</h3>
-                <img src="./Nora-Laura.png" alt="Portrait von Laura" class="persona-img" loading="lazy">
+                <img src="./Nora-Laura.png" alt="Portrait von Laura" class="persona-img">
                 <p class="cliq-body"><strong>Situation:</strong></p>
                 <p class="cliq-body">Pitch-Deadline in 72h, Kunde fordert wasserdichte AVV + IP-Klauseln</p>
                 <div class="pain-points">
@@ -659,14 +292,14 @@
                 </div>
             </div>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:var(--space-lg);font-weight:var(--font-weight-semibold);font-size:22px;line-height:1.3;">
+        <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
             Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.
         </p>
     </div>
 </section>
 
 <!-- =========  HOW WE FIX IT  ========= -->
-<section class="section" style="background:var(--color-surface);">
+<section class="section" style="background:#f7fafc;">
     <div class="container">
         <h2 class="section-title"><span class="brackets">[</span>How we fix it<span class="brackets">]</span></h2>
         <p class="section-subtitle">Drei punktgenaue Pilotpakete:</p>
@@ -702,7 +335,7 @@
                 </div>
             </div>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:var(--space-lg);font-weight:var(--font-weight-semibold);font-size:22px;line-height:1.3;">
+        <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
             Keine Stundenzettel. Kein Onboarding. 100 % Festpreis. Erst der Pilot, dann – wenn gewünscht – der monatliche Retainer.
         </p>
     </div>
@@ -735,7 +368,7 @@
 </section>
 
 <!-- =========  WHO WE ARE  ========= -->
-<section class="section" style="background:var(--color-surface);">
+<section class="section" style="background:#f7fafc;">
     <div class="container">
         <h2 class="section-title"><span class="brackets">[</span>Who we are<span class="brackets">]</span></h2>
         <p class="section-subtitle">Deine Legal Counsel auf Abruf</p>
@@ -743,7 +376,7 @@
             <!-- Milad -->
             <div class="content-pad">
                 <h3 class="cliq-heading">Milad Ghafarian – Principal Lawyer</h3>
-                <img src="./Milad.png" alt="Portrait von Milad Ghafarian" class="team-img" loading="lazy">
+                <img src="./Milad.png" alt="Portrait von Milad Ghafarian" class="team-img">
                 <p class="cliq-body">
                     Rechtsanwalt mit 8+ Jahren in Tech-, Corporate- und Commercial-Verträgen
                     (SaaS, Cloud, Software-Dev) bei sDAX-Konzern und spezialisierten Boutiquen.
@@ -753,7 +386,7 @@
             <!-- Burak -->
             <div class="content-pad">
                 <h3 class="cliq-heading">Burak Korkmaz – Of Counsel</h3>
-                <img src="./Burak.png" alt="Portrait von Burak Korkmaz" class="team-img" loading="lazy">
+                <img src="./Burak.png" alt="Portrait von Burak Korkmaz" class="team-img">
                 <p class="cliq-body">
                     Rechtsanwalt mit Fokus auf Commercial, IP/IT und Employment-Support für digitale Geschäftsmodelle;
                     Erfahrung aus Münchner Boutique-Teams. Arbeitet auf Deutsch und Englisch,
@@ -761,7 +394,7 @@
                 </p>
             </div>
         </div>
-        <p class="cliq-body" style="text-align:center;margin-top:var(--space-lg);font-weight:var(--font-weight-semibold);font-size:22px;line-height:1.3;">
+        <p class="cliq-body" style="text-align:center;margin-top:2rem;font-weight:600;font-size:22px;line-height:1.3;">
             Gemeinsam liefern wir Großkanzlei-Präzision – in Scale-up-Geschwindigkeit.
         </p>
     </div>
@@ -784,26 +417,58 @@
     </div>
 </footer>
 
+<!-- =========  TYPEWRITER SCRIPT  ========= -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Pure CSS typewriter effect is handled by CSS animations
-    // No JavaScript needed for typewriter anymore
+    const words = [
+        "Compliance.",
+        "Datenschutz / KI / IP.",
+        "Business Law / ESG.",
+        "Freelancer / People.",
+        "Festpreise / Abo-Modelle.",
+        "Kanzleiqualität / Startup-Tempo."
+    ];
     
-    // Add fallback for browsers that don't support view() timeline
-    if (!CSS.supports('animation-timeline: view()')) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeSpeed = 80;
+    const deleteSpeed = 40;
+    const pauseTime = 800;
+    
+    const typewriterElement = document.getElementById("typewriter");
+    
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            // Deleting characters
+            typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            // Typing characters
+            typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let speed = isDeleting ? deleteSpeed : typeSpeed;
+        
+        if (!isDeleting && charIndex === currentWord.length) {
+            // Word is complete, pause before deleting
+            speed = pauseTime;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            // Word is deleted, move to next word
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            speed = 200;
+        }
+        
+        setTimeout(type, speed);
     }
+    
+    // Start the typewriter effect
+    type();
 });
 </script>
 
