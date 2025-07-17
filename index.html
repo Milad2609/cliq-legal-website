@@ -20,80 +20,80 @@
       line-height: 1.6;
       color: #333;
       overflow-x: hidden;
+      background-color: #232323;
     }
     
     .font-mont {
       font-family: 'Montserrat', sans-serif;
     }
     
-    /* SICHTBARE SCHWEBENDE KREISE */
+    /* AD HOC LEGAL STYLE - GELBER HINTERGRUND */
+    .bg-yellow {
+      background-color: #e9b934;
+    }
+    
+    .bg-dark {
+      background-color: #232323;
+    }
+    
+    /* SICHTBARE SCHWEBENDE KREISE WIE AD HOC LEGAL */
     .floating-circle {
       position: fixed;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.1) 60%, rgba(255,255,255,0) 80%);
       z-index: -1;
       pointer-events: none;
       animation: float 20s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.1) 60%, rgba(255,255,255,0) 80%);
     }
     
     .circle-1 {
-      width: 500px;
-      height: 500px;
-      top: 15vh;
-      left: 10vw;
-      background: radial-gradient(circle, rgba(0, 234, 219, 0.3) 0%, rgba(0, 234, 219, 0.1) 50%, rgba(0, 234, 219, 0) 80%);
+      width: 60vmin;
+      height: 60vmin;
+      top: 24vh;
+      left: 28vw;
     }
     
     .circle-2 {
-      width: 400px;
-      height: 400px;
-      top: -5vh;
-      right: 10vw;
+      width: 56vmin;
+      height: 56vmin;
+      top: -10vh;
+      right: 25vw;
       animation-delay: -10s;
-      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0) 70%);
     }
     
     @keyframes float {
       0%, 100% { 
         transform: translateY(0px) rotate(0deg); 
-        opacity: 0.8;
-      }
-      25% { 
-        transform: translateY(-30px) rotate(90deg); 
-        opacity: 1;
       }
       50% { 
-        transform: translateY(-60px) rotate(180deg); 
-        opacity: 0.9;
-      }
-      75% { 
-        transform: translateY(-30px) rotate(270deg); 
-        opacity: 1;
+        transform: translateY(-40px) rotate(180deg); 
       }
     }
     
-    /* Sections */
+    /* Sections wie Ad Hoc Legal */
     .section {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 240px 2rem;
       position: relative;
     }
     
     .hero {
-      background: linear-gradient(135deg, #002a4a 0%, #001a2e 100%);
+      background-color: #232323;
       color: white;
       text-align: center;
     }
     
-    .white-bg {
-      background-color: white;
+    .yellow-section {
+      background-color: #e9b934;
+      color: #232323;
     }
     
-    .gray-bg {
-      background-color: #f8fafc;
+    .white-section {
+      background-color: white;
+      color: #232323;
     }
     
     /* Container */
@@ -103,19 +103,21 @@
       width: 100%;
     }
     
-    /* Typography */
+    /* Typography wie Ad Hoc Legal */
     h1 {
-      font-size: clamp(3rem, 8vw, 5rem);
+      font-size: clamp(4rem, 12vw, 8rem);
       font-weight: 700;
       margin-bottom: 2rem;
-      line-height: 1.1;
+      line-height: 0.9;
+      text-transform: uppercase;
     }
     
     h2 {
-      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-size: clamp(2rem, 6vw, 4rem);
       font-weight: 700;
       margin-bottom: 1.5rem;
       text-align: center;
+      text-transform: uppercase;
     }
     
     h3 {
@@ -129,34 +131,35 @@
       margin-bottom: 1rem;
     }
     
-    /* Buttons */
+    /* Buttons wie Ad Hoc Legal */
     .btn {
       display: inline-block;
       padding: 1rem 2rem;
-      background-color: #00eadb;
-      color: #002a4a;
+      background-color: #e9b934;
+      color: #232323;
       text-decoration: none;
-      border-radius: 8px;
       font-weight: 600;
       font-size: 1.125rem;
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
     
     .btn:hover {
-      background-color: #00b8a9;
+      background-color: #d4a82a;
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     
-    /* Cards */
+    /* Cards wie Ad Hoc Legal */
     .card {
       background: white;
-      border-radius: 12px;
+      border-radius: 0;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       padding: 2rem;
       transition: transform 0.3s ease;
+      border: 1px solid #eee;
     }
     
     .card:hover {
@@ -178,7 +181,7 @@
       margin: 2rem 0;
     }
     
-    /* Header */
+    /* Header wie Ad Hoc Legal */
     .header {
       position: fixed;
       top: 2rem;
@@ -199,7 +202,7 @@
     }
     
     .logo span {
-      color: #00eadb;
+      color: #e9b934;
     }
     
     .nav {
@@ -212,10 +215,13 @@
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.9rem;
     }
     
     .nav a:hover {
-      color: #00eadb;
+      color: #e9b934;
     }
     
     /* Avatar circles */
@@ -232,12 +238,14 @@
       color: white;
     }
     
-    .avatar-mint {
-      background: linear-gradient(135deg, #00eadb, #00b8a9);
+    .avatar-yellow {
+      background: #e9b934;
+      color: #232323;
     }
     
-    .avatar-blue {
-      background: linear-gradient(135deg, #002a4a, #001a2e);
+    .avatar-dark {
+      background: #232323;
+      color: white;
     }
     
     /* Lists */
@@ -254,7 +262,7 @@
     
     li:before {
       content: "•";
-      color: #00eadb;
+      color: #e9b934;
       font-weight: bold;
       position: absolute;
       left: 0;
@@ -262,18 +270,19 @@
     
     /* Footer */
     .footer {
-      background-color: #f1f5f9;
+      background-color: #232323;
+      color: white;
       padding: 2rem;
       text-align: center;
     }
     
     .footer a {
-      color: #002a4a;
+      color: #e9b934;
       text-decoration: none;
     }
     
     .footer a:hover {
-      color: #00eadb;
+      color: white;
     }
     
     /* Mobile responsive */
@@ -289,7 +298,7 @@
       }
       
       .section {
-        padding: 1rem;
+        padding: 120px 1rem;
       }
       
       .grid-3, .grid-2 {
@@ -299,7 +308,7 @@
   </style>
 </head>
 <body>
-  <!-- SICHTBARE SCHWEBENDE KREISE -->
+  <!-- SICHTBARE SCHWEBENDE KREISE WIE AD HOC LEGAL -->
   <div class="floating-circle circle-1"></div>
   <div class="floating-circle circle-2"></div>
 
@@ -317,13 +326,13 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Section wie Ad Hoc Legal -->
   <section id="home" class="section hero">
     <div class="container">
       <h1 class="font-mont">
-        Don't guess.<br>Let's CLIQ.
+        UNIQUE<br>SERVICES for<br>UNIQUE CLIENTS
       </h1>
-      <p style="font-size: 1.5rem; margin-bottom: 2rem;">
+      <p style="font-size: 1.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.1em;">
         Legal Counsel as a Service • Anwaltskanzlei zum Festpreis
       </p>
       <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn">
@@ -333,17 +342,17 @@
   </section>
 
   <!-- Who We Help Section -->
-  <section id="who" class="section white-bg">
+  <section id="who" class="section white-section">
     <div class="container">
       <h2 class="font-mont">[ Who we help ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem;">
+      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
         Rechtliche Lücken bremsen dein Wachstum?
       </p>
       
       <div class="grid-3">
         <!-- Nora -->
         <div class="card text-center">
-          <div class="avatar avatar-mint">N</div>
+          <div class="avatar avatar-yellow">N</div>
           <h3>Nora – COO, SaaS‑Scale‑up (70 MA)</h3>
           <p style="font-size: 0.9rem; margin-bottom: 1rem;">
             KI‑Features kurz vor Launch, Investor Due‑Diligence tickt, Slack quillt über.
@@ -357,7 +366,7 @@
         
         <!-- Markus -->
         <div class="card text-center">
-          <div class="avatar avatar-blue">M</div>
+          <div class="avatar avatar-dark">M</div>
           <h3>Markus – CFO, Mittelstand (150 MA)</h3>
           <p style="font-size: 0.9rem; margin-bottom: 1rem;">
             Audit‑Termin rückt näher, „Legal Counsel"‑Stelle seit 3 Monaten unbesetzt.
@@ -371,7 +380,7 @@
         
         <!-- Laura -->
         <div class="card text-center">
-          <div class="avatar avatar-mint">L</div>
+          <div class="avatar avatar-yellow">L</div>
           <h3>Laura – Agentur‑CEO (40 MA)</h3>
           <p style="font-size: 0.9rem; margin-bottom: 1rem;">
             Pitch‑Deadline in 72h, Kunde fordert AVV + IP‑Klauseln.
@@ -391,10 +400,10 @@
   </section>
 
   <!-- How We Fix It Section -->
-  <section id="fix" class="section gray-bg">
+  <section id="fix" class="section yellow-section">
     <div class="container">
       <h2 class="font-mont">[ How we fix it ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem;">
+      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
         Drei Pilot‑Pakete, punktgenau →
       </p>
       
@@ -404,8 +413,8 @@
           <h3>Data & AI Compliance Sprint</h3>
           <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">14 Tage → Dein Plus</p>
           <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Gap‑Report, Roadmap‑Maßnahmen, Auditor Checkliste.</p>
-          <p style="font-size: 1.25rem; font-weight: bold; color: #002a4a; margin-bottom: 1.5rem;">Festpreis 3.000 €</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn" style="margin-top: auto;">Book Pilot</a>
+          <p style="font-size: 1.25rem; font-weight: bold; color: #232323; margin-bottom: 1.5rem;">Festpreis 3.000 €</p>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn" style="margin-top: auto; background: #232323; color: white;">Book Pilot</a>
         </div>
         
         <!-- Package 2 -->
@@ -413,8 +422,8 @@
           <h3>Quick‑Hire HR Legal</h3>
           <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">7 Tage → Dein Plus</p>
           <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Arbeits‑ & Freelancer‑Verträge, Remote‑Policy, Slack‑FAQ.</p>
-          <p style="font-size: 1.25rem; font-weight: bold; color: #002a4a; margin-bottom: 1.5rem;">Festpreis 3.000 €</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn" style="margin-top: auto;">Book Pilot</a>
+          <p style="font-size: 1.25rem; font-weight: bold; color: #232323; margin-bottom: 1.5rem;">Festpreis 3.000 €</p>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn" style="margin-top: auto; background: #232323; color: white;">Book Pilot</a>
         </div>
         
         <!-- Package 3 -->
@@ -422,8 +431,8 @@
           <h3>Commercial / Agency Deal‑Desk</h3>
           <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">laufend → Dein Plus</p>
           <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">max 5 Vertrags‑Redlines < 24h/Monat, AGB‑ & IP‑Review, Quartalsreport.</p>
-          <p style="font-size: 1.25rem; font-weight: bold; color: #002a4a; margin-bottom: 1.5rem;">Festpreis 3.000 €/Monat</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn" style="margin-top: auto;">Book Pilot</a>
+          <p style="font-size: 1.25rem; font-weight: bold; color: #232323; margin-bottom: 1.5rem;">Festpreis 3.000 €/Monat</p>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn" style="margin-top: auto; background: #232323; color: white;">Book Pilot</a>
         </div>
       </div>
       
@@ -434,10 +443,10 @@
   </section>
 
   <!-- How It Works Section -->
-  <section id="works" class="section white-bg">
+  <section id="works" class="section white-section">
     <div class="container">
       <h2 class="font-mont">[ How it works ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem;">
+      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
         Ein CLIQ → Mail‑Chaos wird Rechtstransparenz.
       </p>
       
@@ -463,24 +472,24 @@
   </section>
 
   <!-- Team Section -->
-  <section id="team" class="section gray-bg">
+  <section id="team" class="section yellow-section">
     <div class="container">
       <h2 class="font-mont">[ Who we are ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem;">
+      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
         Deine Legal Counsel auf Abruf
       </p>
       
       <div class="grid-2">
         <!-- Milad -->
         <div class="card text-center">
-          <div class="avatar avatar-blue" style="width: 160px; height: 160px; font-size: 3rem;">M</div>
+          <div class="avatar avatar-dark" style="width: 160px; height: 160px; font-size: 3rem;">M</div>
           <h3>Milad Ghafarian – Principal Lawyer</h3>
           <p style="font-size: 0.9rem;">8+ Jahre Tech‑, Corporate‑ & Commercial‑Erfahrung (sDAX), zweisprachig DE/EN.</p>
         </div>
         
         <!-- Burak -->
         <div class="card text-center">
-          <div class="avatar avatar-mint" style="width: 160px; height: 160px; font-size: 3rem;">B</div>
+          <div class="avatar avatar-yellow" style="width: 160px; height: 160px; font-size: 3rem;">B</div>
           <h3>Burak Korkmaz – Of Counsel</h3>
           <p style="font-size: 0.9rem;">Commercial, IP/IT & Employment‑Support für digitale Geschäftsmodelle, DE/EN.</p>
         </div>
@@ -496,7 +505,7 @@
   <section id="contact" class="section hero">
     <div class="container">
       <h2 class="font-mont">[ Let's bring legal clarity ]</h2>
-      <p style="font-size: 1.25rem; margin-bottom: 2rem;">
+      <p style="font-size: 1.25rem; margin-bottom: 2rem; text-transform: uppercase;">
         Buche deinen 15‑min Schnell‑Check – Antwort garantiert < 24 h.
       </p>
       <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn">Free Call buchen</a>
