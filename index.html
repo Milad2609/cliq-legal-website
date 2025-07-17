@@ -43,7 +43,7 @@
       z-index: 1;
       pointer-events: none;
       animation: float 15s ease-in-out infinite;
-      opacity: 0; /* Standardmäßig unsichtbar */
+      opacity: 0;
       transition: opacity 0.5s ease;
     }
     
@@ -113,17 +113,19 @@
       width: 100%;
     }
     
-    /* Typography wie Ad Hoc Legal */
+    /* Typography wie Ad Hoc Legal - MOBILE OPTIMIERT */
     h1 {
-      font-size: clamp(4rem, 12vw, 8rem);
+      font-size: clamp(2.5rem, 8vw, 8rem);
       font-weight: 700;
       margin-bottom: 2rem;
       line-height: 0.9;
       text-transform: uppercase;
+      word-break: keep-all;
+      hyphens: none;
     }
     
     h2 {
-      font-size: clamp(2rem, 6vw, 4rem);
+      font-size: clamp(1.8rem, 5vw, 4rem);
       font-weight: 700;
       margin-bottom: 1.5rem;
       text-align: center;
@@ -131,30 +133,31 @@
     }
     
     h3 {
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
       font-weight: 600;
       margin-bottom: 1rem;
     }
     
     p {
-      font-size: 1.125rem;
+      font-size: clamp(1rem, 3vw, 1.125rem);
       margin-bottom: 1rem;
     }
     
     /* Buttons wie Ad Hoc Legal */
     .btn {
       display: inline-block;
-      padding: 1rem 2rem;
+      padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
       background-color: #66CD00;
       color: #232323;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.125rem;
+      font-size: clamp(0.9rem, 3vw, 1.125rem);
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      white-space: nowrap;
     }
     
     .btn:hover {
@@ -167,7 +170,7 @@
       background: white;
       border-radius: 0;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
+      padding: clamp(1.5rem, 4vw, 2rem);
       transition: transform 0.3s ease;
       border: 1px solid #eee;
     }
@@ -176,22 +179,22 @@
       transform: translateY(-5px);
     }
     
-    /* Grids */
+    /* Grids - MOBILE OPTIMIERT */
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
       margin: 2rem 0;
     }
     
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
       margin: 2rem 0;
     }
     
-    /* Header wie Ad Hoc Legal - DÜNNER */
+    /* Header wie Ad Hoc Legal - MOBILE OPTIMIERT */
     .header {
       position: fixed;
       top: 0;
@@ -201,16 +204,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
+      padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem);
       background: rgba(35, 35, 35, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      height: 60px;
+      height: clamp(50px, 8vw, 60px);
     }
     
     .logo {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
       font-weight: 700;
       text-decoration: none;
       transition: color 0.3s ease;
@@ -223,7 +226,7 @@
     
     .nav {
       display: flex;
-      gap: 1.5rem;
+      gap: clamp(1rem, 2vw, 1.5rem);
     }
     
     .nav a {
@@ -233,23 +236,23 @@
       transition: color 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      font-size: 0.8rem;
+      font-size: clamp(0.7rem, 2vw, 0.8rem);
     }
     
     .nav a:hover {
       color: #66CD00;
     }
     
-    /* Avatar circles */
+    /* Avatar circles - MOBILE OPTIMIERT */
     .avatar {
-      width: 120px;
-      height: 120px;
+      width: clamp(80px, 20vw, 120px);
+      height: clamp(80px, 20vw, 120px);
       border-radius: 50%;
       margin: 0 auto 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
       font-weight: bold;
       color: white;
     }
@@ -288,7 +291,7 @@
     .footer {
       background-color: #232323;
       color: white;
-      padding: 2rem;
+      padding: clamp(1.5rem, 4vw, 2rem);
       text-align: center;
     }
     
@@ -301,7 +304,7 @@
       color: white;
     }
     
-    /* Mobile responsive */
+    /* Mobile responsive - ERWEITERT */
     @media (max-width: 768px) {
       .nav {
         display: none;
@@ -313,15 +316,67 @@
       }
       
       .section {
-        padding: 100px 1rem 1rem 1rem;
+        padding: 120px 1rem 1rem 1rem;
+        min-height: auto;
       }
       
       .grid-3, .grid-2 {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
       
       .floating-circle {
-        display: none;
+        display: none; /* Kreise auf Mobile ausblenden */
+      }
+      
+      /* Mobile-spezifische Anpassungen */
+      .card {
+        padding: 1.5rem;
+      }
+      
+      .btn {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      
+      /* Slogan auf Mobile optimiert */
+      h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+        word-break: normal;
+      }
+      
+      /* Container auf Mobile */
+      .container {
+        padding: 0 1rem;
+      }
+    }
+    
+    /* Sehr kleine Bildschirme */
+    @media (max-width: 480px) {
+      .section {
+        padding: 100px 0.5rem 1rem 0.5rem;
+      }
+      
+      .header {
+        padding: 0.5rem;
+      }
+      
+      .logo {
+        font-size: 1.1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .card {
+        padding: 1rem;
       }
     }
   </style>
@@ -331,7 +386,7 @@
   <div class="floating-circle circle-1"></div>
   <div class="floating-circle circle-2"></div>
 
-  <!-- Header - DÜNNER -->
+  <!-- Header - MOBILE OPTIMIERT -->
   <header class="header">
     <a href="#home" class="logo">
       <span>[</span>CLIQ LEGAL<span>]</span>
@@ -345,13 +400,13 @@
     </nav>
   </header>
 
-  <!-- Hero Section wie Ad Hoc Legal -->
+  <!-- Hero Section wie Ad Hoc Legal - MOBILE OPTIMIERT -->
   <section id="home" class="section hero">
     <div class="container">
       <h1 class="font-mont">
         Don't guess.<br>Let's CLIQ.
       </h1>
-      <p style="font-size: 1.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.1em;">
+      <p style="font-size: clamp(1.2rem, 4vw, 1.5rem); margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.1em;">
         Legal Counsel as a Service • Anwaltskanzlei zum Festpreis
       </p>
       <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn">
@@ -364,7 +419,7 @@
   <section id="who" class="section white-section">
     <div class="container">
       <h2 class="font-mont">[ Who we help ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
+      <p style="text-align: center; font-size: clamp(1rem, 3vw, 1.25rem); margin-bottom: 3rem; text-transform: uppercase;">
         Rechtliche Lücken bremsen dein Wachstum?
       </p>
       
@@ -412,7 +467,7 @@
         </div>
       </div>
       
-      <p style="text-align: center; font-size: 1.25rem; margin-top: 3rem;">
+      <p style="text-align: center; font-size: clamp(1rem, 3vw, 1.25rem); margin-top: 3rem;">
         Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.
       </p>
     </div>
@@ -422,7 +477,7 @@
   <section id="fix" class="section green-section">
     <div class="container">
       <h2 class="font-mont">[ How we fix it ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
+      <p style="text-align: center; font-size: clamp(1rem, 3vw, 1.25rem); margin-bottom: 3rem; text-transform: uppercase;">
         Drei Pilot‑Pakete, punktgenau →
       </p>
       
@@ -455,7 +510,7 @@
         </div>
       </div>
       
-      <p style="text-align: center; font-size: 1.25rem; margin-top: 3rem;">
+      <p style="text-align: center; font-size: clamp(1rem, 3vw, 1.25rem); margin-top: 3rem;">
         Keine Stundenzettel. 100 % Festpreis. Erst der Pilot, dann der Retainer.
       </p>
     </div>
@@ -465,7 +520,7 @@
   <section id="works" class="section white-section">
     <div class="container">
       <h2 class="font-mont">[ How it works ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
+      <p style="text-align: center; font-size: clamp(1rem, 3vw, 1.25rem); margin-bottom: 3rem; text-transform: uppercase;">
         Ein CLIQ → Mail‑Chaos wird Rechtstransparenz.
       </p>
       
@@ -494,27 +549,27 @@
   <section id="team" class="section green-section">
     <div class="container">
       <h2 class="font-mont">[ Who we are ]</h2>
-      <p style="text-align: center; font-size: 1.25rem; margin-bottom: 3rem; text-transform: uppercase;">
+      <p style="text-align: center; font-size: clamp(1rem, 3vw, 1.25rem); margin-bottom: 3rem; text-transform: uppercase;">
         Deine Legal Counsel auf Abruf
       </p>
       
       <div class="grid-2">
         <!-- Milad -->
         <div class="card text-center">
-          <div class="avatar avatar-dark" style="width: 160px; height: 160px; font-size: 3rem;">M</div>
+          <div class="avatar avatar-dark" style="width: clamp(120px, 25vw, 160px); height: clamp(120px, 25vw, 160px); font-size: clamp(2.5rem, 6vw, 3rem);">M</div>
           <h3>Milad Ghafarian – Principal Lawyer</h3>
           <p style="font-size: 0.9rem;">8+ Jahre Tech‑, Corporate‑ & Commercial‑Erfahrung (sDAX), zweisprachig DE/EN.</p>
         </div>
         
         <!-- Burak -->
         <div class="card text-center">
-          <div class="avatar avatar-green" style="width: 160px; height: 160px; font-size: 3rem;">B</div>
+          <div class="avatar avatar-green" style="width: clamp(120px, 25vw, 160px); height: clamp(120px, 25vw, 160px); font-size: clamp(2.5rem, 6vw, 3rem);">B</div>
           <h3>Burak Korkmaz – Of Counsel</h3>
           <p style="font-size: 0.9rem;">Commercial, IP/IT & Employment‑Support für digitale Geschäftsmodelle, DE/EN.</p>
         </div>
       </div>
       
-      <p style="text-align: center; font-size: 1.25rem; margin-top: 3rem;">
+      <p style="text-align: center; font-size: clamp(1rem, 3vw, 1.25rem); margin-top: 3rem;">
         Gemeinsam liefern wir Großkanzlei‑Präzision – in Scale‑up‑Geschwindigkeit.
       </p>
     </div>
@@ -524,7 +579,7 @@
   <section id="contact" class="section hero">
     <div class="container">
       <h2 class="font-mont">[ Let's bring legal clarity ]</h2>
-      <p style="font-size: 1.25rem; margin-bottom: 2rem; text-transform: uppercase;">
+      <p style="font-size: clamp(1rem, 3vw, 1.25rem); margin-bottom: 2rem; text-transform: uppercase;">
         Buche deinen 15‑min Schnell‑Check – Antwort garantiert < 24 h.
       </p>
       <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn">Free Call buchen</a>
