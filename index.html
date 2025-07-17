@@ -36,60 +36,50 @@
       background-color: #232323;
     }
     
-    /* SICHTBARE SCHWEBENDE KREISE WIE AD HOC LEGAL - VIEL SICHTBARER */
+    /* SICHTBARE SCHWEBENDE KREISE - EINFACH UND SICHTBAR */
     .floating-circle {
       position: fixed;
       border-radius: 50%;
       z-index: -1;
       pointer-events: none;
-      animation: float 20s ease-in-out infinite;
+      animation: float 15s ease-in-out infinite;
     }
     
     .circle-1 {
-      width: 60vmin;
-      height: 60vmin;
-      top: 24vh;
-      left: 28vw;
-      background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.4) 30%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.1) 80%, rgba(255,255,255,0) 90%);
-      filter: blur(1px);
+      width: 400px;
+      height: 400px;
+      top: 20vh;
+      left: 15vw;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 80%);
+      box-shadow: 0 0 50px rgba(255,255,255,0.3);
     }
     
     .circle-2 {
-      width: 56vmin;
-      height: 56vmin;
-      top: -10vh;
-      right: 25vw;
-      animation-delay: -10s;
-      background: radial-gradient(circle, rgba(233,185,52,0.5) 0%, rgba(233,185,52,0.3) 40%, rgba(233,185,52,0.1) 70%, rgba(233,185,52,0) 90%);
-      filter: blur(2px);
+      width: 300px;
+      height: 300px;
+      top: -5vh;
+      right: 10vw;
+      animation-delay: -7s;
+      background: radial-gradient(circle, rgba(233,185,52,0.7) 0%, rgba(233,185,52,0.3) 50%, rgba(233,185,52,0.1) 80%);
+      box-shadow: 0 0 40px rgba(233,185,52,0.4);
     }
     
     @keyframes float {
       0%, 100% { 
-        transform: translateY(0px) rotate(0deg) scale(1); 
-        opacity: 0.8;
-      }
-      25% { 
-        transform: translateY(-30px) rotate(90deg) scale(1.05); 
-        opacity: 1;
+        transform: translateY(0px) rotate(0deg); 
       }
       50% { 
-        transform: translateY(-60px) rotate(180deg) scale(1.1); 
-        opacity: 0.9;
-      }
-      75% { 
-        transform: translateY(-30px) rotate(270deg) scale(1.05); 
-        opacity: 1;
+        transform: translateY(-50px) rotate(180deg); 
       }
     }
     
-    /* Sections wie Ad Hoc Legal */
+    /* Sections wie Ad Hoc Legal - MIT HEADER ABSTAND */
     .section {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 240px 2rem;
+      padding: 240px 2rem 2rem 2rem; /* Mehr Padding oben für Header */
       position: relative;
     }
     
@@ -194,16 +184,20 @@
       margin: 2rem 0;
     }
     
-    /* Header wie Ad Hoc Legal - RESPONSIVE LOGO */
+    /* Header wie Ad Hoc Legal - FIXED MIT HINTERGRUND */
     .header {
       position: fixed;
-      top: 2rem;
-      left: 2rem;
-      right: 2rem;
-      z-index: 100;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 2rem;
+      background: rgba(35, 35, 35, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     
     .logo {
@@ -212,22 +206,10 @@
       font-weight: 700;
       text-decoration: none;
       transition: color 0.3s ease;
-    }
-    
-    /* Logo-Farben basierend auf Sektion */
-    .logo-white {
       color: white;
     }
     
-    .logo-white span {
-      color: #e9b934;
-    }
-    
-    .logo-dark {
-      color: #232323;
-    }
-    
-    .logo-dark span {
+    .logo span {
       color: #e9b934;
     }
     
@@ -237,6 +219,7 @@
     }
     
     .nav a {
+      color: white;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
@@ -245,20 +228,7 @@
       font-size: 0.9rem;
     }
     
-    /* Navigation-Farben basierend auf Sektion */
-    .nav-white a {
-      color: white;
-    }
-    
-    .nav-white a:hover {
-      color: #e9b934;
-    }
-    
-    .nav-dark a {
-      color: #232323;
-    }
-    
-    .nav-dark a:hover {
+    .nav a:hover {
       color: #e9b934;
     }
     
@@ -330,32 +300,34 @@
       }
       
       .header {
-        top: 1rem;
-        left: 1rem;
-        right: 1rem;
+        padding: 1rem;
       }
       
       .section {
-        padding: 120px 1rem;
+        padding: 120px 1rem 1rem 1rem;
       }
       
       .grid-3, .grid-2 {
         grid-template-columns: 1fr;
       }
+      
+      .floating-circle {
+        display: none; /* Kreise auf Mobile ausblenden */
+      }
     }
   </style>
 </head>
 <body>
-  <!-- SICHTBARE SCHWEBENDE KREISE WIE AD HOC LEGAL - VIEL SICHTBARER -->
+  <!-- SICHTBARE SCHWEBENDE KREISE - EINFACH UND SICHTBAR -->
   <div class="floating-circle circle-1"></div>
   <div class="floating-circle circle-2"></div>
 
-  <!-- Header -->
+  <!-- Header - FIXED MIT HINTERGRUND -->
   <header class="header">
-    <a href="#home" class="logo logo-white" id="logo">
+    <a href="#home" class="logo">
       <span>[</span>CLIQ LEGAL<span>]</span>
     </a>
-    <nav class="nav nav-white" id="nav">
+    <nav class="nav">
       <a href="#who">Who we help</a>
       <a href="#fix">How we fix it</a>
       <a href="#works">How it works</a>
@@ -559,49 +531,5 @@
       <a href="https://linkedin.com/company/cliq-legal" target="_blank">LinkedIn</a>
     </p>
   </footer>
-
-  <script>
-    // Logo und Navigation basierend auf Sektion anpassen
-    function updateHeaderColors() {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const sections = document.querySelectorAll('.section');
-      const logo = document.getElementById('logo');
-      const nav = document.getElementById('nav');
-      
-      // Bestimme aktuelle Sektion
-      let currentSection = 'hero'; // Standard
-      
-      sections.forEach((section, index) => {
-        const sectionTop = section.offsetTop;
-        const sectionBottom = sectionTop + section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionBottom - 100) {
-          if (section.classList.contains('hero') || section.classList.contains('hero')) {
-            currentSection = 'hero';
-          } else if (section.classList.contains('white-section')) {
-            currentSection = 'white';
-          } else if (section.classList.contains('yellow-section')) {
-            currentSection = 'yellow';
-          }
-        }
-      });
-      
-      // Logo und Navigation anpassen
-      if (currentSection === 'hero') {
-        logo.className = 'logo logo-white';
-        nav.className = 'nav nav-white';
-      } else {
-        logo.className = 'logo logo-dark';
-        nav.className = 'nav nav-dark';
-      }
-    }
-    
-    // Event Listener für Scroll
-    window.addEventListener('scroll', updateHeaderColors);
-    
-    // Initial aufrufen
-    updateHeaderColors();
-  </script>
 </body>
 </html>
