@@ -36,7 +36,7 @@
       background-color: #232323;
     }
     
-    /* SICHTBARE SCHWEBENDE KREISE - NUR IN HERO SECTION */
+    /* SICHTBARE SCHWEBENDE KREISE - AUCH AUF MOBILE */
     .floating-circle {
       position: fixed;
       border-radius: 50%;
@@ -90,10 +90,17 @@
       position: relative;
     }
     
+    /* HERO SECTION PROMINENTER */
     .hero {
       background-color: #232323;
       color: white;
       text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
     
     .green-section {
@@ -320,13 +327,30 @@
         min-height: auto;
       }
       
+      /* HERO SECTION AUF MOBILE PROMINENTER */
+      .hero {
+        padding: 100px 1rem 2rem 1rem;
+        min-height: 100vh;
+      }
+      
       .grid-3, .grid-2 {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
       
-      .floating-circle {
-        display: none; /* Kreise auf Mobile ausblenden */
+      /* Kreise auf Mobile anpassen */
+      .circle-1 {
+        width: 300px;
+        height: 300px;
+        top: 20vh;
+        left: 5vw;
+      }
+      
+      .circle-2 {
+        width: 250px;
+        height: 250px;
+        top: -5vh;
+        right: 2vw;
       }
       
       /* Mobile-spezifische Anpassungen */
@@ -359,6 +383,10 @@
         padding: 100px 0.5rem 1rem 0.5rem;
       }
       
+      .hero {
+        padding: 80px 0.5rem 2rem 0.5rem;
+      }
+      
       .header {
         padding: 0.5rem;
       }
@@ -378,11 +406,26 @@
       .card {
         padding: 1rem;
       }
+      
+      /* Kreise auf sehr kleinen Bildschirmen */
+      .circle-1 {
+        width: 200px;
+        height: 200px;
+        top: 25vh;
+        left: 2vw;
+      }
+      
+      .circle-2 {
+        width: 150px;
+        height: 150px;
+        top: -2vh;
+        right: 1vw;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- SICHTBARE SCHWEBENDE KREISE - NUR IN HERO SECTION -->
+  <!-- SICHTBARE SCHWEBENDE KREISE - AUCH AUF MOBILE -->
   <div class="floating-circle circle-1"></div>
   <div class="floating-circle circle-2"></div>
 
@@ -400,7 +443,7 @@
     </nav>
   </header>
 
-  <!-- Hero Section wie Ad Hoc Legal - MOBILE OPTIMIERT -->
+  <!-- Hero Section wie Ad Hoc Legal - PROMINENTER -->
   <section id="home" class="section hero">
     <div class="container">
       <h1 class="font-mont">
