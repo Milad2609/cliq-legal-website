@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CLIQ Legal – Legal Counsel as a Service</title>
 
-  <!-- Tailwind → keeps CSS maintainable -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -16,140 +16,215 @@
             cliqMint: "#00eadb",
             cliqMintDark: "#00b8a9",
           },
-          fontFamily: {
-            inter: ["Inter", "ui-sans-serif", "system-ui"],
-            mont: ["Montserrat", "ui-sans-serif"],
-          },
         },
       },
     };
   </script>
-  <!-- Google‑Fonts -->
+  
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  
   <style>
-    /* ---- custom bits that Tailwind can't (yet) do easily ---- */
-    .shape-circle {
-      background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 70%);
-      filter: blur(2px);
-      animation: float 8s ease-in-out infinite;
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
     
-    .shape-circle:nth-child(2) {
-      animation-delay: -4s;
+    .font-mont {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    /* Sichtbare schwebende Kreise */
+    .floating-circle {
+      position: fixed;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 70%);
+      filter: blur(3px);
+      animation: float 15s ease-in-out infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .circle-1 {
+      width: 400px;
+      height: 400px;
+      top: 20vh;
+      left: 20vw;
+    }
+    
+    .circle-2 {
+      width: 300px;
+      height: 300px;
+      top: -10vh;
+      right: 15vw;
+      animation-delay: -7s;
     }
     
     @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-30px) rotate(180deg); }
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+      }
+      50% { 
+        transform: translateY(-40px) rotate(180deg); 
+      }
     }
     
-    /* Disable scroll‑snap on touch devices that often feel jumpy */
-    @media (min-width: 1024px) {
-      .snap-y-lg { scroll-snap-type: y mandatory; }
-      .snap-start-lg { scroll-snap-align: start; }
-    }
-    
-    /* Ensure smooth scrolling works */
+    /* Smooth scrolling */
     html {
       scroll-behavior: smooth;
     }
     
-    /* Background grain effect like Ad Hoc Legal */
-    .bg-grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.03;
+    /* Section styling */
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
     
-    /* Enhanced floating circles */
-    .floating-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 70%);
-      filter: blur(3px);
-      animation: float 10s ease-in-out infinite;
+    .hero {
+      background-color: #002a4a;
+      color: white;
+      text-align: center;
     }
     
-    .floating-circle:nth-child(1) {
-      width: 56vmin;
-      height: 56vmin;
-      top: 24vh;
-      left: 28vw;
-      animation-delay: 0s;
+    .white-bg {
+      background-color: white;
     }
     
-    .floating-circle:nth-child(2) {
-      width: 56vmin;
-      height: 56vmin;
-      top: -10vh;
-      right: 25vw;
-      animation-delay: -5s;
+    .gray-bg {
+      background-color: #f8fafc;
+    }
+    
+    /* Button styling */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: #00eadb;
+      color: #002a4a;
+      text-decoration: none;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #00b8a9;
+    }
+    
+    /* Card styling */
+    .card {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+    }
+    
+    /* Grid layouts */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    /* Header */
+    .header {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    
+    .logo span {
+      color: #00eadb;
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu {
+        display: block;
+      }
+      
+      .desktop-nav {
+        display: none;
+      }
     }
   </style>
 </head>
-<body class="font-inter text-slate-700 overflow-x-hidden relative snap-y-lg bg-grain">
-  <!-- ───── Fixed BG shapes (like adhoclegal) ───── -->
-  <aside aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
-  </aside>
+<body>
+  <!-- Schwebende Kreise im Hintergrund -->
+  <div class="floating-circle circle-1"></div>
+  <div class="floating-circle circle-2"></div>
 
-  <!-- ───── Menu overlay ───── -->
-  <div id="menu-overlay" class="fixed inset-0 bg-white/95 backdrop-blur-lg z-40 translate-x-full transition-transform duration-500 ease-in-out flex flex-col" aria-hidden="true">
-    <button id="menu-close" class="self-end m-8 text-cliqBlue uppercase tracking-widest">Close ✕</button>
-    <nav class="mt-16 flex-1 flex flex-col items-center justify-center gap-10 text-5xl font-mont font-semibold uppercase text-cliqBlue">
-      <a href="#home" class="hover:text-cliqMintDark">Home</a>
-      <a href="#who"  class="hover:text-cliqMintDark">Who we help</a>
-      <a href="#fix"  class="hover:text-cliqMintDark">How we fix it</a>
-      <a href="#works"class="hover:text-cliqMintDark">How it works</a>
-      <a href="#team" class="hover:text-cliqMintDark">Who we are</a>
-      <a href="#contact" class="hover:text-cliqMintDark">Contact</a>
-    </nav>
-  </div>
-
-  <!-- ───── Burger & Lang Switch ───── -->
-  <header class="fixed top-6 left-6 right-6 z-50 flex items-center justify-between">
-    <a href="#home" class="flex items-center gap-1 text-white font-mont text-2xl lg:text-3xl">
-      <span class="text-cliqMint">[</span>
-      CLIQ LEGAL
-      <span class="text-cliqMint">]</span>
+  <!-- Header -->
+  <header class="header">
+    <a href="#home" class="logo">
+      <span>[</span>CLIQ LEGAL<span>]</span>
     </a>
-    <div class="flex items-center gap-6">
-      <nav class="hidden lg:block uppercase tracking-widest text-white text-sm font-semibold">
-        <a href="#" class="hover:text-cliqMint">EN</a>
-        <span class="mx-1">|</span>
-        <a href="#" class="hover:text-cliqMint">DE</a>
-      </nav>
-      <button id="burger" class="relative w-10 h-10 flex flex-col justify-center items-center gap-1 group lg:hidden">
-        <span class="block w-6 h-0.5 bg-white transition-transform group-[.open]:translate-y-1.5 group-[.open]:rotate-45"></span>
-        <span class="block w-6 h-0.5 bg-white transition-opacity group-[.open]:opacity-0"></span>
-        <span class="block w-6 h-0.5 bg-white transition-transform group-[.open]:-translate-y-1.5 group-[.open]:-rotate-45"></span>
-      </button>
-    </div>
+    <nav class="desktop-nav">
+      <a href="#who" class="text-white hover:text-cliqMint mr-4">Who we help</a>
+      <a href="#fix" class="text-white hover:text-cliqMint mr-4">How we fix it</a>
+      <a href="#works" class="text-white hover:text-cliqMint mr-4">How it works</a>
+      <a href="#team" class="text-white hover:text-cliqMint mr-4">Who we are</a>
+      <a href="#contact" class="text-white hover:text-cliqMint">Contact</a>
+    </nav>
+    <button class="mobile-menu text-white">☰</button>
   </header>
 
-  <!-- ───── HERO ───── -->
-  <section id="home" class="min-h-screen flex flex-col justify-center items-center bg-cliqBlue text-white snap-start-lg relative">
-    <h1 class="text-5xl md:text-7xl font-mont font-bold leading-tight text-center max-w-[18ch]">
-      Don't guess.<br>Let's CLIQ.
-    </h1>
-    <p class="mt-8 text-xl md:text-2xl font-semibold text-center">Legal Counsel as a Service<span class="inline-block mx-1">•</span>Anwaltskanzlei zum Festpreis</p>
-    <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="mt-12 inline-block bg-cliqMint text-cliqBlue font-semibold px-8 py-4 rounded-md hover:bg-cliqMintDark transition-all">Free 15‑min Call</a>
-    <!-- scroll indicator (desktop) -->
-    <div class="hidden lg:flex flex-col items-center absolute bottom-8 inset-x-0 text-sm tracking-widest uppercase">
-      <span class="rotate-180">⇣</span>
-      Scroll
+  <!-- Hero Section -->
+  <section id="home" class="section hero">
+    <div class="text-center">
+      <h1 class="font-mont text-5xl md:text-7xl font-bold leading-tight mb-8">
+        Don't guess.<br>Let's CLIQ.
+      </h1>
+      <p class="text-xl md:text-2xl font-semibold mb-12">
+        Legal Counsel as a Service • Anwaltskanzlei zum Festpreis
+      </p>
+      <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn">
+        Free 15‑min Call
+      </a>
     </div>
   </section>
 
-  <!-- ───── WHO WE HELP (3 personas) ───── -->
-  <section id="who" class="min-h-screen flex items-center bg-white snap-start-lg py-24">
-    <div class="container mx-auto px-8 max-w-7xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ Who we help ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Rechtliche Lücken bremsen dein Wachstum?</p>
-      <div class="grid gap-10 md:grid-cols-3">
+  <!-- Who We Help Section -->
+  <section id="who" class="section white-bg">
+    <div class="w-full max-w-7xl">
+      <h2 class="font-mont text-4xl md:text-5xl font-bold text-center mb-8">[ Who we help ]</h2>
+      <p class="text-xl font-semibold text-center mb-16">Rechtliche Lücken bremsen dein Wachstum?</p>
+      
+      <div class="grid-3">
         <!-- Nora -->
-        <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mb-4 flex items-center justify-center text-white font-bold text-2xl">N</div>
+        <div class="card text-center">
+          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl">N</div>
           <h3 class="font-semibold text-lg mb-2">Nora – COO, SaaS‑Scale‑up (70 MA)</h3>
           <p class="text-sm mb-4">KI‑Features kurz vor Launch, Investor Due‑Diligence tickt, Slack quillt über.</p>
           <ul class="text-sm space-y-1 text-left list-disc list-inside">
@@ -157,10 +232,11 @@
             <li>DSGVO‑Auskunft fehlt</li>
             <li>Vertragsstau</li>
           </ul>
-        </article>
+        </div>
+        
         <!-- Markus -->
-        <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqBlue to-slate-600 mb-4 flex items-center justify-center text-white font-bold text-2xl">M</div>
+        <div class="card text-center">
+          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqBlue to-slate-600 mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl">M</div>
           <h3 class="font-semibold text-lg mb-2">Markus – CFO, Mittelstand (150 MA)</h3>
           <p class="text-sm mb-4">Audit‑Termin rückt näher, „Legal Counsel"‑Stelle seit 3 Monaten unbesetzt.</p>
           <ul class="text-sm space-y-1 text-left list-disc list-inside">
@@ -168,10 +244,11 @@
             <li>Remote‑Policy unscharf</li>
             <li>Hiring‑Gap kostet Geld</li>
           </ul>
-        </article>
+        </div>
+        
         <!-- Laura -->
-        <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mb-4 flex items-center justify-center text-white font-bold text-2xl">L</div>
+        <div class="card text-center">
+          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl">L</div>
           <h3 class="font-semibold text-lg mb-2">Laura – Agentur‑CEO (40 MA)</h3>
           <p class="text-sm mb-4">Pitch‑Deadline in 72h, Kunde fordert AVV + IP‑Klauseln.</p>
           <ul class="text-sm space-y-1 text-left list-disc list-inside">
@@ -179,66 +256,72 @@
             <li>Rechtekette lückenhaft</li>
             <li>AVV‑Deadlines</li>
           </ul>
-        </article>
+        </div>
       </div>
+      
       <p class="text-center mt-16 text-xl font-semibold">Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.</p>
     </div>
   </section>
 
-  <!-- ───── HOW WE FIX IT (packages) ───── -->
-  <section id="fix" class="min-h-screen flex items-center bg-slate-50 snap-start-lg py-24">
-    <div class="container mx-auto px-8 max-w-7xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ How we fix it ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Drei Pilot‑Pakete, punktgenau →</p>
-      <div class="grid gap-10 md:grid-cols-3">
+  <!-- How We Fix It Section -->
+  <section id="fix" class="section gray-bg">
+    <div class="w-full max-w-7xl">
+      <h2 class="font-mont text-4xl md:text-5xl font-bold text-center mb-8">[ How we fix it ]</h2>
+      <p class="text-xl font-semibold text-center mb-16">Drei Pilot‑Pakete, punktgenau →</p>
+      
+      <div class="grid-3">
         <!-- Package 1 -->
-        <article class="flex flex-col bg-white rounded-xl shadow-md p-6">
+        <div class="card flex flex-col">
           <h3 class="font-semibold text-2xl mb-4">Data & AI Compliance Sprint</h3>
           <p class="text-sm mb-2 font-semibold">14 Tage → Dein Plus</p>
           <p class="text-sm mb-6">Gap‑Report, Roadmap‑Maßnahmen, Auditor Checkliste.</p>
           <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
-        </article>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn mt-auto text-center">Book Pilot</a>
+        </div>
+        
         <!-- Package 2 -->
-        <article class="flex flex-col bg-white rounded-xl shadow-md p-6">
+        <div class="card flex flex-col">
           <h3 class="font-semibold text-2xl mb-4">Quick‑Hire HR Legal</h3>
           <p class="text-sm mb-2 font-semibold">7 Tage → Dein Plus</p>
           <p class="text-sm mb-6">Arbeits‑ & Freelancer‑Verträge, Remote‑Policy, Slack‑FAQ.</p>
           <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
-        </article>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn mt-auto text-center">Book Pilot</a>
+        </div>
+        
         <!-- Package 3 -->
-        <article class="flex flex-col bg-white rounded-xl shadow-md p-6">
+        <div class="card flex flex-col">
           <h3 class="font-semibold text-2xl mb-4">Commercial / Agency Deal‑Desk</h3>
           <p class="text-sm mb-2 font-semibold">laufend → Dein Plus</p>
           <p class="text-sm mb-6">max 5 Vertrags‑Redlines < 24h/Monat, AGB‑ & IP‑Review, Quartalsreport.</p>
           <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €/Monat</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
-        </article>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn mt-auto text-center">Book Pilot</a>
+        </div>
       </div>
+      
       <p class="text-center mt-16 text-xl font-semibold">Keine Stundenzettel. 100 % Festpreis. Erst der Pilot, dann der Retainer.</p>
     </div>
   </section>
 
-  <!-- ───── HOW IT WORKS ───── -->
-  <section id="works" class="min-h-screen flex items-center bg-white snap-start-lg py-24">
-    <div class="container mx-auto px-8 max-w-6xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ How it works ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Ein CLIQ → Mail‑Chaos wird Rechtstransparenz.</p>
-      <div class="grid gap-10 md:grid-cols-2">
-        <div class="bg-white rounded-xl shadow-md p-6">
+  <!-- How It Works Section -->
+  <section id="works" class="section white-bg">
+    <div class="w-full max-w-6xl">
+      <h2 class="font-mont text-4xl md:text-5xl font-bold text-center mb-8">[ How it works ]</h2>
+      <p class="text-xl font-semibold text-center mb-16">Ein CLIQ → Mail‑Chaos wird Rechtstransparenz.</p>
+      
+      <div class="grid-2">
+        <div class="card">
           <h3 class="font-semibold text-xl mb-2">15‑min Discovery Call</h3>
           <p class="text-sm">Wir hören zu, sortieren den größten Pain und empfehlen das passende Paket.</p>
         </div>
-        <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="card">
           <h3 class="font-semibold text-xl mb-2">2‑Page Pilot‑Vertrag</h3>
           <p class="text-sm">E‑Signatur, Start spätestens 48 h später.</p>
         </div>
-        <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="card">
           <h3 class="font-semibold text-xl mb-2">Deep‑Dive & Fix</h3>
           <p class="text-sm">Wir arbeiten selbstständig, halten dich up‑to‑date, liefern Roadmap + Doku.</p>
         </div>
-        <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="card">
           <h3 class="font-semibold text-xl mb-2">Legal Counsel as a Service</h3>
           <p class="text-sm">Auf Wunsch bleiben wir als Counsel auf Abruf – planbar zum Festpreis.</p>
         </div>
@@ -246,51 +329,51 @@
     </div>
   </section>
 
-  <!-- ───── TEAM ───── -->
-  <section id="team" class="min-h-screen flex items-center bg-slate-50 snap-start-lg py-24">
-    <div class="container mx-auto px-8 max-w-6xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ Who we are ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Deine Legal Counsel auf Abruf</p>
-      <div class="grid gap-10 md:grid-cols-2">
+  <!-- Team Section -->
+  <section id="team" class="section gray-bg">
+    <div class="w-full max-w-6xl">
+      <h2 class="font-mont text-4xl md:text-5xl font-bold text-center mb-8">[ Who we are ]</h2>
+      <p class="text-xl font-semibold text-center mb-16">Deine Legal Counsel auf Abruf</p>
+      
+      <div class="grid-2">
         <!-- Milad -->
-        <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <div class="w-40 h-40 rounded-full bg-gradient-to-br from-cliqBlue to-slate-600 mb-4 flex items-center justify-center text-white font-bold text-4xl">M</div>
+        <div class="card text-center">
+          <div class="w-40 h-40 rounded-full bg-gradient-to-br from-cliqBlue to-slate-600 mx-auto mb-4 flex items-center justify-center text-white font-bold text-4xl">M</div>
           <h3 class="font-semibold text-lg mb-2">Milad Ghafarian – Principal Lawyer</h3>
           <p class="text-sm">8+ Jahre Tech‑, Corporate‑ & Commercial‑Erfahrung (sDAX), zweisprachig DE/EN.</p>
-        </article>
+        </div>
+        
         <!-- Burak -->
-        <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <div class="w-40 h-40 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mb-4 flex items-center justify-center text-white font-bold text-4xl">B</div>
+        <div class="card text-center">
+          <div class="w-40 h-40 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mx-auto mb-4 flex items-center justify-center text-white font-bold text-4xl">B</div>
           <h3 class="font-semibold text-lg mb-2">Burak Korkmaz – Of Counsel</h3>
           <p class="text-sm">Commercial, IP/IT & Employment‑Support für digitale Geschäftsmodelle, DE/EN.</p>
-        </article>
+        </div>
       </div>
+      
       <p class="text-center mt-16 text-xl font-semibold">Gemeinsam liefern wir Großkanzlei‑Präzision – in Scale‑up‑Geschwindigkeit.</p>
     </div>
   </section>
 
-  <!-- ───── FINAL CTA ───── -->
-  <section id="contact" class="min-h-[60vh] flex flex-col justify-center items-center bg-cliqBlue text-white snap-start-lg py-24">
-    <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-6 max-w-xl">[ Let's bring legal clarity ]</h2>
-    <p class="text-center text-xl font-semibold mb-10">Buche deinen 15‑min Schnell‑Check – Antwort garantiert < 24 h.</p>
-    <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-10 py-5 rounded-md hover:bg-cliqMintDark">Free Call buchen</a>
+  <!-- Contact Section -->
+  <section id="contact" class="section hero">
+    <div class="text-center">
+      <h2 class="font-mont text-4xl md:text-5xl font-bold mb-6">[ Let's bring legal clarity ]</h2>
+      <p class="text-xl font-semibold mb-10">Buche deinen 15‑min Schnell‑Check – Antwort garantiert < 24 h.</p>
+      <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="btn">Free Call buchen</a>
+    </div>
   </section>
 
-  <!-- ───── FOOTER ───── -->
+  <!-- Footer -->
   <footer class="bg-slate-100 py-10 text-center text-sm">
     © 2025 CLIQ Legal – Rechtsanwalt Milad Ghafarian  ·  <a href="#" class="hover:text-cliqBlue">Impressum</a> | <a href="#" class="hover:text-cliqBlue">Datenschutz</a> | <a href="https://linkedin.com/company/cliq-legal" target="_blank" class="hover:text-cliqBlue">LinkedIn</a>
   </footer>
 
-  <!-- ───── Burger JS ───── -->
   <script>
-    // burger toggle
-    const burger = document.getElementById("burger");
-    const overlay = document.getElementById("menu-overlay");
-    const closeBtn = document.getElementById("menu-close");
-    [burger, closeBtn].forEach(btn => btn && btn.addEventListener("click", () => {
-      overlay.classList.toggle("translate-x-full");
-      burger.classList.toggle("open");
-    }));
+    // Simple mobile menu toggle
+    document.querySelector('.mobile-menu').addEventListener('click', function() {
+      alert('Mobile menu would open here');
+    });
   </script>
 </body>
 </html>
