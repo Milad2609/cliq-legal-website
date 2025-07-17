@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLIQ Legal – Legal Counsel as a Service</title>
+  <title>CLIQ Legal – Legal Counsel as a Service</title>
 
-  <!-- Tailwind → keeps CSS maintainable -->
+  <!-- Tailwind → keeps CSS maintainable -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -27,23 +27,70 @@
   <!-- Google‑Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    /* ---- custom bits that Tailwind can’t (yet) do easily ---- */
+    /* ---- custom bits that Tailwind can't (yet) do easily ---- */
     .shape-circle {
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%);
+      background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 70%);
       filter: blur(2px);
+      animation: float 8s ease-in-out infinite;
     }
+    
+    .shape-circle:nth-child(2) {
+      animation-delay: -4s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+    
     /* Disable scroll‑snap on touch devices that often feel jumpy */
     @media (min-width: 1024px) {
       .snap-y-lg { scroll-snap-type: y mandatory; }
       .snap-start-lg { scroll-snap-align: start; }
     }
+    
+    /* Ensure smooth scrolling works */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Background grain effect like Ad Hoc Legal */
+    .bg-grain {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+    }
+    
+    /* Enhanced floating circles */
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 70%);
+      filter: blur(3px);
+      animation: float 10s ease-in-out infinite;
+    }
+    
+    .floating-circle:nth-child(1) {
+      width: 56vmin;
+      height: 56vmin;
+      top: 24vh;
+      left: 28vw;
+      animation-delay: 0s;
+    }
+    
+    .floating-circle:nth-child(2) {
+      width: 56vmin;
+      height: 56vmin;
+      top: -10vh;
+      right: 25vw;
+      animation-delay: -5s;
+    }
   </style>
 </head>
-<body class="font-inter text-slate-700 overflow-x-hidden relative snap-y-lg">
+<body class="font-inter text-slate-700 overflow-x-hidden relative snap-y-lg bg-grain">
   <!-- ───── Fixed BG shapes (like adhoclegal) ───── -->
   <aside aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
-    <div id="circle-left" class="shape-circle w-[56vmin] h-[56vmin] absolute top-[24vh] left-[28vw] rounded-full"></div>
-    <div id="circle-right" class="shape-circle w-[56vmin] h-[56vmin] absolute -top-[10vh] right-[25vw] rounded-full"></div>
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
   </aside>
 
   <!-- ───── Menu overlay ───── -->
@@ -51,10 +98,10 @@
     <button id="menu-close" class="self-end m-8 text-cliqBlue uppercase tracking-widest">Close ✕</button>
     <nav class="mt-16 flex-1 flex flex-col items-center justify-center gap-10 text-5xl font-mont font-semibold uppercase text-cliqBlue">
       <a href="#home" class="hover:text-cliqMintDark">Home</a>
-      <a href="#who"  class="hover:text-cliqMintDark">Who we help</a>
-      <a href="#fix"  class="hover:text-cliqMintDark">How we fix it</a>
-      <a href="#works"class="hover:text-cliqMintDark">How it works</a>
-      <a href="#team" class="hover:text-cliqMintDark">Who we are</a>
+      <a href="#who"  class="hover:text-cliqMintDark">Who we help</a>
+      <a href="#fix"  class="hover:text-cliqMintDark">How we fix it</a>
+      <a href="#works"class="hover:text-cliqMintDark">How it works</a>
+      <a href="#team" class="hover:text-cliqMintDark">Who we are</a>
       <a href="#contact" class="hover:text-cliqMintDark">Contact</a>
     </nav>
   </div>
@@ -63,7 +110,7 @@
   <header class="fixed top-6 left-6 right-6 z-50 flex items-center justify-between">
     <a href="#home" class="flex items-center gap-1 text-white font-mont text-2xl lg:text-3xl">
       <span class="text-cliqMint">[</span>
-      CLIQ LEGAL
+      CLIQ LEGAL
       <span class="text-cliqMint">]</span>
     </a>
     <div class="flex items-center gap-6">
@@ -83,10 +130,10 @@
   <!-- ───── HERO ───── -->
   <section id="home" class="min-h-screen flex flex-col justify-center items-center bg-cliqBlue text-white snap-start-lg relative">
     <h1 class="text-5xl md:text-7xl font-mont font-bold leading-tight text-center max-w-[18ch]">
-      Don’t guess.<br>Let’s CLIQ.
+      Don't guess.<br>Let's CLIQ.
     </h1>
-    <p class="mt-8 text-xl md:text-2xl font-semibold text-center">Legal Counsel as a Service<span class="inline-block mx-1">•</span>Anwaltskanzlei zum Festpreis</p>
-    <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="mt-12 inline-block bg-cliqMint text-cliqBlue font-semibold px-8 py-4 rounded-md hover:bg-cliqMintDark transition-all">Free 15‑min Call</a>
+    <p class="mt-8 text-xl md:text-2xl font-semibold text-center">Legal Counsel as a Service<span class="inline-block mx-1">•</span>Anwaltskanzlei zum Festpreis</p>
+    <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="mt-12 inline-block bg-cliqMint text-cliqBlue font-semibold px-8 py-4 rounded-md hover:bg-cliqMintDark transition-all">Free 15‑min Call</a>
     <!-- scroll indicator (desktop) -->
     <div class="hidden lg:flex flex-col items-center absolute bottom-8 inset-x-0 text-sm tracking-widest uppercase">
       <span class="rotate-180">⇣</span>
@@ -97,36 +144,36 @@
   <!-- ───── WHO WE HELP (3 personas) ───── -->
   <section id="who" class="min-h-screen flex items-center bg-white snap-start-lg py-24">
     <div class="container mx-auto px-8 max-w-7xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ Who we help ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Rechtliche Lücken bremsen dein Wachstum?</p>
+      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ Who we help ]</h2>
+      <p class="text-center text-xl font-semibold mb-16">Rechtliche Lücken bremsen dein Wachstum?</p>
       <div class="grid gap-10 md:grid-cols-3">
         <!-- Nora -->
         <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <img src="./Nora-Laura.png" alt="Nora" class="w-28 h-28 rounded-full object-cover mb-4" />
-          <h3 class="font-semibold text-lg mb-2">Nora – COO, SaaS‑Scale‑up (70 MA)</h3>
-          <p class="text-sm mb-4">KI‑Features kurz vor Launch, Investor Due‑Diligence tickt, Slack quillt über.</p>
+          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mb-4 flex items-center justify-center text-white font-bold text-2xl">N</div>
+          <h3 class="font-semibold text-lg mb-2">Nora – COO, SaaS‑Scale‑up (70 MA)</h3>
+          <p class="text-sm mb-4">KI‑Features kurz vor Launch, Investor Due‑Diligence tickt, Slack quillt über.</p>
           <ul class="text-sm space-y-1 text-left list-disc list-inside">
-            <li>AI‑Act‑Risiko 2026</li>
+            <li>AI‑Act‑Risiko 2026</li>
             <li>DSGVO‑Auskunft fehlt</li>
             <li>Vertragsstau</li>
           </ul>
         </article>
         <!-- Markus -->
         <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <img src="./Markus.png" alt="Markus" class="w-28 h-28 rounded-full object-cover mb-4" />
-          <h3 class="font-semibold text-lg mb-2">Markus – CFO, Mittelstand (150 MA)</h3>
-          <p class="text-sm mb-4">Audit‑Termin rückt näher, „Legal Counsel“-Stelle seit 3 Monaten unbesetzt.</p>
+          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqBlue to-slate-600 mb-4 flex items-center justify-center text-white font-bold text-2xl">M</div>
+          <h3 class="font-semibold text-lg mb-2">Markus – CFO, Mittelstand (150 MA)</h3>
+          <p class="text-sm mb-4">Audit‑Termin rückt näher, „Legal Counsel"‑Stelle seit 3 Monaten unbesetzt.</p>
           <ul class="text-sm space-y-1 text-left list-disc list-inside">
-            <li>20 Lieferverträge offen</li>
+            <li>20 Lieferverträge offen</li>
             <li>Remote‑Policy unscharf</li>
             <li>Hiring‑Gap kostet Geld</li>
           </ul>
         </article>
         <!-- Laura -->
         <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <img src="./Nora-Laura.png" alt="Laura" class="w-28 h-28 rounded-full object-cover mb-4" />
-          <h3 class="font-semibold text-lg mb-2">Laura – Agentur‑CEO (40 MA)</h3>
-          <p class="text-sm mb-4">Pitch‑Deadline in 72h, Kunde fordert AVV + IP‑Klauseln.</p>
+          <div class="w-28 h-28 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mb-4 flex items-center justify-center text-white font-bold text-2xl">L</div>
+          <h3 class="font-semibold text-lg mb-2">Laura – Agentur‑CEO (40 MA)</h3>
+          <p class="text-sm mb-4">Pitch‑Deadline in 72h, Kunde fordert AVV + IP‑Klauseln.</p>
           <ul class="text-sm space-y-1 text-left list-disc list-inside">
             <li>Scheinselbstständigkeit</li>
             <li>Rechtekette lückenhaft</li>
@@ -134,50 +181,50 @@
           </ul>
         </article>
       </div>
-      <p class="text-center mt-16 text-xl font-semibold">Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.</p>
+      <p class="text-center mt-16 text-xl font-semibold">Gemeinsamer Nenner: Keine interne Legal Counsel, aber volle Haftung. Wir schließen die Lücke – binnen Tagen.</p>
     </div>
   </section>
 
   <!-- ───── HOW WE FIX IT (packages) ───── -->
   <section id="fix" class="min-h-screen flex items-center bg-slate-50 snap-start-lg py-24">
     <div class="container mx-auto px-8 max-w-7xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ How we fix it ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Drei Pilot‑Pakete, punktgenau →</p>
+      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ How we fix it ]</h2>
+      <p class="text-center text-xl font-semibold mb-16">Drei Pilot‑Pakete, punktgenau →</p>
       <div class="grid gap-10 md:grid-cols-3">
         <!-- Package 1 -->
         <article class="flex flex-col bg-white rounded-xl shadow-md p-6">
-          <h3 class="font-semibold text-2xl mb-4">Data & AI Compliance Sprint</h3>
-          <p class="text-sm mb-2 font-semibold">14 Tage → Dein Plus</p>
+          <h3 class="font-semibold text-2xl mb-4">Data & AI Compliance Sprint</h3>
+          <p class="text-sm mb-2 font-semibold">14 Tage → Dein Plus</p>
           <p class="text-sm mb-6">Gap‑Report, Roadmap‑Maßnahmen, Auditor Checkliste.</p>
-          <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
+          <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €</p>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
         </article>
         <!-- Package 2 -->
         <article class="flex flex-col bg-white rounded-xl shadow-md p-6">
           <h3 class="font-semibold text-2xl mb-4">Quick‑Hire HR Legal</h3>
-          <p class="text-sm mb-2 font-semibold">7 Tage → Dein Plus</p>
+          <p class="text-sm mb-2 font-semibold">7 Tage → Dein Plus</p>
           <p class="text-sm mb-6">Arbeits‑ & Freelancer‑Verträge, Remote‑Policy, Slack‑FAQ.</p>
-          <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
+          <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €</p>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
         </article>
         <!-- Package 3 -->
         <article class="flex flex-col bg-white rounded-xl shadow-md p-6">
           <h3 class="font-semibold text-2xl mb-4">Commercial / Agency Deal‑Desk</h3>
-          <p class="text-sm mb-2 font-semibold">laufend → Dein Plus</p>
-          <p class="text-sm mb-6">max 5 Vertrags‑Redlines < 24h/Monat, AGB‑ & IP‑Review, Quartalsreport.</p>
-          <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €/Monat</p>
-          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
+          <p class="text-sm mb-2 font-semibold">laufend → Dein Plus</p>
+          <p class="text-sm mb-6">max 5 Vertrags‑Redlines < 24h/Monat, AGB‑ & IP‑Review, Quartalsreport.</p>
+          <p class="text-lg font-bold text-cliqBlue mb-6">Festpreis 3.000 €/Monat</p>
+          <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-6 py-3 rounded-md hover:bg-cliqMintDark mt-auto">Book Pilot</a>
         </article>
       </div>
-      <p class="text-center mt-16 text-xl font-semibold">Keine Stundenzettel. 100 % Festpreis. Erst der Pilot, dann der Retainer.</p>
+      <p class="text-center mt-16 text-xl font-semibold">Keine Stundenzettel. 100 % Festpreis. Erst der Pilot, dann der Retainer.</p>
     </div>
   </section>
 
   <!-- ───── HOW IT WORKS ───── -->
   <section id="works" class="min-h-screen flex items-center bg-white snap-start-lg py-24">
     <div class="container mx-auto px-8 max-w-6xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ How it works ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Ein CLIQ → Mail‑Chaos wird Rechtstransparenz.</p>
+      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ How it works ]</h2>
+      <p class="text-center text-xl font-semibold mb-16">Ein CLIQ → Mail‑Chaos wird Rechtstransparenz.</p>
       <div class="grid gap-10 md:grid-cols-2">
         <div class="bg-white rounded-xl shadow-md p-6">
           <h3 class="font-semibold text-xl mb-2">15‑min Discovery Call</h3>
@@ -185,15 +232,15 @@
         </div>
         <div class="bg-white rounded-xl shadow-md p-6">
           <h3 class="font-semibold text-xl mb-2">2‑Page Pilot‑Vertrag</h3>
-          <p class="text-sm">E‑Signatur, Start spätestens 48 h später.</p>
+          <p class="text-sm">E‑Signatur, Start spätestens 48 h später.</p>
         </div>
         <div class="bg-white rounded-xl shadow-md p-6">
-          <h3 class="font-semibold text-xl mb-2">Deep‑Dive & Fix</h3>
+          <h3 class="font-semibold text-xl mb-2">Deep‑Dive & Fix</h3>
           <p class="text-sm">Wir arbeiten selbstständig, halten dich up‑to‑date, liefern Roadmap + Doku.</p>
         </div>
         <div class="bg-white rounded-xl shadow-md p-6">
-          <h3 class="font-semibold text-xl mb-2">Legal Counsel as a Service</h3>
-          <p class="text-sm">Auf Wunsch bleiben wir als Counsel auf Abruf – planbar zum Festpreis.</p>
+          <h3 class="font-semibold text-xl mb-2">Legal Counsel as a Service</h3>
+          <p class="text-sm">Auf Wunsch bleiben wir als Counsel auf Abruf – planbar zum Festpreis.</p>
         </div>
       </div>
     </div>
@@ -202,39 +249,39 @@
   <!-- ───── TEAM ───── -->
   <section id="team" class="min-h-screen flex items-center bg-slate-50 snap-start-lg py-24">
     <div class="container mx-auto px-8 max-w-6xl">
-      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ Who we are ]</h2>
-      <p class="text-center text-xl font-semibold mb-16">Deine Legal Counsel auf Abruf</p>
+      <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-8">[ Who we are ]</h2>
+      <p class="text-center text-xl font-semibold mb-16">Deine Legal Counsel auf Abruf</p>
       <div class="grid gap-10 md:grid-cols-2">
         <!-- Milad -->
         <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <img src="./Milad.png" alt="Milad" class="w-40 h-40 rounded-full object-cover mb-4" />
-          <h3 class="font-semibold text-lg mb-2">Milad Ghafarian – Principal Lawyer</h3>
-          <p class="text-sm">8+ Jahre Tech‑, Corporate‑ & Commercial‑Erfahrung (sDAX), zweisprachig DE/EN.</p>
+          <div class="w-40 h-40 rounded-full bg-gradient-to-br from-cliqBlue to-slate-600 mb-4 flex items-center justify-center text-white font-bold text-4xl">M</div>
+          <h3 class="font-semibold text-lg mb-2">Milad Ghafarian – Principal Lawyer</h3>
+          <p class="text-sm">8+ Jahre Tech‑, Corporate‑ & Commercial‑Erfahrung (sDAX), zweisprachig DE/EN.</p>
         </article>
         <!-- Burak -->
         <article class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-          <img src="./Burak.png" alt="Burak" class="w-40 h-40 rounded-full object-cover mb-4" />
-          <h3 class="font-semibold text-lg mb-2">Burak Korkmaz – Of Counsel</h3>
+          <div class="w-40 h-40 rounded-full bg-gradient-to-br from-cliqMint to-cliqMintDark mb-4 flex items-center justify-center text-white font-bold text-4xl">B</div>
+          <h3 class="font-semibold text-lg mb-2">Burak Korkmaz – Of Counsel</h3>
           <p class="text-sm">Commercial, IP/IT & Employment‑Support für digitale Geschäftsmodelle, DE/EN.</p>
         </article>
       </div>
-      <p class="text-center mt-16 text-xl font-semibold">Gemeinsam liefern wir Großkanzlei‑Präzision – in Scale‑up‑Geschwindigkeit.</p>
+      <p class="text-center mt-16 text-xl font-semibold">Gemeinsam liefern wir Großkanzlei‑Präzision – in Scale‑up‑Geschwindigkeit.</p>
     </div>
   </section>
 
-  <!-- ───── FINAL CTA ───── -->
+  <!-- ───── FINAL CTA ───── -->
   <section id="contact" class="min-h-[60vh] flex flex-col justify-center items-center bg-cliqBlue text-white snap-start-lg py-24">
-    <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-6 max-w-xl">[ Let's bring legal clarity ]</h2>
-    <p class="text-center text-xl font-semibold mb-10">Buche deinen 15‑min Schnell‑Check – Antwort garantiert < 24 h.</p>
-    <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-10 py-5 rounded-md hover:bg-cliqMintDark">Free Call buchen</a>
+    <h2 class="text-center text-4xl md:text-5xl font-mont font-bold mb-6 max-w-xl">[ Let's bring legal clarity ]</h2>
+    <p class="text-center text-xl font-semibold mb-10">Buche deinen 15‑min Schnell‑Check – Antwort garantiert < 24 h.</p>
+    <a href="https://calendly.com/mg-cliq/15min" target="_blank" class="bg-cliqMint text-cliqBlue font-semibold px-10 py-5 rounded-md hover:bg-cliqMintDark">Free Call buchen</a>
   </section>
 
   <!-- ───── FOOTER ───── -->
   <footer class="bg-slate-100 py-10 text-center text-sm">
-    © 2025 CLIQ Legal – Rechtsanwalt Milad Ghafarian  ·  <a href="#" class="hover:text-cliqBlue">Impressum</a> | <a href="#" class="hover:text-cliqBlue">Datenschutz</a> | <a href="https://linkedin.com/company/cliq-legal" target="_blank" class="hover:text-cliqBlue">LinkedIn</a>
+    © 2025 CLIQ Legal – Rechtsanwalt Milad Ghafarian  ·  <a href="#" class="hover:text-cliqBlue">Impressum</a> | <a href="#" class="hover:text-cliqBlue">Datenschutz</a> | <a href="https://linkedin.com/company/cliq-legal" target="_blank" class="hover:text-cliqBlue">LinkedIn</a>
   </footer>
 
-  <!-- ───── Typewriter & Burger JS ───── -->
+  <!-- ───── Burger JS ───── -->
   <script>
     // burger toggle
     const burger = document.getElementById("burger");
@@ -244,30 +291,6 @@
       overlay.classList.toggle("translate-x-full");
       burger.classList.toggle("open");
     }));
-
-    // basic typewriter (USP)
-    document.addEventListener("DOMContentLoaded", () => {
-      const words = [
-        "Compliance.",
-        "Datenschutz / KI / IP.",
-        "Business Law / ESG.",
-        "Freelancer / People.",
-        "Festpreise / Abo‑Modelle.",
-        "Kanzleiqualität / Startup‑Tempo.",
-      ];
-      let i = 0, j = 0, deleting = false;
-      const speed = { type: 80, del: 40, pause: 900 };
-      const el = document.getElementById("typewriter");
-      const step = () => {
-        const word = words[i];
-        el.textContent = deleting ? word.slice(0, --j) : word.slice(0, ++j);
-        const timeout = deleting ? speed.del : speed.type;
-        if (!deleting && j === word.length) { setTimeout(() => deleting = true, speed.pause); }
-        else if (deleting && j === 0) { deleting = false; i = (i + 1) % words.length; }
-        setTimeout(step, timeout);
-      };
-      if (el) step();
-    });
   </script>
 </body>
 </html>
