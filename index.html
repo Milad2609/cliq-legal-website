@@ -181,7 +181,7 @@
       margin: 2rem 0;
     }
     
-    /* Header wie Ad Hoc Legal */
+    /* Header wie Ad Hoc Legal - RESPONSIVE LOGO */
     .header {
       position: fixed;
       top: 2rem;
@@ -194,14 +194,27 @@
     }
     
     .logo {
-      color: white;
       font-family: 'Montserrat', sans-serif;
       font-size: 1.75rem;
       font-weight: 700;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
     
-    .logo span {
+    /* Logo-Farben basierend auf Sektion */
+    .logo-white {
+      color: white;
+    }
+    
+    .logo-white span {
+      color: #e9b934;
+    }
+    
+    .logo-dark {
+      color: #232323;
+    }
+    
+    .logo-dark span {
       color: #e9b934;
     }
     
@@ -211,7 +224,6 @@
     }
     
     .nav a {
-      color: white;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
@@ -220,7 +232,20 @@
       font-size: 0.9rem;
     }
     
-    .nav a:hover {
+    /* Navigation-Farben basierend auf Sektion */
+    .nav-white a {
+      color: white;
+    }
+    
+    .nav-white a:hover {
+      color: #e9b934;
+    }
+    
+    .nav-dark a {
+      color: #232323;
+    }
+    
+    .nav-dark a:hover {
       color: #e9b934;
     }
     
@@ -314,10 +339,10 @@
 
   <!-- Header -->
   <header class="header">
-    <a href="#home" class="logo">
+    <a href="#home" class="logo logo-white" id="logo">
       <span>[</span>CLIQ LEGAL<span>]</span>
     </a>
-    <nav class="nav">
+    <nav class="nav nav-white" id="nav">
       <a href="#who">Who we help</a>
       <a href="#fix">How we fix it</a>
       <a href="#works">How it works</a>
@@ -330,7 +355,7 @@
   <section id="home" class="section hero">
     <div class="container">
       <h1 class="font-mont">
-        UNIQUE<br>SERVICES for<br>UNIQUE CLIENTS
+        Don't guess.<br>Let's CLIQ.
       </h1>
       <p style="font-size: 1.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.1em;">
         Legal Counsel as a Service • Anwaltskanzlei zum Festpreis
@@ -521,5 +546,49 @@
       <a href="https://linkedin.com/company/cliq-legal" target="_blank">LinkedIn</a>
     </p>
   </footer>
+
+  <script>
+    // Logo und Navigation basierend auf Sektion anpassen
+    function updateHeaderColors() {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const sections = document.querySelectorAll('.section');
+      const logo = document.getElementById('logo');
+      const nav = document.getElementById('nav');
+      
+      // Bestimme aktuelle Sektion
+      let currentSection = 'hero'; // Standard
+      
+      sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionBottom - 100) {
+          if (section.classList.contains('hero') || section.classList.contains('hero')) {
+            currentSection = 'hero';
+          } else if (section.classList.contains('white-section')) {
+            currentSection = 'white';
+          } else if (section.classList.contains('yellow-section')) {
+            currentSection = 'yellow';
+          }
+        }
+      });
+      
+      // Logo und Navigation anpassen
+      if (currentSection === 'hero') {
+        logo.className = 'logo logo-white';
+        nav.className = 'nav nav-white';
+      } else {
+        logo.className = 'logo logo-dark';
+        nav.className = 'nav nav-dark';
+      }
+    }
+    
+    // Event Listener für Scroll
+    window.addEventListener('scroll', updateHeaderColors);
+    
+    // Initial aufrufen
+    updateHeaderColors();
+  </script>
 </body>
 </html>
