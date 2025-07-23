@@ -2,22 +2,42 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="description" content="CLIQ - Ihre Legal Partner für moderne Unternehmen">
     <meta name="theme-color" content="#0F0F0F">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CLIQ">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+    <meta name="msapplication-tap-highlight" content="no">
     <title>CLIQ - Legal Partner</title>
     
     <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
     
-    <!-- Preload critical images -->
-    <link rel="preload" as="image" href="container_bg.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="container2_bg.png" fetchpriority="high">
-    <link rel="preload" as="image" href="Milad.png" fetchpriority="high">
-    <link rel="preload" as="image" href="Burak.png" fetchpriority="high">
-    <link rel="preload" as="image" href="Icon1.png" fetchpriority="medium">
-    <link rel="preload" as="image" href="Icon2.png" fetchpriority="medium">
+    <!-- Critical CSS for above-the-fold content -->
+    <style id="critical-css">
+        /* Critical rendering path optimizations */
+        html, body { margin: 0; padding: 0; background: #0F0F0F; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250, 240, 230, 0.3); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .hero-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .logo { color: #FFF3D6; font-weight: 600; font-size: 24px; text-align: center; }
+        /* Prevent layout shift */
+        img { max-width: 100%; height: auto; }
+    </style>
+    
+    <!-- Preload critical images with optimized loading -->
+    <link rel="preload" as="image" href="container_bg.jpg" fetchpriority="high" type="image/jpeg">
+    <link rel="preload" as="image" href="container2_bg.png" fetchpriority="high" type="image/png">
+    <link rel="preload" as="image" href="Milad.png" fetchpriority="high" type="image/png">
+    <link rel="preload" as="image" href="Burak.png" fetchpriority="high" type="image/png">
+    <link rel="preload" as="image" href="Icon1.png" fetchpriority="medium" type="image/png">
+    <link rel="preload" as="image" href="Icon2.png" fetchpriority="medium" type="image/png">
+    
+    <!-- Resource hints for better performance -->
+    <link rel="modulepreload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -38,6 +58,53 @@
         
         html {
             scroll-behavior: smooth;
+            /* Optimize paint performance */
+            contain: layout style;
+        }
+        
+        /* Optimize paint and layout */
+        .hero-section,
+        .intro-paket-section,
+        .pain-section,
+        .team-section,
+        .drei-wege-section,
+        .comparison-section {
+            contain: layout style paint;
+            will-change: auto;
+            /* Hardware acceleration */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+        
+        /* Optimize animations for 60fps */
+        @media (prefers-reduced-motion: no-preference) {
+            .hero-section,
+            .intro-paket-section,
+            .pain-section,
+            .team-section,
+            .drei-wege-section,
+            .comparison-section {
+                transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
+        
+        /* Advanced performance optimizations */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Optimize for high DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            img {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
         }
         
         /* Optimize paint and layout */
@@ -51,12 +118,121 @@
             will-change: auto;
         }
         
-        /* Optimize images */
+        /* Optimize images with advanced techniques */
         img {
             max-width: 100%;
             height: auto;
             loading: lazy;
             decoding: async;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            /* Optimize rendering */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            /* Prevent layout shift */
+            aspect-ratio: attr(width) / attr(height);
+        }
+        
+        /* Optimize background images */
+        [style*="background-image"] {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Hardware acceleration for backgrounds */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+        
+        /* Mobile-specific optimizations */
+        @media (max-width: 768px) {
+            /* Optimize touch targets */
+            .nav-item a,
+            .cta-button,
+            .disclaimer-link {
+                min-height: 44px;
+                min-width: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Optimize for mobile performance */
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+                /* Optimize memory usage */
+                contain: layout style;
+            }
+            
+            /* Optimize animations for mobile */
+            .hero-section,
+            .intro-paket-section,
+            .pain-section,
+            .team-section,
+            .drei-wege-section,
+            .comparison-section {
+                /* Reduce animation complexity on mobile */
+                transition: opacity 0.4s ease-out;
+                /* Optimize paint performance */
+                contain: layout style paint;
+                will-change: auto;
+            }
+            
+            /* Optimize scrolling */
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Optimize animations for mobile */
+            .hero-section,
+            .intro-paket-section,
+            .pain-section,
+            .team-section,
+            .drei-wege-section,
+            .comparison-section {
+                contain: layout style paint;
+                will-change: auto;
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+            }
+            
+            /* Optimize backdrop filters for mobile */
+            .navbar {
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                background: rgba(250, 240, 230, 0.8);
+            }
+            
+            /* Optimize font rendering */
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+            
+            /* Optimize tap highlights */
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Optimize selection */
+            *::selection {
+                background: rgba(255, 243, 214, 0.3);
+                color: #FFF3D6;
+            }
+            
+            /* Optimize focus states for accessibility */
+            a:focus,
+            button:focus {
+                outline: 2px solid rgba(255, 243, 214, 0.5);
+                outline-offset: 2px;
+            }
         }
         
         html, body {
@@ -70,6 +246,10 @@
         
         :root {
             --hero-gap: 80px;
+            --animation-duration: 0.6s;
+            --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-duration: 0.3s;
+            --scroll-behavior: smooth;
         }
         
         .logo {
@@ -96,6 +276,22 @@
             justify-content: space-between;
             align-items: center;
             will-change: transform;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+                background: rgba(250, 240, 230, 0.95);
+            }
+            
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+            }
         }
         
         .nav-menu {
@@ -151,6 +347,19 @@
             margin: 0;
             padding: 48px 0 0 0;
             contain: layout style paint;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 100vh;
+                padding: 60px 20px 20px 20px;
+                padding-top: calc(60px + env(safe-area-inset-top));
+            }
+            
+            .logo {
+                font-size: 20px;
+                margin-top: 20px;
+            }
         }
         .hero-section .bullet-text.pre-logo {
             margin-bottom: 0;
@@ -1128,6 +1337,32 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-table {
+                font-size: 12px;
+                margin-top: 20px;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px 4px;
+                font-size: 11px;
+            }
+            
+            .comparison-container {
+                padding: 0 20px;
+            }
+            
+            .comparison-title {
+                font-size: 32px;
+                line-height: 1.2;
+            }
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
             font-family: 'Inter', sans-serif;
             font-size: 14px;
             font-weight: 400;
@@ -1168,10 +1403,44 @@
         .comparison-table {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+            transition: opacity var(--animation-duration) var(--animation-timing), 
+                        transform var(--animation-duration) var(--animation-timing);
+            will-change: opacity, transform;
         }
         
         .comparison-table.visible {
+            opacity: 1;
+            transform: none;
+        }
+        
+        /* Optimize all fade-in animations */
+        .intro-paket-content-container,
+        .pain-left-container,
+        .pain-right-container,
+        .team-image-container,
+        .team-text-content,
+        .burak-container,
+        .burak-text-content,
+        .drei-wege-container-left,
+        .drei-wege-container-center,
+        .drei-wege-container-right {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--animation-duration) var(--animation-timing), 
+                        transform var(--animation-duration) var(--animation-timing);
+            will-change: opacity, transform;
+        }
+        
+        .intro-paket-content-container.visible,
+        .pain-left-container.visible,
+        .pain-right-container.visible,
+        .team-image-container.visible,
+        .team-text-content.visible,
+        .burak-container.visible,
+        .burak-text-content.visible,
+        .drei-wege-container-left.visible,
+        .drei-wege-container-center.visible,
+        .drei-wege-container-right.visible {
             opacity: 1;
             transform: none;
         }
@@ -1226,10 +1495,66 @@
             color: rgba(255, 243, 214, 0.4);
         }
         
+        @media (max-width: 768px) {
+            .disclaimer-section {
+                padding: 30px 0;
+                padding-bottom: calc(30px + env(safe-area-inset-bottom));
+            }
+            
+            .disclaimer-content {
+                padding: 0 20px;
+            }
+            
+            .disclaimer-text {
+                font-size: 11px;
+            }
+            
+            .disclaimer-link {
+                font-size: 11px;
+            }
+            
+            .disclaimer-separator {
+                font-size: 11px;
+            }
+        }
+        
         .team-section {
             background-color: #0F0F0F;
             padding: 80px 0;
             text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .team-section {
+                padding: 60px 20px;
+            }
+            
+            .team-title {
+                font-size: 48px;
+                line-height: 1.2;
+            }
+            
+            .team-subtitle {
+                font-size: 16px;
+            }
+            
+            .team-container {
+                padding: 0 20px;
+            }
+            
+            .team-content-wrapper,
+            .burak-content-wrapper {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .team-image-container,
+            .burak-container {
+                width: 100%;
+                max-width: 300px;
+                height: 300px;
+                margin: 0 auto;
+            }
         }
         
         .team-container {
@@ -2064,9 +2389,52 @@
 
     
     <script>
-// Performance optimized intersection observer
+// Performance optimized intersection observer with mobile enhancements
 (function() {
   'use strict';
+  
+  // Performance monitoring
+  var performanceObserver = null;
+  if ('PerformanceObserver' in window) {
+    performanceObserver = new PerformanceObserver(function(list) {
+      list.getEntries().forEach(function(entry) {
+        if (entry.entryType === 'largest-contentful-paint') {
+          console.log('LCP:', entry.startTime);
+        }
+      });
+    });
+    performanceObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+  }
+  
+  // Mobile detection with performance optimization
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  var isLowEndDevice = navigator.hardwareConcurrency <= 4 || navigator.deviceMemory <= 4;
+  
+  // Mobile-specific optimizations
+  if (isMobile) {
+    // Optimize for mobile performance
+    document.documentElement.style.setProperty('--scroll-behavior', 'auto');
+    
+    // Disable zoom on double tap for iOS
+    if (isIOS) {
+      var lastTouchEnd = 0;
+      document.addEventListener('touchend', function(event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+    }
+    
+    // Optimize scroll performance
+    document.addEventListener('touchmove', function(event) {
+      if (event.scale !== 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+  }
   
   // Debounce function for performance
   function debounce(func, wait) {
@@ -2086,9 +2454,15 @@
     return function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          requestAnimationFrame(function() {
-            entry.target.classList.add('visible');
-          });
+          // Use different timing for mobile vs desktop
+          var delay = isMobile ? 0 : 16; // 16ms = 1 frame at 60fps
+          
+          setTimeout(function() {
+            requestAnimationFrame(function() {
+              entry.target.classList.add('visible');
+            });
+          }, delay);
+          
           entry.target._observer.unobserve(entry.target);
         }
       });
@@ -2097,9 +2471,13 @@
   
   // Initialize when DOM is ready
   function initAnimations() {
+    // Optimize observer options based on device capabilities
+    var threshold = isLowEndDevice ? 0.05 : (isMobile ? 0.1 : 0.2);
+    var rootMargin = isLowEndDevice ? '0px 0px -10px 0px' : (isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px');
+    
     var observerOptions = { 
-      threshold: 0.2,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: threshold,
+      rootMargin: rootMargin
     };
     
     var observer = new IntersectionObserver(createObserverCallback(), observerOptions);
@@ -2128,12 +2506,106 @@
     });
   }
   
+  // Advanced image loading optimization
+  function optimizeImages() {
+    var images = document.querySelectorAll('img[loading="lazy"]');
+    if ('loading' in HTMLImageElement.prototype) {
+      // Native lazy loading supported
+      images.forEach(function(img) {
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+        }
+      });
+    } else {
+      // Fallback for older browsers
+      var imageObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+      
+      images.forEach(function(img) {
+        imageObserver.observe(img);
+      });
+    }
+  }
+  
   // Use requestIdleCallback for better performance, fallback to setTimeout
   if (window.requestIdleCallback) {
-    requestIdleCallback(initAnimations);
+    requestIdleCallback(function() {
+      initAnimations();
+      optimizeImages();
+    });
   } else {
-    setTimeout(initAnimations, 1);
+    setTimeout(function() {
+      initAnimations();
+      optimizeImages();
+    }, 1);
   }
+  
+  // Preload critical images
+  function preloadCriticalImages() {
+    var criticalImages = ['container_bg.jpg', 'container2_bg.png', 'Milad.png', 'Burak.png'];
+    criticalImages.forEach(function(src) {
+      var link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+    });
+  }
+  
+  // Execute preload immediately
+  preloadCriticalImages();
+  
+  // Performance monitoring and optimization
+  function monitorPerformance() {
+    // Monitor Core Web Vitals
+    if ('PerformanceObserver' in window) {
+      // First Input Delay (FID)
+      var fidObserver = new PerformanceObserver(function(list) {
+        list.getEntries().forEach(function(entry) {
+          if (entry.processingStart - entry.startTime > 100) {
+            console.warn('High FID detected:', entry.processingStart - entry.startTime);
+          }
+        });
+      });
+      fidObserver.observe({ entryTypes: ['first-input'] });
+      
+      // Cumulative Layout Shift (CLS)
+      var clsObserver = new PerformanceObserver(function(list) {
+        var clsValue = 0;
+        list.getEntries().forEach(function(entry) {
+          if (!entry.hadRecentInput) {
+            clsValue += entry.value;
+          }
+        });
+        if (clsValue > 0.1) {
+          console.warn('High CLS detected:', clsValue);
+        }
+      });
+      clsObserver.observe({ entryTypes: ['layout-shift'] });
+    }
+    
+    // Optimize based on connection speed
+    if ('connection' in navigator) {
+      var connection = navigator.connection;
+      if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+        // Reduce animations for slow connections
+        document.documentElement.style.setProperty('--animation-duration', '0.2s');
+      }
+    }
+  }
+  
+  // Initialize performance monitoring
+  monitorPerformance();
 })();
 </script>
 
