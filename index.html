@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="container_bg.jpg">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            box-sizing: border-box;
+            background: #0F0F0F;
+            overflow-x: hidden;
+        }
+        
+        :root {
+            --hero-gap: 80px;
+        }
+        
+        .logo {
+            color: #FFF3D6;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 24px;
+            margin-top: 40px;
+            z-index: 3;
+            text-align: center;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 40px;
+            z-index: 1000;
+            background: rgba(250, 240, 230, 0.3);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-item {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #1D1D1F;
+        }
+        
+        .nav-item a {
+            text-decoration: none;
+            color: #1D1D1F;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-item a:hover {
+            opacity: 0.7;
+        }
+        
+        .cta-button {
+            background: #1D1D1F;
+            color: #F8F8F8;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            /* Kein Bewegungseffekt */
+        }
+        
+        .hero-section {
+            background-color: #0F0F0F;
+            position: relative;
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 48px 0 0 0;
+        }
+        .hero-section .bullet-text.pre-logo {
+            margin-bottom: 0;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('hero_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.90;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15,15,15,0.93);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .hero-section > * {
+            position: relative;
+            z-index: 2;
+        }
+        .main-text, .bottom-text {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .background-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 1000px;
+            color: rgba(128, 128, 128, 0.08);
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            z-index: 1;
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes morph {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                filter: blur(0px) contrast(1);
+            }
+            25% { 
+                transform: translate(-50%, -50%) scale(1.1);
+                filter: blur(2px) contrast(1.2);
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(0.9);
+                filter: blur(1px) contrast(0.8);
+            }
+            75% { 
+                transform: translate(-50%, -50%) scale(1.05);
+                filter: blur(3px) contrast(1.1);
+            }
+        }
+        
+        .main-text {
+            position: relative;
+            left: unset;
+            top: unset;
+            transform: none;
+            margin-top: 0;
+            margin-bottom: 0;
+            color: #1D1D1F;
+            font-size: 96px;
+            font-weight: 800;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .subline {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: #1D1D1F;
+            margin-top: 24px;
+            margin-bottom: 0;
+            line-height: 1.7;
+            text-align: center;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #FFB347, #8A2BE2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 96px;
+            font-weight: 400;
+            margin-top: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .bottom-text {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-segment {
+            white-space: nowrap;
+        }
+        
+        .bold {
+            font-weight: 700;
+        }
+        
+        .second-section {
+            background-color: #FFF5EE;
+            min-height: 100vh;
+            width: 100%;
+            padding: 80px 0;
+        }
+        
+        .intro-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .intro-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .intro-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #1D1D1F;
+            margin: 0;
+        }
+        
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            align-items: stretch;
+            margin-bottom: 40px;
+        }
+        
+        .content-container {
+            background: #FAF0E6;
+            padding: 20px;
+            border-radius: 12px;
+            height: auto;
+            text-align: center;
+            border: 2px solid #1D1D1F;
+            box-shadow: 0 6px 20px rgba(29, 29, 31, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .content-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(29, 29, 31, 0.25);
+        }
+        
+        .content-container.benefits {
+            background: #E8F5E8;
+        }
+        
+        .price-roi-section {
+            background: #FAF0E6;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1D1D1F;
+            margin-bottom: 24px;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+        
+        .benefits-list li {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #1D1D1F;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .price-section {
+            margin-bottom: 40px;
+        }
+        
+        .price-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1D1D1F;
+            margin-bottom: 8px;
+        }
+        
+        .price-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #666;
+            margin: 0;
+        }
+        
+        .roi-section {
+            margin-bottom: 40px;
+        }
+        
+        .roi-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1D1D1F;
+            margin-bottom: 20px;
+        }
+        
+        .roi-table {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        
+        .roi-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 12px 16px;
+        }
+        
+        .roi-row.header {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .roi-row.highlight {
+            background: linear-gradient(to right, #FFB347, #8A2BE2);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .roi-cell {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+        
+        .roi-note {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .cta-button-large {
+            background: linear-gradient(to right, #FFB347, #8A2BE2);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button-large:hover {
+            /* Kein Bewegungseffekt */
+        }
+        
+        .quotes {
+            margin-bottom: 40px;
+        }
+        
+        .quote {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #1D1D1F;
+            font-style: italic;
+            margin-bottom: 16px;
+            padding-left: 20px;
+            border-left: 3px solid #8A2BE2;
+        }
+        
+        .problem-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1D1D1F;
+            margin-bottom: 20px;
+        }
+        
+        .problem-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .problem-list li {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #1D1D1F;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .solution-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            color: #1D1D1F;
+            margin: 0;
+        }
+        .hero-bullets {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            margin-top: 48px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            font-style: italic;
+            position: relative;
+            min-width: 0;
+        }
+        .bullet-text {
+            background: linear-gradient(90deg, #AC86DA 0%, #D6C6F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-style: italic;
+            padding-right: 4px;
+            min-width: 0;
+        }
+        .bullet-dot {
+            color: #AC86DA;
+            font-size: 13px;
+            margin: 0 8px;
+            user-select: none;
+        }
+        .hero-slogan {
+            margin-top: 48px;
+            text-align: center;
+            color: #FFF3D6;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 86px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-slogan div {
+            /* font-weight: 800; entfernt, damit font-weight aus .hero-slogan greift */
+        }
+        .hero-subline {
+            margin-top: 32px;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+        .subline-highlight {
+            color: #FFF3D6;
+            font-weight: 600;
+        }
+        .hero-center {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .cta-button {
+            margin-top: 40px;
+            margin-bottom: 56px;
+            background: #FFF3D6;
+            color: #1D1D1F;
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 16px 40px;
+            border: 2px solid #FFF3D6;
+            border-radius: 32px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            display: block;
+        }
+        .cta-button:hover {
+            background: #1D1D1F;
+            color: #FFF3D6;
+            border: 2px solid #FFF3D6;
+        }
+        .references-section {
+            margin-top: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .references-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFF3D6;
+            font-style: italic;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .references-marquee-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 56px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .references-marquee {
+            display: flex;
+            align-items: center;
+            height: 56px;
+            min-width: 200%;
+            animation: marquee 22s linear infinite;
+            gap: 32px;
+        }
+        .logo-placeholder {
+            width: 90px;
+            height: 36px;
+            background: #E3D6F3;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #BBA6D6;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+        }
+        .logo-placeholder::after {
+            content: 'Logo';
+            opacity: 0.5;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .references-marquee-wrapper::before,
+        .references-marquee-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .references-marquee-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, #0F0F0F 80%, rgba(15,15,15,0) 100%);
+        }
+        .references-marquee-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, #0F0F0F 80%, rgba(15,15,15,0) 100%);
+        }
+        
+        .intro-paket-section {
+            background-color: #0F0F0F;
+            padding: 180px 0 40px 0;
+            text-align: center;
+        }
+        
+        .intro-paket-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .intro-paket-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 86px;
+            font-weight: 400;
+            color: #FFF3D6;
+            margin: 0;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+        
+        .intro-paket-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            background: linear-gradient(90deg, #AC86DA 0%, #D6C6F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-style: italic;
+        }
+        
+        .intro-paket-content-section {
+            background-color: #0F0F0F;
+            padding: 20px 0 40px 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            max-width: 100vw;
+        }
+        
+        .intro-paket-content-container {
+            width: 100%;
+            max-width: 600px;
+            min-width: 320px;
+            min-height: 220px;
+            padding: 40px;
+            text-align: left;
+            background: #1A1A1A;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 243, 214, 0.08);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+        }
+        @media (max-width: 600px) {
+            .intro-paket-content-container {
+                padding: 16px;
+            }
+            .launch-badge {
+                top: 12px;
+                left: 12px;
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+        }
+        .intro-paket-content-container.visible {
+            opacity: 1;
+            transform: none;
+        }
+        .intro-paket-content-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('container_bg.jpg') center center / cover no-repeat;
+            opacity: 0.7;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .intro-paket-content-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15,15,15,0.9);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .intro-paket-content-container > * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content-list {
+            margin-bottom: 40px;
+            counter-reset: item-counter;
+        }
+        
+        .content-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: #FFF3D6;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            padding-left: 40px;
+            position: relative;
+            counter-increment: item-counter;
+        }
+        
+        .content-item::before {
+            content: counter(item-counter, decimal-leading-zero);
+            position: absolute;
+            left: 0;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 16px;
+            top: 2px;
+        }
+        
+        .price-section {
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .price-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #FFF3D6;
+            margin-bottom: 16px;
+        }
+        
+        .price-highlight {
+            color: #FFF3D6;
+            font-weight: 700;
+        }
+        
+        .price-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFF3D6;
+            font-style: italic;
+        }
+        .logo-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 0.5em;
+            transform: translateY(-50%);
+        }
+        .logo-block .pre-logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            background: linear-gradient(90deg, #AC86DA 0%, #D6C6F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.02em;
+            margin-bottom: 0;
+            line-height: 1.1;
+            font-style: italic;
+        }
+        .logo-block .logo {
+            color: #FFF3D6;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 24px;
+            margin: 0;
+            z-index: 3;
+            text-align: center;
+        }
+        .launch-badge {
+            position: absolute;
+            top: 32px;
+            left: 32px;
+            background: #AC86DA;
+            border: 1.5px solid #AC86DA;
+            border-radius: 14px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
+            z-index: 3;
+        }
+        .launch-badge-text {
+            color: #FFFFFF;
+            font-style: italic;
+            padding-right: 4px;
+            min-width: 0;
+        }
+        .launch-badge-vignette {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 14px;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.18) 100%);
+        }
+        .cliqstart-content {
+            margin-top: 80px;
+            padding: 0 20px;
+        }
+        .cliqstart-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #AC86DA 0%, #D6C6F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            margin: 0 0 24px 0;
+            text-align: left;
+        }
+        .cliqstart-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            color: #FFFFFF;
+            font-style: italic;
+            line-height: 1.6;
+            margin: 0 0 32px 0;
+            text-align: left;
+        }
+        .cliqstart-price {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        .price-amount {
+            font-family: 'Inter', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        .price-label {
+            background: linear-gradient(90deg, #AC86DA 0%, #D6C6F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        .cliqstart-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px 0;
+        }
+        .cliqstart-features li {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+        .cliqstart-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+        .cliqstart-cta-section {
+            text-align: center;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .cliqstart-cta-section .cta-button {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+        .cta-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            color: #FFFFFF;
+            font-style: italic;
+            margin: 0;
+            text-align: center;
+        }
+        .pain-section {
+            background-color: #0F0F0F;
+            padding: 90px 0 40px 0;
+            text-align: center;
+        }
+        .pain-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .pain-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 86px;
+            font-weight: 400;
+            color: #FFF3D6;
+            margin: 0 0 12px 0;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        .pain-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            background: linear-gradient(90deg, #AC86DA 0%, #D6C6F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-style: italic;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .pain-content-section {
+            background-color: #0F0F0F;
+            padding: 20px 0 40px 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            max-width: 100vw;
+        }
+        .pain-content-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            gap: 40px;
+            padding: 0 40px;
+        }
+        .pain-left-container, .pain-right-container {
+            flex: 1;
+            min-height: 400px;
+            background: #1A1A1A;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 243, 214, 0.08);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+        }
+        .pain-left-container.visible, .pain-right-container.visible {
+            opacity: 1;
+            transform: none;
+        }
+        .pain-left-container::before, .pain-right-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('container2_bg.png') center center / cover no-repeat;
+            opacity: 0.8;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .pain-left-container::after, .pain-right-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15,15,15,0.65);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .pain-left-content, .pain-right-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            height: 100%;
+        }
+        
+        .pain-container-icon {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 90px;
+            z-index: 3;
+            pointer-events: none;
+        }
+        
+        .pain-container-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: #FFF3D6;
+            text-align: center;
+            margin: 120px 0 30px 0;
+            line-height: 1.4;
+        }
+        
+        .pain-quote {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-style: italic;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pain-cost-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .comparison-section {
+            background-color: #0F0F0F;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .comparison-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            background: linear-gradient(90deg, #AC86DA 0%, #D6C6F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 243, 214, 0.08);
+            color: #FFFFFF;
+            vertical-align: top;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, rgba(172, 134, 218, 0.1) 0%, rgba(214, 198, 247, 0.05) 100%);
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .comparison-table td:first-child {
+            background: linear-gradient(135deg, rgba(172, 134, 218, 0.08) 0%, rgba(214, 198, 247, 0.03) 100%);
+            font-weight: 500;
+        }
+        
+        .comparison-table td:nth-child(2) {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(26, 26, 26, 0.3);
+        }
+        
+        .comparison-table tr:hover {
+            background-color: rgba(26, 26, 26, 0.5);
+        }
+        
+        .comparison-table {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+        }
+        
+        .comparison-table.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <img src="container_bg.jpg" alt="" style="display:none" aria-hidden="true">
+    <div class="hero-section hero-center">
+        <div class="logo-block">
+            <div class="pre-logo">Don't guess. Let's</div>
+            <div class="logo">CLIQ.</div>
+        </div>
+        <div class="hero-bullets">
+            <span class="bullet-text">Senior Level Anwälte</span>
+            <span class="bullet-dot">&#9679;</span>
+            <span class="bullet-text">Verträge, Compliance, KI & Datenschutz</span>
+            <span class="bullet-dot">&#9679;</span>
+            <span class="bullet-text">Kanzleiqualität. Startup Tempo</span>
+        </div>
+        <div class="hero-slogan">
+            <div>Legal Counsel as a Service.</div>
+            <div>Anwaltskanzlei zum Festpreis.</div>
+        </div>
+        <div class="hero-subline">
+            Wir verbinden <span class="subline-highlight">Konzernerfahrung</span> mit <span class="subline-highlight">Großkanzlei-Expertise</span>, um Unternehmen den entscheidenden Vorsprung zu verschaffen.
+        </div>
+        <button class="cta-button">Free 15-Min Call</button>
+        <div class="references-section">
+            <div class="references-title">
+                Wir haben bereits Ergebnisse geliefert für:
+            </div>
+            <div class="references-marquee-wrapper">
+                <div class="references-marquee">
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <!-- Doppelt für nahtlosen Loop -->
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="intro-paket-section">
+        <div class="intro-paket-container">
+            <div class="intro-paket-title">CLIQstart</div>
+            <div class="intro-paket-subtitle">Lern uns kennen. Sofort einsatzbereit – ohne Onboarding, ohne Stundenzettel.</div>
+        </div>
+    </div>
+    <div class="intro-paket-content-section">
+        <div class="intro-paket-content-container">
+            <div class="launch-badge">
+                <span class="launch-badge-text">Rechtssicherheit in weniger als 10 Tagen</span>
+                <span class="launch-badge-vignette"></span>
+            </div>
+            
+            <div class="cliqstart-content">
+                <h2 class="cliqstart-title">CLIQstart</h2>
+                
+                <p class="cliqstart-description">
+                    CLIQstart liefert in weniger als 10 Tagen geprüfte und optimierte Verträge, klare Antworten auf eure wichtigsten Rechtsfragen und einen kompakten Legal-Check mit konkreten Empfehlungen.
+                </p>
+                
+                <div class="cliqstart-price">
+                    <span class="price-label">Festpreis:</span>
+                    <span class="price-amount">EUR 2.000</span>
+                </div>
+                
+                <ul class="cliqstart-features">
+                    <li>drei geprüfte, unterschriftsreife Verträge</li>
+                    <li>Beantwortung von zehn individuellen Rechtsfragen</li>
+                    <li>Compliance-Check (z.B. zu DSGVO, HR, AI Act oder ESG)</li>
+                    <li>Abschluss-Call mit Einordnung & Maßnahmeplan</li>
+                    <li>Senior Level Anwälte</li>
+                    <li>alle Ergebnisse in weniger als 10 Tagen</li>
+                </ul>
+                
+                <div class="cliqstart-cta-section">
+                    <button class="cta-button">Free 15-Min Call</button>
+                    <p class="cta-subtext">Kurzes Gespräch. Keine Verpflichtung. Kein Blabla.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pain-section">
+        <div class="pain-container">
+            <div class="pain-title">Warum?</div>
+            <div class="pain-subtitle">Links die täglichen Pain‑Points, rechts der Preis, wenn du sie ignorierst.</div>
+        </div>
+    </div>
+    <div class="pain-content-section">
+        <div class="pain-content-container">
+            <div class="pain-left-container">
+                <img src="Icon1.png" alt="" class="pain-container-icon" aria-hidden="true">
+                <div class="pain-left-content">
+                    <div class="pain-container-title">Was wir jeden Tag hören …</div>
+                    <div class="pain-quote">❝Unsere Legal‑Stelle ist seit Monaten unbesetzt.❞</div>
+                    <div class="pain-quote">❝Verträge stapeln sich – der Launch hängt fest.❞</div>
+                    <div class="pain-quote">❝Datenschutz? Macht aktuell keiner.❞</div>
+                    <div class="pain-quote">❝KI‑Feature fertig, aber wir sind juristisch unsicher.❞</div>
+                    <div class="pain-quote">❝In vier Wochen kommt der Auditor – wir haben keinen Plan.❞</div>
+                    <div class="pain-quote">❝Großkunde fordert AV‑Vertrag & IP‑Klauseln in 72 h.❞</div>
+                </div>
+            </div>
+            <div class="pain-right-container">
+                <img src="Icon2.png" alt="" class="pain-container-icon" aria-hidden="true">
+                <div class="pain-right-content">
+                    <div class="pain-container-title">… und was das wirklich kostet</div>
+                    <div class="pain-cost-item">> 80 000 € Personallücke: 78 Tage Time‑to‑Hire + Cost‑of‑Vacancy für einen In‑house‑Juristen.</div>
+                    <div class="pain-cost-item">Umsatz‑ & Projektverzug: verschobene Launches lassen den Wettbewerb vorbeiziehen.</div>
+                    <div class="pain-cost-item">Bußgelder bis 4 % des Jahresumsatzes (DSGVO, BFSG) – plus Reputationsschäden.</div>
+                    <div class="pain-cost-item">Bis 35 Mio € Strafe nach EU‑AI‑Act bei ungeprüften KI‑Funktionen.</div>
+                    <div class="pain-cost-item">Audit‑Fail & Haftungsrisiken: Nachprüfungen, Geschäftsführungs­haftung, Vertrauensverlust bei Investoren.</div>
+                    <div class="pain-cost-item">Deal platzt in letzter Minute: fehlende AVV/IP‑Klauseln kosten den Großkunden.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="comparison-section">
+        <div class="comparison-container">
+            <h2 class="comparison-title">Vergleicht eure Optionen</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Merkmal</th>
+                        <th>CLIQ</th>
+                        <th>In-House Legal Counsel</th>
+                        <th>Klassische Kanzleien</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kosten</td>
+                        <td>Monatlicher Festpreis</td>
+                        <td>Hohes Gehalt + Lohnnebenkosten</td>
+                        <td>Hohe Stundensätze</td>
+                    </tr>
+                    <tr>
+                        <td>Onboarding-Zeit</td>
+                        <td>nicht nötig – sofort bereit</td>
+                        <td>1–3 Monate + Recruiting</td>
+                        <td>Hoch – neue Beauftragung je Projekt</td>
+                    </tr>
+                    <tr>
+                        <td>Planbarkeit</td>
+                        <td>Sehr hoch – 100 % Kostenkontrolle</td>
+                        <td>Mittel + Ausfall schwer kalkulierbar</td>
+                        <td>Niedrig – Abrechnung nach Aufwand</td>
+                    </tr>
+                    <tr>
+                        <td>Reaktionszeit</td>
+                        <td>Schnell, innerhalb von Stunden</td>
+                        <td>Mittel</td>
+                        <td>Variiert</td>
+                    </tr>
+                    <tr>
+                        <td>Haftung</td>
+                        <td>volle Berufshaftung</td>
+                        <td>Unternehmen trägt volle Verantwortung</td>
+                        <td>volle Berufshaftung</td>
+                    </tr>
+                    <tr>
+                        <td>Ausfallrisiko</td>
+                        <td>Gering</td>
+                        <td>Hoch – Krankheit, Urlaub, Kündigung = Stillstand</td>
+                        <td>Variiert</td>
+                    </tr>
+                    <tr>
+                        <td>Koordinationsaufwand</td>
+                        <td>Gering – One-Stop-Lösung</td>
+                        <td>Mittel – oft mit externer Kanzlei nötig</td>
+                        <td>Hoch</td>
+                    </tr>
+                    <tr>
+                        <td>Flexibilität & Skalierung</td>
+                        <td>Hoch – kurzfristig erweiterbar, monatlich kündbar</td>
+                        <td>Niedrig – starre Kapazität, lange Kündigungsfristen</td>
+                        <td>Mittel – aber teuer & unflexibel</td>
+                    </tr>
+                    <tr>
+                        <td>Lösungsfokus</td>
+                        <td>Klar & businessorientiert</td>
+                        <td>Vorsichtig & verzögert</td>
+                        <td>Gutachtenlastig & Stundenfüller</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  var container = document.querySelector('.intro-paket-content-container');
+  if (container) {
+    var observer = new window.IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(container);
+  }
+  
+  var painContainers = document.querySelectorAll('.pain-left-container, .pain-right-container');
+  painContainers.forEach(function(container) {
+    var observer = new window.IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(container);
+  });
+  
+  var comparisonTable = document.querySelector('.comparison-table');
+  if (comparisonTable) {
+    var observer = new window.IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(comparisonTable);
+  }
+});
+</script>
+</body>
+</html> 
