@@ -20,7 +20,14 @@
     <!-- Critical CSS for above-the-fold content -->
     <style id="critical-css">
         /* Critical rendering path optimizations */
-        html, body { margin: 0; padding: 0; background: #0F0F0F; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        html, body { 
+            margin: 0; 
+            padding: 0; 
+            background: #0F0F0F;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+        }
+        
+
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250, 240, 230, 0.3); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
         .hero-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .logo { color: #FFF3D6; font-weight: 600; font-size: 24px; text-align: center; }
@@ -368,12 +375,51 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            background: #0F0F0F;
+            background: 
+                #0F0F0F,
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(255, 255, 255, 0.08) 1px,
+                    rgba(255, 255, 255, 0.08) 2px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(255, 255, 255, 0.06) 1px,
+                    rgba(255, 255, 255, 0.06) 2px
+                );
+            background-size: 
+                auto,
+                4px 4px,
+                4px 4px;
+            background-position: 
+                0 0,
+                0 0,
+                2px 2px;
+            background-repeat: no-repeat, repeat, repeat;
             overflow-x: hidden;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             /* Prevent horizontal scroll on mobile */
             max-width: 100vw;
             box-sizing: border-box;
+            position: relative;
+        }
+        
+        @keyframes noise {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-8px, -8px); }
+            20% { transform: translate(-15px, 8px); }
+            30% { transform: translate(8px, -15px); }
+            40% { transform: translate(-8px, 20px); }
+            50% { transform: translate(-15px, 8px); }
+            60% { transform: translate(20px, -8px); }
+            70% { transform: translate(15px, 15px); }
+            80% { transform: translate(5px, 20px); }
+            90% { transform: translate(-15px, 15px); }
+            100% { transform: translate(0, 0); }
         }
         
         /* Ensure all elements respect container width */
@@ -798,21 +844,7 @@
         .hero-section .bullet-text.pre-logo {
             margin-bottom: 0;
         }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('hero_bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.90;
-            z-index: 0;
-            pointer-events: none;
-        }
+
         .hero-section::after {
             content: '';
             position: absolute;
@@ -1241,15 +1273,10 @@
             height: 56px;
             overflow: hidden;
             margin: 0 auto;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
-        .references-marquee {
-            display: flex;
-            align-items: center;
-            height: 56px;
-            min-width: 200%;
-            animation: marquee 22s linear infinite;
-            gap: 32px;
-        }
+
         .logo-placeholder {
             width: 90px;
             height: 36px;
@@ -1268,10 +1295,45 @@
             content: 'Logo';
             opacity: 0.5;
         }
+        
+        .logo-real {
+            height: 36px;
+            width: 90px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .logo-real:hover {
+            opacity: 1;
+        }
+        
+        /* Spezifische Anpassung für Curevision-Logo */
+        .logo-real[src*="curevision"] {
+            width: 90px;
+            object-position: center;
+        }
         @keyframes marquee {
             0% { transform: translateX(-50%); }
             100% { transform: translateX(0); }
         }
+        
+        /* Zusätzliche Optimierung für flüssigeres Scrolling */
+        .references-marquee {
+            display: flex;
+            align-items: center;
+            height: 56px;
+            min-width: 200%;
+            animation: marquee 35s linear infinite;
+            gap: 40px;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        
+        /* Optimierung für flüssigeres Scrolling */
         .references-marquee-wrapper::before,
         .references-marquee-wrapper::after {
             content: '';
@@ -2639,10 +2701,10 @@
             </div>
             <div class="references-marquee-wrapper">
                 <div class="references-marquee">
-                    <div class="logo-placeholder"></div>
-                    <div class="logo-placeholder"></div>
-                    <div class="logo-placeholder"></div>
-                    <div class="logo-placeholder"></div>
+                    <img src="curevision.png" alt="Curevision" class="logo-real">
+                    <img src="annu.png" alt="Annu" class="logo-real">
+                    <img src="binnberg.svg" alt="Binnberg" class="logo-real">
+                    <img src="barista.png" alt="Barista" class="logo-real">
                     <div class="logo-placeholder"></div>
                     <div class="logo-placeholder"></div>
                     <div class="logo-placeholder"></div>
@@ -2650,10 +2712,10 @@
                     <div class="logo-placeholder"></div>
                     <div class="logo-placeholder"></div>
                     <!-- Doppelt für nahtlosen Loop -->
-                    <div class="logo-placeholder"></div>
-                    <div class="logo-placeholder"></div>
-                    <div class="logo-placeholder"></div>
-                    <div class="logo-placeholder"></div>
+                    <img src="curevision.png" alt="Curevision" class="logo-real">
+                    <img src="annu.png" alt="Annu" class="logo-real">
+                    <img src="binnberg.svg" alt="Binnberg" class="logo-real">
+                    <img src="barista.png" alt="Barista" class="logo-real">
                     <div class="logo-placeholder"></div>
                     <div class="logo-placeholder"></div>
                     <div class="logo-placeholder"></div>
